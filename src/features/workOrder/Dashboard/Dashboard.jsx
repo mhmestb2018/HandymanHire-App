@@ -3,6 +3,7 @@ import { Grid } from "semantic-ui-react";
 import WorkList from "../WorkList/WorkList";
 import WorkOrderForm from "../WorkOrderForm/WorkOrderForm";
 import { Button } from "semantic-ui-react";
+import cuid from "cuid";
 
 const jobsFromDashboard = [
   {
@@ -65,6 +66,13 @@ class Dashboard extends Component {
       isOpen: !isOpen
     }));
   };
+  handleCreateJob = newJob => {
+    newJob.id = cuid();
+    newJob.photoURL = "/assets/user.png";
+    this.setState(({ jobs }) => ({
+      jobs: [...jobs, newJob]
+    }));
+  };
   render() {
     const { jobs, isOpen } = this.state;
 
@@ -79,7 +87,11 @@ class Dashboard extends Component {
             positive
             content="Create project"
           />
-          {isOpen && <WorkOrderForm cancelFormOpen={this.handleIsOpenToggle} />}
+          {isOpen && <WorkOrderForm
+              createJob={this.handleCreateJob}
+              cancelFormOpen={this.handleIsOpenToggle}
+            />
+          }
         </Grid.Column>
       </Grid>
     );
