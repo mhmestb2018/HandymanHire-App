@@ -1,11 +1,19 @@
-import React, { Component } from "react";
-
+import React, { Component, Fragment } from "react";
+import Dashboard from "../../features/workOrder/Dashboard/Dashboard";
+import NavBar from "../../features/nav/NavBar/NavBar";
+import { Header, Container } from "semantic-ui-react";
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>Work Orders</h1>
-      </div>
+      <Fragment>
+        <NavBar />
+        <Container className="main">
+        <Header as="h2">
+            FIND TOP-RATED, CERTIFIED PROS FOR YOUR PROJECT
+          </Header>
+          <Dashboard />
+        </Container>
+      </Fragment>
     );
   }
 }

@@ -40,18 +40,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [],
   "devDependencies": {
     "@types/react-redux-toastr": "^7.4.1",
     "@types/react-router-dom": "^4.3.3",
