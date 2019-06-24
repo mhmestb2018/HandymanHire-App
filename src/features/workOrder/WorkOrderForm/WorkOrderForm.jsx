@@ -9,9 +9,21 @@ class WorkOrderForm extends Component {
     address: "",
     orderedBy: ""
   };
-  handleFormSubmit = evt => {
-    evt.preventDefault();
-    this.props.createJob(this.state);
+  componentDidMount(){
+    if(this.props.selectedJob !==null ){
+      this.setState({
+        ...this.props.selectedJob
+      })
+    }
+  }
+  handleFormSubmit = jb => {
+    jb.preventDefault();
+    if(this.state.id){
+      this.props.updateJob(this.state);
+    }else{
+      this.props.createJob(this.state);
+    }
+    
   };
   handleInputChange = ({target:{name,value}}) => {
     this.setState({

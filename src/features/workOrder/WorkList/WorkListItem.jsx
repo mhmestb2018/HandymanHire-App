@@ -3,7 +3,7 @@ import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 import WorkListProposals from "./WorkListProposals";
 class WorkListItem extends Component {
   render() {
-    const { job } = this.props;
+    const { job, selectJob, deleteJob } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -11,10 +11,8 @@ class WorkListItem extends Component {
             <Item>
               <Item.Image size="tiny" circular src={job.photoURL} />
               <Item.Content>
-                <Item.Header >{job.title}</Item.Header>
-                <Item.Description>
-                  Ordered by {job.orderedBy}
-                </Item.Description>
+                <Item.Header>{job.title}</Item.Header>
+                <Item.Description>Ordered by {job.orderedBy}</Item.Description>
               </Item.Content>
             </Item>
           </Item.Group>
@@ -22,7 +20,20 @@ class WorkListItem extends Component {
         <Segment clearing>
           <span>{job.description}</span>
           <div>
-            <Button as="a" color="teal" floated="right" content="View" />
+            <Button
+              onClick={() => selectJob(job)}
+              as="a"
+              color="teal"
+              floated="right"
+              content="View"
+            />
+            <Button
+              onClick={() => deleteJob(job.id)}
+              as="a"
+              color="red"
+              floated="right"
+              content="delete"
+            />
           </div>
         </Segment>
         <Segment>
@@ -37,9 +48,10 @@ class WorkListItem extends Component {
             <Item.Header as="a">People interesting in the project</Item.Header>
           </div>
           <List horizontal>
-            {job.proposal && job.proposals.map(proposal => (
-              <WorkListProposals key={proposal.id} proposal={proposal} />
-            ))}
+            {job.proposal &&
+              job.proposals.map(proposal => (
+                <WorkListProposals key={proposal.id} proposal={proposal} />
+              ))}
           </List>
         </Segment>
       </Segment.Group>
