@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 import WorkListProposals from "./WorkListProposals";
+import { Link } from "react-router-dom";
 class WorkListItem extends Component {
   render() {
-    const { job, selectJob, deleteJob } = this.props;
+    const { job, deleteJob } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -21,18 +22,18 @@ class WorkListItem extends Component {
           <span>{job.description}</span>
           <div>
             <Button
-              onClick={() => selectJob(job)}
-              as="a"
-              color="teal"
-              floated="right"
-              content="View"
-            />
-            <Button
               onClick={() => deleteJob(job.id)}
               as="a"
               color="red"
               floated="right"
               content="delete"
+            />
+            <Button
+              as={Link}
+              to={`/jobs/${job.id}`}
+              color="teal"
+              floated="right"
+              content="View"
             />
           </div>
         </Segment>

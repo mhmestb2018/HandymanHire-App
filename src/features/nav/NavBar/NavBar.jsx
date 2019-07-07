@@ -16,14 +16,13 @@ class NavBar extends Component {
   render() {
     const { authenticated } = this.state;
     return (
-      
       <Menu inverted fixed="top">
         <Container>
           <Menu.Item as={NavLink} exact to="/" header>
             <img src="assets/logo.png" alt="logo" />
             Job-hire
           </Menu.Item>
-          <Menu.Item as={NavLink} to="/jobs" name="Jobs" />
+          <Menu.Item as={NavLink} exact to="/jobs" name="Jobs" />
           <Menu.Item as={NavLink} to="/contractors" name="Contractors" />
           <Menu.Item as={NavLink} to="/test" name="Test" />
           <Menu.Item>

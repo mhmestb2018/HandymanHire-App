@@ -4,12 +4,13 @@ import NavBar from "../../features/nav/NavBar/NavBar";
 import { Container } from "semantic-ui-react";
 import { Route } from "react-router-dom";
 import WorkOrderForm from "../../features/workOrder/WorkOrderForm/WorkOrderForm";
-import WorkOrderDetailedPage from "../../features/workOrder/WorkOrderDetailed/WorkOrderDetailedPage";
 import ContractorsDashboard from "../../features/user/ContractorsDashboard/ContractorsDashboard";
 import UserDetailedPage from "../../features/user/UserDetailed/UserDetailedPage";
 import SettingsDashboard from "../../features/user/Settings/SettingsDashboard";
 import HomePage from "../../features/home/HomePage";
 import TestComponent from "../../features/testarea/TestComponent";
+import WorkOrderDetailedPage from "../../features/workOrder/WorkOrderDetailed/WorkOrderDetailedPage";
+
 class App extends Component {
   render() {
     return (
@@ -21,13 +22,13 @@ class App extends Component {
             <Fragment>
               <NavBar />
               <Container className="main">
-                <Route path="/jobs" component={Dashboard} />
-                <Route path="/jobs:id" component={WorkOrderDetailedPage} />
-                <Route path="/profile:id" component={UserDetailedPage} />
+                <Route exact path="/jobs" component={Dashboard} />
+                <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
+                <Route path="/profile/:id" component={UserDetailedPage} />
                 <Route path="/contractors" component={ContractorsDashboard} />
                 <Route path="/settings" component={SettingsDashboard} />
                 <Route path="/createJob" component={WorkOrderForm} />
-                <Route path="/test" component={TestComponent}/>
+                <Route path="/test" component={TestComponent} />
               </Container>
             </Fragment>
           )}
