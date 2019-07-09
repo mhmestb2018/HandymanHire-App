@@ -30,7 +30,7 @@ const initialState = [
     id: "2",
     title: "Fix the washing machine",
     date: "2018-03-28",
-    category: "Household Appliance",
+    category: "Home Appliances Repair",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Castlebar, IE",
