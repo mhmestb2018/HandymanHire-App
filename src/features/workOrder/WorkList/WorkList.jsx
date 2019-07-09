@@ -3,11 +3,11 @@ import WorkListItem from "./WorkListItem";
 
 class WorkList extends Component {
   render() {
-    const { jobs, selectJob,deleteJob } = this.props;
+    const { jobs, deleteJob } = this.props;
     return (
       <Fragment>
         {jobs.map(job => (
-          <WorkListItem key={job.id} job={job} selectJob={selectJob} deleteJob={deleteJob}/>
+          <WorkListItem key={job.id} job={job} deleteJob={deleteJob} />
         ))}
       </Fragment>
     );

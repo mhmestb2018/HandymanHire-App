@@ -6,7 +6,7 @@ const initialState = [
     id: "1",
     title: "House Painting",
     date: "2020-03-27",
-    category: "Home Exterior",
+    category: "Painting",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Sligo, IE",
@@ -30,7 +30,7 @@ const initialState = [
     id: "2",
     title: "Fix the washing machine",
     date: "2018-03-28",
-    category: "Home Interior",
+    category: "Household Appliance",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Castlebar, IE",

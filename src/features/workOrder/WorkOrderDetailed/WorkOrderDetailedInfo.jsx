@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 
-const WorkOrderDetailedInfo = () => {
+const WorkOrderDetailedInfo = ({job}) => {
   return (
     <Segment.Group>
       <Segment attached="top">
@@ -10,7 +10,7 @@ const WorkOrderDetailedInfo = () => {
             <Icon size="large" color="blue" name="info" />
           </Grid.Column>
           <Grid.Column width={15}>
-            <p>Description of Job</p>
+            <p>{job.description}</p>
           </Grid.Column>
         </Grid>
       </Segment>
@@ -20,7 +20,7 @@ const WorkOrderDetailedInfo = () => {
             <Icon name="calendar" size="large" color="blue" />
           </Grid.Column>
           <Grid.Column width={15}>
-            <span>Start Date</span>
+            <span>{job.date}</span>
           </Grid.Column>
         </Grid>
       </Segment>
@@ -30,7 +30,7 @@ const WorkOrderDetailedInfo = () => {
             <Icon name="marker" size="large" color="blue" />
           </Grid.Column>
           <Grid.Column width={11}>
-            <span>Job Place</span>
+            <span>{job.address}</span>
           </Grid.Column>
           <Grid.Column width={4}>
             <Button color="blue" size="tiny" content="Show Map" />

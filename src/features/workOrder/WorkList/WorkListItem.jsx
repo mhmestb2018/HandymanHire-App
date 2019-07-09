@@ -44,6 +44,7 @@ class WorkListItem extends Component {
             <Icon name="marker" /> {job.city}
           </span>
         </Segment>
+        
         <Segment secondary>
           <div>
             <Item.Header as="a">People interesting in the project</Item.Header>

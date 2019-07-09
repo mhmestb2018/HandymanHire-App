@@ -5,7 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import App from "./app/layout/App";
 import { Provider } from "react-redux";
-import {configureStore} from './app/store/configureStore';
+import { configureStore } from "./app/store/configureStore";
+import ScrollToTop from "./app/common/utill/ScrollToTop";
 
 const store = configureStore();
 const rootEl = document.getElementById("root");
@@ -14,7 +15,9 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
       </BrowserRouter>
     </Provider>,
     rootEl

@@ -1,37 +1,66 @@
 import React, { Component } from "react";
 import { Segment, Button, label, Form } from "semantic-ui-react";
+import { connect } from "react-redux";
+import {
+  createJob,
+  updateJob
+} from "../../workOrder/WorkList/workOrderActions";
+import cuid from "cuid";
 
-class WorkOrderForm extends Component {
-  state = {
+const mapState = (state, ownProps) => {
+  const jobId = ownProps.match.params.id;
+  let job = {
     title: "",
     date: "",
     city: "",
     address: "",
     orderedBy: ""
   };
-  componentDidMount(){
-    if(this.props.selectedJob !==null ){
+  // if (jobId && state.jobs.lenght > 0) {
+  job = state.jobs.filter(job => job.id === jobId)[0];
+  // }
+  return {
+    job
+  };
+};
+const actions = {
+  createJob,
+  updateJob
+};
+class WorkOrderForm extends Component {
+  state = {
+    ...this.props.job
+  };
+
+  componentDidMount() {
+    if (this.props.selectedJob !== null) {
       this.setState({
         ...this.props.selectedJob
-      })
+      });
     }
   }
   handleFormSubmit = jb => {
     jb.preventDefault();
-    if(this.state.id){
+    if (this.state.id) {
       this.props.updateJob(this.state);
-    }else{
-      this.props.createJob(this.state);
+      this.props.history.push(`/jobs/${this.state.id}`)
+    } else {
+      // this.props.createJob(this.state);
+      const newJob = {
+        ...this.state,
+        id: cuid(),
+        hostPhotoURL: "/assets/categoryImages/logo2.png"
+      };
+      this.props.createJob(newJob);
+      this.props.history.push(`/jobs`)
     }
-    
   };
-  handleInputChange = ({target:{name,value}}) => {
+  handleInputChange = ({ target: { name, value } }) => {
     this.setState({
       [name]: value
     });
   };
   render() {
-    const { cancelFormOpen } = this.props;
     const { title, date, city, address, orderedBy } = this.state;
     return (
       <Segment>
@@ -85,7 +114,7 @@ class WorkOrderForm extends Component {
           <Button positive type="submit">
             Submit
           </Button>
-          <Button onClick={cancelFormOpen} type="button">
+          <Button onClick={this.props.history.goBack} type="button">
             Cancel
           </Button>
         </Form>
@@ -93,4 +122,7 @@ class WorkOrderForm extends Component {
     );
   }
 }
-export default WorkOrderForm;
+export default connect(
+  mapState,
+  actions
+)(WorkOrderForm);

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import WorkList from "../WorkList/WorkList";
-import WorkOrderForm from "../WorkOrderForm/WorkOrderForm";
-import { Button } from "semantic-ui-react";
-import cuid from "cuid";
 import { connect } from "react-redux";
 import { createJob, deleteJob, updateJob } from "../WorkList/workOrderActions";
 
@@ -16,65 +13,66 @@ const actions = {
   updateJob
 };
 class Dashboard extends Component {
-  state = {
-    isOpen: false,
-    selectedJob: null
-  };
+  // state = {
+  //   isOpen: false,
+  //   selectedJob: null
+  // };
   // handleIsOpenToggle = () => {
   //   this.setState(({ isOpen }) => ({
   //     isOpen: !isOpen
   //   }));
   // };
-  handleCreateFormOpen = () => {
-    this.setState({
-      isOpen: true,
-      selectedJob: null
-    });
-  };
-  handleFormCancel = () => {
-    this.setState({
-      isOpen: false
-    });
-  };
-  handleCreateJob = newJob => {
-    newJob.id = cuid();
-    newJob.photoURL = "/assets/user.png";
-    this.props.createJob(newJob);
-    this.setState(({ jobs }) => ({
-      isOpen: false
-    }));
-  };
-  handleSelectJob = job => {
-    this.setState({
-      selectedJob: job,
-      isOpen: true
-    });
-  };
+  // handleCreateFormOpen = () => {
+  //   this.setState({
+  //     isOpen: true,
+  //     selectedJob: null
+  //   });
+  // };
+  // handleFormCancel = () => {
+  //   this.setState({
+  //     isOpen: false
+  //   });
+  // };
+  // handleCreateJob = newJob => {
+  //   newJob.id = cuid();
+  //   newJob.photoURL = "/assets/user.png";
+  //   this.props.createJob(newJob);
+    // this.setState(({ jobs }) => ({
+    //   isOpen: false
+    // }));
+  // };
+  // handleSelectJob = job => {
+  //   this.setState({
+  //     selectedJob: job,
+  //     isOpen: true
+  //   });
+  // };
 
-  handleUpdateJobs = updatedJob => {
-    this.props.updateJob(updatedJob);
-    this.setState(({ jobs }) => ({
-      isOpen: false,
-      selectedJob: null
-    }));
-  };
+  // handleUpdateJobs = updatedJob => {
+  //   this.props.updateJob(updatedJob);
+  //   // this.setState(({ jobs }) => ({
+  //   //   isOpen: false,
+  //   //   selectedJob: null
+  //   // }));
+  // };
   handleDeleteJob = id => {
     this.props.deleteJob(id);
   };
   render() {
-    const { isOpen, selectedJob } = this.state;
+    // const { isOpen, selectedJob } = this.state;
     const { jobs } = this.props;
     return (
       <Grid>
         <Grid.Column width={10}>
           <WorkList
             jobs={jobs}
-            selectJob={this.handleSelectJob}
+            // selectJob={this.handleSelectJob}
             deleteJob={this.handleDeleteJob}
           />
         </Grid.Column>
         <Grid.Column width={6}>
-          <Button
+          <h2>Activity Feed</h2>
+          {/* <Button
             onClick={this.handleCreateFormOpen}
             positive
             content="Create project"
@@ -88,7 +86,7 @@ class Dashboard extends Component {
               createJob={this.handleCreateJob}
               cancelFormOpen={this.handleFormCancel}
             />
-          )}
+          )} */}
         </Grid.Column>
       </Grid>
     );

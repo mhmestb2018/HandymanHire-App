@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import Dashboard from "../../features/workOrder/Dashboard/Dashboard";
 import NavBar from "../../features/nav/NavBar/NavBar";
 import { Container } from "semantic-ui-react";
-import { Route } from "react-router-dom";
+import { Route,Switch ,withRouter } from "react-router-dom";
 import WorkOrderForm from "../../features/workOrder/WorkOrderForm/WorkOrderForm";
 import ContractorsDashboard from "../../features/user/ContractorsDashboard/ContractorsDashboard";
 import UserDetailedPage from "../../features/user/UserDetailed/UserDetailedPage";
@@ -22,13 +22,18 @@ class App extends Component {
             <Fragment>
               <NavBar />
               <Container className="main">
-                <Route exact path="/jobs" component={Dashboard} />
-                <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
-                <Route path="/profile/:id" component={UserDetailedPage} />
-                <Route path="/contractors" component={ContractorsDashboard} />
-                <Route path="/settings" component={SettingsDashboard} />
-                <Route path="/createJob" component={WorkOrderForm} />
-                <Route path="/test" component={TestComponent} />
+                <Switch key={this.props.location.key}>
+                  <Route exact path="/jobs" component={Dashboard} />
+                  <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
+                  <Route path="/profile/:id" component={UserDetailedPage} />
+                  <Route path="/contractors" component={ContractorsDashboard} />
+                  <Route path="/settings" component={SettingsDashboard} />
+                  <Route
+                    path={["/createJob", "/manage/:id"]}
+                    component={WorkOrderForm}
+                  />
+                  <Route path="/test" component={TestComponent} />
+                </Switch>
               </Container>
             </Fragment>
           )}
@@ -38,4 +43,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
