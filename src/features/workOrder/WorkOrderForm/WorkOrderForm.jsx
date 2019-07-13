@@ -1,3 +1,4 @@
+/*global google*/
 import React, { Component } from "react";
 import { Segment, Button, Form, Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
@@ -17,6 +18,9 @@ import {
   hasLengthGreaterThan
 } from "revalidate";
 import DateInput from "../../../app/common/form/DateInput";
+import PlaceInput from "../../../app/common/form/PlaceInput";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+
 const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
   let job = {
@@ -72,6 +76,11 @@ const category = [
 ];
 
 class WorkOrderForm extends Component {
+  state = {
+    cityLatLng: {},
+    addressLatLng: {}
+  };
+
   // state = {
   //   ...this.props.job
   // };
@@ -84,13 +93,14 @@ class WorkOrderForm extends Component {
   //   }
   // }
   onFormSubmit = values => {
+    values.adddressLatLng = this.state.adddressLatLng;
     if (this.props.initialValues.id) {
       this.props.updateJob(values);
       this.props.history.push(`/jobs/${this.props.initialValues.id}`);
     } else {
       // this.props.createJob(this.state);
       const newJob = {
-        ...this.values,
+        ...values,
         id: cuid(),
         hostPhotoURL: "/assets/categoryImages/logo2.png",
         orderedBy: "Bob"
@@ -98,6 +108,31 @@ class WorkOrderForm extends Component {
       this.props.createJob(newJob);
       this.props.history.push(`/jobs/${newJob.id}`);
     }
+  };
+
+  handleCitySelect = selectedCity => {
+    geocodeByAddress(selectedCity)
+      .then(results => getLatLng(results[0]))
+      .then(latlng => {
+        this.setState({
+          cityLatLng: latlng
+        });
+      })
+      .then(() => {
+        this.props.change("city", selectedCity);
+      });
+  };
+  handleAddressSelect = selectedAddress => {
+    geocodeByAddress(selectedAddress)
+      .then(results => getLatLng(results[0]))
+      .then(latlng => {
+        this.setState({
+          adddressLatLng: latlng
+        });
+      })
+      .then(() => {
+        this.props.change("address", selectedAddress);
+      });
   };
   // handleInputChange = ({ target: { name, value } }) => {
   //   this.setState({
@@ -142,12 +177,20 @@ class WorkOrderForm extends Component {
               <Header sub color="blue" content="Work Order Location Details" />
               <Field
                 name="city"
-                component={TextInput}
+                component={PlaceInput}
+                options={{ types: ["(cities)"] }}
+                onSelect={this.handleCitySelect}
                 placeholder="Your Region"
               />
               <Field
                 name="address"
-                component={TextInput}
+                component={PlaceInput}
+                options={{
+                  location: new google.maps.LatLng(this.state.cityLatLng),
+                  radius: 1000,
+                  types: ["establishment"]
+                }}
+                onSelect={this.handleAddressSelect}
                 placeholder="Your address"
               />
               <Field
@@ -201,14 +244,17 @@ class WorkOrderForm extends Component {
               >
                 Submit
               </Button>
-              <Button
+              
+{/* Do not working, conflict with create new job */}
+              {/* <Button
                 onClick={
                   initialValues.id
                     ? () => history.push(`/jobs/${initialValues.id}`)
                     : () => history.push("/jobs")
                 }
-                type="button"
-              >
+                type="button" >Cancel</Button> */}
+
+              <Button onClick={this.props.history.goBack} type="button">
                 Cancel
               </Button>
             </Form>

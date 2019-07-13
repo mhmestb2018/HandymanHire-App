@@ -3,7 +3,10 @@ body {
 }
 
 /*timepicker style*/
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
   padding-left: 0;
   padding-right: 0;
   width: 100px;
@@ -17,27 +20,27 @@ body {
   width: 100%;
 }
 
-
 /*home page styles*/
 
 .masthead {
   display: flex;
   align-items: center;
+  text-align: center;
   background-image: linear-gradient(
-          /* 135deg,
+    /* 135deg,
           rgb(36, 53, 121) 0%,
           rgb(33, 138, 174) 69%,
           rgb(32, 132, 172) 89% */
-                 135deg,
-          rgb(55, 75, 155) 0%,
-          rgb(35, 109, 134) 69%,
-          rgb(22, 126, 77) 89%
+      135deg,
+    rgb(55, 75, 155) 0%,
+    rgb(35, 109, 134) 69%,
+    rgb(22, 126, 77) 89%
   ) !important;
   height: 100vh;
 }
 
 .masthead.segment {
-  min-height: 800px;
+  min-height: 600px;
   padding: 4em 0 !important;
 }
 
@@ -74,11 +77,11 @@ body {
 
 .ui.fixed.menu {
   background-image: linear-gradient(
-          135deg,
-          rgb(55, 75, 155) 0%,
-          rgb(35, 109, 134) 69%,
-          rgb(22, 126, 77) 89%
-          /* 135deg,
+    135deg,
+    rgb(55, 75, 155) 0%,
+    rgb(35, 109, 134) 69%,
+    rgb(22, 126, 77) 89%
+      /* 135deg,
           rgb(36, 53, 121) 0%,
           rgb(33, 138, 174) 69%,
           rgb(32, 132, 172) 89% */
@@ -99,11 +102,11 @@ body {
   margin-left: 0.5em;
 }
 
-.ui.menu .item>img:not(.ui) {
+.ui.menu .item > img:not(.ui) {
   margin-right: 1.5em !important;
 }
 
-.ui.menu:not(.vertical) .item>.button {
+.ui.menu:not(.vertical) .item > .button {
   margin-left: 0.5em;
 }
 

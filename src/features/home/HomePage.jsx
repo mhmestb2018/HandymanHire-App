@@ -38,9 +38,11 @@ const HomePage = ({ history }) => {
           size="medium"
           src="/assets/categoryImages/logo2.png"
           alt="logo"
-          style={{ margin: 110 }}
+          style={{
+            padding: 2
+          }}
         />
-        <Header as="h2" inverted>
+        <Header as="h2" inverted >
           FIND TOP-RATED, CERTIFIED PROS FOR YOUR PROJECT
         </Header>
 

@@ -11,6 +11,11 @@ const initialState = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Sligo, IE",
     address: "Avondale",
+    addressLatLng: {
+      lat: 51.5118074,
+      lng: -0.12300089999996544
+    },
+
     orderedBy: "Tom",
     photoURL: "https://randomuser.me/api/portraits/men/20.jpg",
     proposals: [
@@ -30,11 +35,15 @@ const initialState = [
     id: "2",
     title: "Fix the washing machine",
     date: "2018-03-28",
-    category: "Home Appliances Repair",
+    category: "Household Appliance",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Castlebar, IE",
     address: "Westport Road",
+    addressLatLng: {
+      lat: 40.7484405,
+      lng: -73.98566440000002
+    },
     orderedBy: "John",
     photoURL: "https://randomuser.me/api/portraits/men/22.jpg",
     proposals: [
@@ -51,6 +60,7 @@ const initialState = [
     ]
   }
 ];
+
 const createJob = (state, payload) => {
   return [...state, payload.job];
 };

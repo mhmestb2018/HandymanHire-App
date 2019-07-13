@@ -34,6 +34,8 @@ class NavBar extends Component {
               inverted
               content="Create job Enquiry"
             />
+
+            
           </Menu.Item>
           {authenticated ? (
             <SignedInMenu signOut={this.handleSignOut} />

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
+import WorkOrderDetailedMap from "./WorkOrderDetailedMap";
 
-const WorkOrderDetailedInfo = ({job}) => {
+const WorkOrderDetailedInfo = ({ job }) => {
+  const [isMapOpen, showMapToogle] = useState(false);
   return (
     <Segment.Group>
       <Segment attached="top">
@@ -33,10 +35,21 @@ const WorkOrderDetailedInfo = ({job}) => {
             <span>{job.address}</span>
           </Grid.Column>
           <Grid.Column width={4}>
-            <Button color="blue" size="tiny" content="Show Map" />
+            <Button
+              onClick={() => showMapToogle(!isMapOpen)}
+              color="blue"
+              size="tiny"
+              content={isMapOpen ? "Hide map" : "Show Map"}
+            />
           </Grid.Column>
         </Grid>
       </Segment>
+      {isMapOpen && (
+        <WorkOrderDetailedMap
+          lat={job.addressLatLng.lat}
+          lng={job.addressLatLng.lng}
+        />
+      )}
     </Segment.Group>
   );
 };

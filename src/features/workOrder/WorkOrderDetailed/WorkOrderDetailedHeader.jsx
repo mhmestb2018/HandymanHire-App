@@ -24,7 +24,6 @@ const WorkOrderDetailedHeader = ({ job }) => {
         <Image
           src={`/assets/categoryImages/${job.category}.jpg`}
           size="medium"
-          fluid
           style={imageStyle}
           centered
         />
@@ -50,7 +49,7 @@ const WorkOrderDetailedHeader = ({ job }) => {
 
       <Segment attached="bottom">
         <Button>Cancel My Offer</Button>
-        <Button color="">Put An Offer</Button>
+        <Button color="green">Put An Offer</Button>
 
         <Button as={Link} to={`/manage/${job.id}`} color="green" floated="right">
           Manage Offer
