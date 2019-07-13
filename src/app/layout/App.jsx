@@ -10,11 +10,13 @@ import SettingsDashboard from "../../features/user/Settings/SettingsDashboard";
 import HomePage from "../../features/home/HomePage";
 import TestComponent from "../../features/testarea/TestComponent";
 import WorkOrderDetailedPage from "../../features/workOrder/WorkOrderDetailed/WorkOrderDetailedPage";
+import ModalManager from "../../features/modals/ModalManager";
 
 class App extends Component {
   render() {
     return (
       <Fragment>
+        <ModalManager/>
         <Route exact path="/" component={HomePage} />
         <Route
           path="/(.+)"

@@ -93,7 +93,7 @@ class WorkOrderForm extends Component {
   //   }
   // }
   onFormSubmit = values => {
-    values.adddressLatLng = this.state.adddressLatLng;
+    values.addressLatLng = this.state.addressLatLng;
     if (this.props.initialValues.id) {
       this.props.updateJob(values);
       this.props.history.push(`/jobs/${this.props.initialValues.id}`);
@@ -127,7 +127,7 @@ class WorkOrderForm extends Component {
       .then(results => getLatLng(results[0]))
       .then(latlng => {
         this.setState({
-          adddressLatLng: latlng
+          addressLatLng: latlng 
         });
       })
       .then(() => {
@@ -141,8 +141,8 @@ class WorkOrderForm extends Component {
   // };
   render() {
     const {
-      history,
-      initialValues,
+      // history,
+      // initialValues,
       invalid,
       submitting,
       pristine
@@ -244,8 +244,8 @@ class WorkOrderForm extends Component {
               >
                 Submit
               </Button>
-              
-{/* Do not working, conflict with create new job */}
+
+              {/* Do not working, conflict with create new job */}
               {/* <Button
                 onClick={
                   initialValues.id
