@@ -62,7 +62,6 @@ class NavBar extends Component {
                 register={this.handleRegister}
               />
             )}
-            ` `
           </Container>
         </Menu>
       </Fragment>

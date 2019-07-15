@@ -1,6 +1,8 @@
 import React from "react";
 import { Segment, Image, Item, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { format, parseISO } from "date-fns";
+
 const imageStyle = {
   // filter: "brightness(80%)"
   background: "white",
@@ -37,7 +39,7 @@ const WorkOrderDetailedHeader = ({ job }) => {
                   content={job.title}
                   //  style={{ color: 'Blue' }}
                 />
-                <p>{job.date}</p>
+                <p>{job.date && format(parseISO(job.date),'EEEE do LLLL yyyy')}</p>
                 <p>
                   Ordered by <strong>{job.orderedBy}</strong>
                 </p>

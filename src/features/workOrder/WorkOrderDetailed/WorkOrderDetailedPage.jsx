@@ -3,7 +3,7 @@ import { Grid } from "semantic-ui-react";
 import WorkOrderDetailedHeader from "./WorkOrderDetailedHeader";
 import WorkOrderDetailedInfo from "./WorkOrderDetailedInfo";
 import WorkOrderChat from "./WorkOrderChat";
-import EventDetailedSidebar from "./EventDetailedSidebar";
+import WorkOrderDetailedSidebar from "./WorkOrderDetailedSidebar";
 import { connect } from "react-redux";
 
 const mapState = (state, ownProps) => {
@@ -27,7 +27,7 @@ const WorkOrderDetailedPage = ({ job }) => {
         <WorkOrderChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <EventDetailedSidebar proposals={job.proposals} />
+        <WorkOrderDetailedSidebar proposals={job.proposals} />
       </Grid.Column>
     </Grid>
   );

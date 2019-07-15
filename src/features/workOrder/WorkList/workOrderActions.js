@@ -10,20 +10,35 @@ import {
   asyncActionError
 } from "../../async/asyncActions";
 import { fetchSampleData } from "../../../app/data/mockApi";
+import { toastr } from "react-redux-toastr";
 
-export const createJob = jobId => {
-  return {
-    type: CREATE_JOB,
-    payload: {
-      jobId
+export const createJob = job => {
+  return async dispatch => {
+    try {
+      dispatch({
+        type: CREATE_JOB,
+        payload: {
+          job
+        }
+      });
+      toastr.success("Success!", "Your job proposal enquiry has been created");
+    } catch (error) {
+      toastr.error("Oops", "Something went wrong");
     }
   };
 };
-export const updateJob = jobId => {
-  return {
-    type: UPDATE_JOB,
-    payload: {
-      jobId
+export const updateJob = job => {
+  return async dispatch => {
+    try {
+      dispatch({
+        type: UPDATE_JOB,
+        payload: {
+          job
+        }
+      });
+      toastr.success("Success!", "Job proposal updated");
+    } catch (error) {
+      toastr.error("Oops", "Something went wrong");
     }
   };
 };

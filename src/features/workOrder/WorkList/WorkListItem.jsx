@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 import WorkListProposals from "./WorkListProposals";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 class WorkListItem extends Component {
   render() {
     const { job, deleteJob } = this.props;
@@ -40,19 +41,21 @@ class WorkListItem extends Component {
         <Segment>
           <span>
             <Icon name="clock" />
-            {job.date} |
+            {format(job.date.toDate(), "EEEE do LLL yyyy")}
+            at{""}
+            {format(job.date.toDate(), "h:mm a")}
             <Icon name="marker" /> {job.city}
           </span>
         </Segment>
-        
+
         <Segment secondary>
           <div>
             <Item.Header as="a">People interesting in the project</Item.Header>
           </div>
           <List horizontal>
-            {job.proposal &&
-              job.proposals.map(proposal => (
-                <WorkListProposals key={proposal.id} proposal={proposal} />
+            {job.proposals &&
+              Object.values(job.proposals).map((proposal,index) => (
+                <WorkListProposals key={index} proposal={proposal} />
               ))}
           </List>
         </Segment>

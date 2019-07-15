@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Segment, Item, Label, List, Image } from "semantic-ui-react";
 
-const EventDetailedSidebar = ({ proposals }) => {
+const WorkOrderDetailedSidebar = ({ proposals }) => {
   const isOrderedBy = false;
   return (
     <Fragment>
@@ -35,9 +35,7 @@ const EventDetailedSidebar = ({ proposals }) => {
                 <Image size="tiny" src={proposal.photoURL} />
 
                 <Item.Content verticalAlign="middle">
-                  <Item.Header as="h3">
-                    {proposal.name}
-                  </Item.Header>
+                  <Item.Header as="h3">{proposal.name}</Item.Header>
                 </Item.Content>
               </Item>
             ))}
@@ -47,4 +45,4 @@ const EventDetailedSidebar = ({ proposals }) => {
   );
 };
 
-export default EventDetailedSidebar;
+export default WorkOrderDetailedSidebar;

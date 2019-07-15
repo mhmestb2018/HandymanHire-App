@@ -1,5 +1,5 @@
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from "./testConstants";
-import { asyncActionStart, asyncActionFinish } from "../async/asyncActions";
+import { asyncActionFinish } from "../async/asyncActions";
 import { ASYNC_ACTION_START } from "../async/asyncConstants";
 
 export const incrementCounter = () => {
@@ -23,7 +23,7 @@ export const incrementAsync = name => {
     dispatch(asyncActionFinish());
   };
 };
-export const decrementAsync = (name) => {
+export const decrementAsync = name => {
   return async dispatch => {
     dispatch({ type: ASYNC_ACTION_START, payload: name });
     await delay(4000);

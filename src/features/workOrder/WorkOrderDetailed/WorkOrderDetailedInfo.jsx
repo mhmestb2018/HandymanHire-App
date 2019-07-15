@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 import WorkOrderDetailedMap from "./WorkOrderDetailedMap";
+import { format, parseISO } from "date-fns";
 
 const WorkOrderDetailedInfo = ({ job }) => {
   const [isMapOpen, showMapToogle] = useState(false);
@@ -22,7 +23,11 @@ const WorkOrderDetailedInfo = ({ job }) => {
             <Icon name="calendar" size="large" color="blue" />
           </Grid.Column>
           <Grid.Column width={15}>
-            <span>{job.date}</span>
+            {job.date &&
+            <span>
+              {format(parseISO(job.date), "EEEE do LLL yyyy")}
+              {/* |at{""} {format(parseISO(job.date), "h:mm a")} */}
+            </span>}
           </Grid.Column>
         </Grid>
       </Segment>

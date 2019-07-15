@@ -2,7 +2,7 @@ const sampleData = [
   {
     id: "1",
     title: "House Painting",
-    date: "2020-03-27",
+    date: "2020-03-27T20:00:00",
     category: "Painting",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",

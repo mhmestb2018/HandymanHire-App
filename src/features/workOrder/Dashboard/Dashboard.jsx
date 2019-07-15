@@ -4,9 +4,11 @@ import WorkList from "../WorkList/WorkList";
 import { connect } from "react-redux";
 import { createJob, deleteJob, updateJob } from "../WorkList/workOrderActions";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import RecentActivity from "../RecentActivity/RecentActivity";
+import { firestoreConnect } from "react-redux-firebase";
 
 const mapState = state => ({
-  jobs: state.jobs,
+  jobs: state.firestore.ordered.jobs,
   loading: state.async.loading
 });
 const actions = {
@@ -74,22 +76,7 @@ class Dashboard extends Component {
           />
         </Grid.Column>
         <Grid.Column width={6}>
-          <h2>Activity Feed</h2>
-          {/* <Button
-            onClick={this.handleCreateFormOpen}
-            positive
-            content="Create project"
-          />
-          {isOpen && (
-            <WorkOrderForm
-              //makes form changed when click on diffrent view button
-              key={selectedJob ? selectedJob.id : 0}
-              updateJob={this.handleUpdateJobs}
-              selectedJob={selectedJob}
-              createJob={this.handleCreateJob}
-              cancelFormOpen={this.handleFormCancel}
-            />
-          )} */}
+          <RecentActivity />
         </Grid.Column>
       </Grid>
     );
@@ -98,4 +85,4 @@ class Dashboard extends Component {
 export default connect(
   mapState,
   actions
-)(Dashboard);
+)(firestoreConnect([{ collection: 'jobs' }])(Dashboard));

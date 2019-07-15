@@ -6,7 +6,7 @@ class WorkList extends Component {
     const { jobs, deleteJob } = this.props;
     return (
       <Fragment>
-        {jobs.map(job => (
+        {jobs && jobs.map(job => (
           <WorkListItem key={job.id} job={job} deleteJob={deleteJob} />
         ))}
       </Fragment>

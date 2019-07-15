@@ -33,11 +33,13 @@ const HomePage = ({ history }) => {
     // </Grid>
 
     <Segment inverted textAlign="center" vertical className="masthead">
-      <Container text >
+      <Container text>
         <Image size="big" src="/assets/logoHHTools.png" alt="logo" />
-        <Header as="h2" inverted content='FIND TOP-RATED, CERTIFIED PROS FOR YOUR PROJECT'/>
-         
-      
+        <Header
+          as="h2"
+          inverted
+          content="FIND TOP-RATED, CERTIFIED PROS FOR YOUR PROJECT"
+        />
 
         <Button onClick={() => history.push("/jobs")} size="huge" inverted>
           Get started

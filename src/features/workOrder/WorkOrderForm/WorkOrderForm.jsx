@@ -92,11 +92,13 @@ class WorkOrderForm extends Component {
   //     });
   //   }
   // }
+
+  // when provided 'if (this.props.initialValues.id)' did not work
   onFormSubmit = values => {
     values.addressLatLng = this.state.addressLatLng;
-    if (this.props.initialValues.id) {
+    if (this.props.initialValues) {
       this.props.updateJob(values);
-      this.props.history.push(`/jobs/${this.props.initialValues.id}`);
+      this.props.history.push(`/jobs/${this.props.initialValues}`);
     } else {
       // this.props.createJob(this.state);
       const newJob = {
