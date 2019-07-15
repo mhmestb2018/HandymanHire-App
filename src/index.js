@@ -7,8 +7,10 @@ import App from "./app/layout/App";
 import { Provider } from "react-redux";
 import { configureStore } from "./app/store/configureStore";
 import ScrollToTop from "./app/common/utill/ScrollToTop";
+import { loadJobs } from "./features/workOrder/WorkList/workOrderActions";
 
 const store = configureStore();
+store.dispatch(loadJobs());
 const rootEl = document.getElementById("root");
 
 let render = () => {

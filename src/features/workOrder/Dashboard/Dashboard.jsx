@@ -3,9 +3,11 @@ import { Grid } from "semantic-ui-react";
 import WorkList from "../WorkList/WorkList";
 import { connect } from "react-redux";
 import { createJob, deleteJob, updateJob } from "../WorkList/workOrderActions";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const mapState = state => ({
-  jobs: state.jobs
+  jobs: state.jobs,
+  loading: state.async.loading
 });
 const actions = {
   createJob,
@@ -37,9 +39,9 @@ class Dashboard extends Component {
   //   newJob.id = cuid();
   //   newJob.photoURL = "/assets/user.png";
   //   this.props.createJob(newJob);
-    // this.setState(({ jobs }) => ({
-    //   isOpen: false
-    // }));
+  // this.setState(({ jobs }) => ({
+  //   isOpen: false
+  // }));
   // };
   // handleSelectJob = job => {
   //   this.setState({
@@ -60,7 +62,8 @@ class Dashboard extends Component {
   };
   render() {
     // const { isOpen, selectedJob } = this.state;
-    const { jobs } = this.props;
+    const { jobs, loading } = this.props;
+    if (loading) return <LoadingComponent />;
     return (
       <Grid>
         <Grid.Column width={10}>
