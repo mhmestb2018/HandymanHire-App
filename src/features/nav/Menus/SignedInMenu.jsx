@@ -1,12 +1,18 @@
 import React from "react";
-import { Menu, Dropdown, Icon } from "semantic-ui-react";
+import { Menu, Dropdown, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const SignedInMenu = ({ signOut, currentUser }) => {
+const SignedInMenu = ({ signOut, profile }) => {
   return (
     <Menu.Item position="right">
-      <Icon name="user" size="big" />
-      <Dropdown pointing="top left" text={currentUser}>
+      {/* <Icon name="user" size="big" /> */}
+      <Image
+        avatar
+        size="mini"
+        spaced="right"
+        src={profile.photoUrl || "/assets/user.jpg"}
+      />
+      <Dropdown pointing="top left" text={profile.displayName}>
         <Dropdown.Menu>
           <Dropdown.Item text="Create Job Enquiry" icon="plus" />
           <Dropdown.Item text="My Jobs" icon="calendar" />

@@ -17,17 +17,18 @@ const SettingsNav = () => {
           My Projects(photos)
         </Menu.Item>
       </Menu>
-
       <Menu vertical>
-        <Header
-          icon="settings"
-          attached
-          inverted
-          color="grey"
-          content="Account"
-        />
-        <Menu.Item>My Account</Menu.Item>
-      </Menu>
+      <Header
+        icon="settings"
+        attached
+        inverted
+        color="grey"
+        content="Account"
+      />
+      <Menu.Item as={NavLink} to="/settings/account">
+        My Account
+      </Menu.Item>
+    </Menu>
     </Fragment>
   );
 };

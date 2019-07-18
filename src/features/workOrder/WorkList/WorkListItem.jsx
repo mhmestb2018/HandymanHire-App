@@ -50,11 +50,11 @@ class WorkListItem extends Component {
 
         <Segment secondary>
           <div>
-            <Item.Header as="a">People interesting in the project</Item.Header>
+            <Item.Header as="a">Interested in doing the job</Item.Header>
           </div>
           <List horizontal>
             {job.proposals &&
-              Object.values(job.proposals).map((proposal,index) => (
+              Object.values(job.proposals).map((proposal, index) => (
                 <WorkListProposals key={index} proposal={proposal} />
               ))}
           </List>

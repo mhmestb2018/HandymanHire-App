@@ -11,6 +11,7 @@ const rrfConfig = {
   attachAuthIsReady: true,
   useFirestoreForProfile: true,
   updateProfileOnLogin: false
+
 }
 export const configureStore = () => {
   const middlewares = [
