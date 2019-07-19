@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateInput = ({
-  input,
+  input: { value, onChange, onBlur },
   width,
   placeholder,
   meta: { touched, error },
@@ -15,10 +15,17 @@ const DateInput = ({
       <DatePicker
         {...rest}
         placeholderText={placeholder}
-        selected={input.value ? new Date(input.value) : null}
+        //to resolve problem with date format in date picker that is send to firebase
+        selected={
+          value
+            ? Object.prototype.toString.call(value) !== "[object Date]"
+              ? value.toDate()
+              : value
+            : null
+        }
         onChangeRaw={j => j.preventDefault()}
-        onChange={input.onChange}
-        onBlur={input.onBlur}
+        onChange={onChange}
+        onBlur={(j, val) => onBlur(val)}
       />
       {touched && error && (
         <Label basic color="red">

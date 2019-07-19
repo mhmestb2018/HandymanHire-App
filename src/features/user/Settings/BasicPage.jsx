@@ -5,12 +5,11 @@ import DateInput from "../../../app/common/form/DateInput";
 import PlaceInput from "../../../app/common/form/PlaceInput";
 import TextInput from "../../../app/common/form/TextInput";
 import RadioInput from "../../../app/common/form/RadioInput";
-import {addYears} from 'date-fns'
-
+import { addYears } from "date-fns";
 
 class Basics extends Component {
   render() {
-    const { pristine, submitting,handleSubmit,updateProfile } = this.props;
+    const { pristine, submitting, handleSubmit, updateProfile } = this.props;
     return (
       <Segment>
         <Header dividing size="large" content="Basics" />
@@ -22,9 +21,9 @@ class Basics extends Component {
             component={TextInput}
             placeholder="User Name"
           />
-         
+
           <Form.Group inline>
-          <label>Gender :</label>
+            <label>Gender :</label>
             <Field
               name="Gender"
               type="radio"
@@ -52,12 +51,12 @@ class Basics extends Component {
             name="dateOfBirth"
             component={DateInput}
             placeholder="Date of Birth"
-            dateFormat='dd LLL yyyy'
+            dateFormat="dd LLL yyyy"
             // dateFormat='YYYY-MM-DD'
             showYearDropdown={true}
             showMonthDropdown={true}
-            dropdownMode='select'
-            maxDate={addYears(new Date(),-18)}
+            dropdownMode="select"
+            maxDate={addYears(new Date(), -18)}
             // maxDate={moment().subtract(18,'years')}
           />
           <Field
@@ -81,6 +80,8 @@ class Basics extends Component {
   }
 }
 
-export default reduxForm({ form: "userProfile", enableReinitialize: true })(
-  Basics
-);
+export default reduxForm({
+  form: "userProfile",
+  enableReinitialize: true,
+  destroyOnUnmount: false
+})(Basics);
