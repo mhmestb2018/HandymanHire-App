@@ -27,7 +27,7 @@ export const uploadProfileImage = (file, fileName) => async (
 ) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
-  const user = firebase.auth;
+  const user = firebase.auth().currentUser;
   const path = `${user.uid}/user_images`
   const options = {
     name: fileName

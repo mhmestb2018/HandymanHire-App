@@ -9,6 +9,7 @@ class CropperPhotos extends Component {
     if (typeof this.cropper.current.getCroppedCanvas() === "undefined") {
       return;
     }
+    //create Binary Large Object from cropped file in order to store in firebase
     this.cropper.current.getCroppedCanvas().toBlob(blob => {
       setImage(blob);
     }, "image/jpeg");

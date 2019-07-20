@@ -10,7 +10,7 @@ const SignedInMenu = ({ signOut, profile }) => {
         avatar
         size="mini"
         spaced="right"
-        src={profile.photoUrl || "/assets/user.jpg"}
+        src={profile.photoURL || "/assets/user.jpg"}
       />
       <Dropdown pointing="top left" text={profile.displayName}>
         <Dropdown.Menu>
