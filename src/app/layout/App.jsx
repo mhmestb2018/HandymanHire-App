@@ -5,7 +5,7 @@ import { Container } from "semantic-ui-react";
 import { Route,Switch ,withRouter } from "react-router-dom";
 import WorkOrderForm from "../../features/workOrder/WorkOrderForm/WorkOrderForm";
 import ContractorsDashboard from "../../features/user/ContractorsDashboard/ContractorsDashboard";
-import UserDetailedPage from "../../features/user/UserDetailed/UserDetailedPage";
+import UserProfilePage from "../../features/user/UserProfile/UserProfilePage";
 import SettingsDashboard from "../../features/user/Settings/SettingsDashboard";
 import HomePage from "../../features/home/HomePage";
 import TestComponent from "../../features/testarea/TestComponent";
@@ -27,7 +27,7 @@ class App extends Component {
                 <Switch key={this.props.location.key}>
                   <Route exact path="/jobs" component={Dashboard} />
                   <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
-                  <Route path="/profile/:id" component={UserDetailedPage} />
+                  <Route path="/profile/:id" component={UserProfilePage} />
                   <Route path="/contractors" component={ContractorsDashboard} />
                   <Route path="/settings" component={SettingsDashboard} />
                   <Route

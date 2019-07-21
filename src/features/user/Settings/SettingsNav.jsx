@@ -32,5 +32,4 @@ const SettingsNav = () => {
     </Fragment>
   );
 };
-
 export default SettingsNav;

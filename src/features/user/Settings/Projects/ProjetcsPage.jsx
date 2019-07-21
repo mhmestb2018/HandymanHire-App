@@ -4,7 +4,11 @@ import { Segment, Header, Divider, Grid, Button } from "semantic-ui-react";
 import { compose } from "redux";
 import DropzoneInput from "./DropzoneInput";
 import CropperPhotos from "./CropperPhotos";
-import { uploadProfileImage } from "../../../auth/userActions";
+import {
+  uploadProfileImage,
+  deletePhoto,
+  setMainPhoto
+} from "../../../auth/userActions";
 import { toastr } from "react-redux-toastr";
 import { firestoreConnect } from "react-redux-firebase";
 import UserPhotos from "./UserPhotos";
@@ -19,15 +23,25 @@ const query = ({ auth }) => {
   ];
 };
 const actions = {
-  uploadProfileImage
+  uploadProfileImage,
+  deletePhoto,
+  setMainPhoto
 };
 const mapState = state => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
-  photos: state.firestore.ordered.photos
+  photos: state.firestore.ordered.photos,
+  loading: state.async.loading
 });
 //hook instead of class component
-const ProjectsPage = ({ uploadProfileImage, photos, profile }) => {
+const ProjectsPage = ({
+  uploadProfileImage,
+  photos,
+  profile,
+  deletePhoto,
+  setMainPhoto,
+  loading
+}) => {
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState(null);
 
@@ -50,6 +64,22 @@ const ProjectsPage = ({ uploadProfileImage, photos, profile }) => {
   const handleCancelCrop = () => {
     setFiles([]);
     setImage(null);
+  };
+
+  const handleDeletePhoto = async photo => {
+    try {
+      await deletePhoto(photo);
+    } catch (error) {
+      toastr.error(error.message);
+    }
+  };
+
+  const handleSetMainPhoto = async photo => {
+    try {
+      await setMainPhoto(photo);
+    } catch (error) {
+      toastr.error(error.message);
+    }
   };
   return (
     <Segment>
@@ -84,12 +114,20 @@ const ProjectsPage = ({ uploadProfileImage, photos, profile }) => {
                 }}
               />
 
-              <Button.Group size="large">
-                <Button onClick={handleUploadImage} style={{ width: "100px" }}>
+              <Button.Group size="large" positive>
+                <Button
+                  laoding={loading}
+                  onClick={handleUploadImage}
+                  style={{ width: "100px" }}
+                >
                   Save
                 </Button>
-                <Button.Or />
-                <Button onClick={handleCancelCrop} style={{ width: "100px" }}>
+                {/* <Button.Or /> */}
+                <Button
+                  // disabled={loading}
+                  onClick={handleCancelCrop}
+                  style={{ width: "100px" }}
+                >
                   Cancel
                 </Button>
               </Button.Group>
@@ -99,7 +137,12 @@ const ProjectsPage = ({ uploadProfileImage, photos, profile }) => {
       </Grid>
 
       <Divider />
-      <UserPhotos photos={photos} profile={profile} />
+      <UserPhotos
+        photos={photos}
+        profile={profile}
+        deletePhoto={handleDeletePhoto}
+        setMainPhoto={handleSetMainPhoto}
+      />
     </Segment>
   );
 };

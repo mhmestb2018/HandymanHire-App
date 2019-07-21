@@ -8,7 +8,7 @@ import RecentActivity from "../RecentActivity/RecentActivity";
 import { firestoreConnect } from "react-redux-firebase";
 
 const mapState = state => ({
-  jobs: state.firestore.ordered.jobs,
+  jobs: state.firestore.ordered.workOrders,
   loading: state.async.loading
 });
 const actions = {
@@ -17,48 +17,7 @@ const actions = {
   updateJob
 };
 class Dashboard extends Component {
-  // state = {
-  //   isOpen: false,
-  //   selectedJob: null
-  // };
-  // handleIsOpenToggle = () => {
-  //   this.setState(({ isOpen }) => ({
-  //     isOpen: !isOpen
-  //   }));
-  // };
-  // handleCreateFormOpen = () => {
-  //   this.setState({
-  //     isOpen: true,
-  //     selectedJob: null
-  //   });
-  // };
-  // handleFormCancel = () => {
-  //   this.setState({
-  //     isOpen: false
-  //   });
-  // };
-  // handleCreateJob = newJob => {
-  //   newJob.id = cuid();
-  //   newJob.photoURL = "/assets/user.png";
-  //   this.props.createJob(newJob);
-  // this.setState(({ jobs }) => ({
-  //   isOpen: false
-  // }));
-  // };
-  // handleSelectJob = job => {
-  //   this.setState({
-  //     selectedJob: job,
-  //     isOpen: true
-  //   });
-  // };
-
-  // handleUpdateJobs = updatedJob => {
-  //   this.props.updateJob(updatedJob);
-  //   // this.setState(({ jobs }) => ({
-  //   //   isOpen: false,
-  //   //   selectedJob: null
-  //   // }));
-  // };
+ 
   handleDeleteJob = id => {
     this.props.deleteJob(id);
   };
@@ -85,4 +44,4 @@ class Dashboard extends Component {
 export default connect(
   mapState,
   actions
-)(firestoreConnect([{ collection: 'jobs' }])(Dashboard));
+)(firestoreConnect([{ collection: 'workOrders' }])(Dashboard));
