@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Segment, Item, Label, List, Image } from "semantic-ui-react";
 
-const WorkOrderDetailedSidebar = ({ proposals }) => {
-  const isOrderedBy = false;
+const WorkOrderDetailedSidebar = ({ InterestedInJobs }) => {
+  const isHandyman = false;
   return (
     <Fragment>
       <Segment
@@ -13,18 +13,18 @@ const WorkOrderDetailedSidebar = ({ proposals }) => {
         inverted
         color="blue"
       >
-        {proposals && proposals.lenght}
-        {proposals && proposals.lenght === 1
+        {/* {InterestedInJobs && InterestedInJobs.lenght}
+        {InterestedInJobs && InterestedInJobs.lenght === 1
           ? "Contractor"
-          : "Contractors"}{" "}
-        Interesting in the job
+          : "Contractors"}{" "} */}
+        Interested in the job
       </Segment>
       <Segment attached>
         <List relaxed divided>
-          {proposals &&
-            proposals.map(proposal => (
-              <Item key={proposal.id} style={{ position: "relative" }}>
-                {isOrderedBy}
+          {InterestedInJobs &&
+           InterestedInJobs.map(InterestedInJob => (
+              <Item key={InterestedInJob.id} style={{ position: "relative" }}>
+                {isHandyman}
                 <Label
                   style={{ position: "absolute" }}
                   color="orange"
@@ -32,10 +32,10 @@ const WorkOrderDetailedSidebar = ({ proposals }) => {
                 >
                   Customer (Ordered by)
                 </Label>
-                <Image size="tiny" src={proposal.photoURL} />
+                <Image size="tiny" src={InterestedInJob.photoURL} />
 
                 <Item.Content verticalAlign="middle">
-                  <Item.Header as="h3">{proposal.name}</Item.Header>
+                  <Item.Header as="h3">{InterestedInJob.displayName}</Item.Header>
                 </Item.Content>
               </Item>
             ))}

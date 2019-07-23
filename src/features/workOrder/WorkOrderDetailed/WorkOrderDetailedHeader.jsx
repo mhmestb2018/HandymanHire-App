@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Segment, Image, Item, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 
 const imageStyle = {
   // filter: "brightness(80%)"
@@ -19,7 +19,12 @@ const imageTextStyle = {
 
   // color: 'white'
 };
-const WorkOrderDetailedHeader = ({ job }) => {
+const WorkOrderDetailedHeader = ({
+  job,
+  isInterested,
+  isHandyman,
+  jobProposal
+}) => {
   return (
     <Segment.Group style={{ background: "white" }}>
       <Segment basic attached="top" style={{ padding: "0" }}>
@@ -39,7 +44,7 @@ const WorkOrderDetailedHeader = ({ job }) => {
                   content={job.title}
                   //  style={{ color: 'Blue' }}
                 />
-                <p>{job.date && format(parseISO(job.date),'EEEE do LLLL yyyy')}</p>
+                <p>{job.date && format(job.date.toDate(), "EEEE do LLLL")}</p>
                 <p>
                   Ordered by <strong>{job.orderedBy}</strong>
                 </p>
@@ -49,13 +54,28 @@ const WorkOrderDetailedHeader = ({ job }) => {
         </Segment>
       </Segment>
 
-      <Segment attached="bottom">
-        <Button>Cancel My Offer</Button>
-        <Button color="green">Put An Offer</Button>
-
-        <Button as={Link} to={`/manage/${job.id}`} color="green" floated="right">
-          Manage Offer
-        </Button>
+      <Segment attached="bottom" clearing>
+        {!isHandyman && (
+          <Fragment>
+            {isInterested ? (
+              <Button>Cancel My Enquiry</Button>
+            ) : (
+              <Button onClick={() => jobProposal(job)} color="green">
+                Put An Offer
+              </Button>
+            )}
+          </Fragment>
+        )}
+        {!isHandyman && (
+          <Button
+            as={Link}
+            to={`/manage/${job.id}`}
+            color="green"
+            floated="right"
+          >
+            Manage Offer
+          </Button>
+        )}
       </Segment>
     </Segment.Group>
   );

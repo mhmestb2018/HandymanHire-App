@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
+import { Segment, Item, Icon, List, Button, Label } from "semantic-ui-react";
 import WorkListProposals from "./WorkListProposals";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 class WorkListItem extends Component {
   render() {
-    const { job, deleteJob } = this.props;
+    const { job } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -15,6 +15,14 @@ class WorkListItem extends Component {
               <Item.Content>
                 <Item.Header>{job.title}</Item.Header>
                 <Item.Description>Ordered by {job.orderedBy}</Item.Description>
+                {job.cancelled && (
+                  <Label
+                    style={{ top: "-40px" }}
+                    ribbon="right"
+                    color="red"
+                    content="This enquiry has been cancelled"
+                  />
+                )}
               </Item.Content>
             </Item>
           </Item.Group>
@@ -22,13 +30,6 @@ class WorkListItem extends Component {
         <Segment clearing>
           <span>{job.description}</span>
           <div>
-            <Button
-              onClick={() => deleteJob(job.id)}
-              as="a"
-              color="red"
-              floated="right"
-              content="delete"
-            />
             <Button
               as={Link}
               to={`/jobs/${job.id}`}

@@ -105,3 +105,35 @@ export const setMainPhoto = photo => async (
     throw new Error("Problem setting main photo");
   }
 };
+export const jobProposal = job => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firestore = getFirestore();
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  const profile = getState().firebase.profile;
+  const interested = {
+    interested: true,
+    joinDate: firestore.FieldValue.serverTimestamp(),
+    photoURL: profile.photoURL || "/assets/user.png",
+    displayName: profile.displayName,
+    handyman: true
+  };
+  try {
+    await firestore.update(`workOrders/${job.id}`, {
+      [`InterestedInJobs.${user.uid}`]: interested
+    });
+    await firestore.set(`job_interested/${job.id}_${user.uid}`, {
+      jobId: job.id,
+      userUid: user.uid,
+      jobDate: job.date,
+      handyman: true
+    });
+    toastr.success("You are interested in that job enquiry");
+  } catch (error) {
+    console.log(error);
+    toastr.error("Problem with signin up ");
+  }
+};

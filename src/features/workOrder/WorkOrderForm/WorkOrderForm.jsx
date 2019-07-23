@@ -4,9 +4,9 @@ import { Segment, Button, Form, Grid, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {
   createJob,
-  updateJob
+  updateJob,
+  cancelToggle
 } from "../../workOrder/WorkList/workOrderActions";
-import cuid from "cuid";
 import { reduxForm, Field } from "redux-form";
 import TextInput from "../../../app/common/form/TextInput";
 import TextArea from "../../../app/common/form/TextArea";
@@ -20,26 +20,30 @@ import {
 import DateInput from "../../../app/common/form/DateInput";
 import PlaceInput from "../../../app/common/form/PlaceInput";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { withFirestore } from "react-redux-firebase";
+import { toastr } from "react-redux-toastr";
 
 const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
-  let job = {
-    // title: "",
-    // date: "",
-    // city: "",
-    // address: "",
-    // orderedBy: ""
-  };
-  // if (jobId && state.jobs.lenght > 0) {
-  job = state.jobs.filter(job => job.id === jobId)[0];
-  // }
+  let job = {};
+  //did not work with if before firestore
+  if (
+    state.firestore.ordered.workOrders &&
+    state.firestore.ordered.workOrders.lenght > 0
+  ) {
+    job =
+      state.firestore.ordered.workOrders.filter(job => job.id === jobId)[0] ||
+      {};
+  }
   return {
-    initialValues: job
+    initialValues: job,
+    job
   };
 };
 const actions = {
   createJob,
-  updateJob
+  updateJob,
+  cancelToggle
 };
 const validate = combineValidators({
   title: isRequired({ message: "The job title is required" }),
@@ -80,35 +84,29 @@ class WorkOrderForm extends Component {
     cityLatLng: {},
     addressLatLng: {}
   };
+  async componentDidMount() {
+    const { firestore, match } = this.props;
+    await firestore.setListener(`workOrders/${match.params.id}`);
+  }
 
-  // state = {
-  //   ...this.props.job
-  // };
 
-  // componentDidMount() {
-  //   if (this.props.selectedJob !== null) {
-  //     this.setState({
-  //       ...this.props.selectedJob
-  //     });
-  //   }
-  // }
-
+  
   // when provided 'if (this.props.initialValues.id)' did not work
-  onFormSubmit = values => {
+  onFormSubmit = async values => {
     values.addressLatLng = this.state.addressLatLng;
-    if (this.props.initialValues) {
-      this.props.updateJob(values);
-      this.props.history.push(`/jobs/${this.props.initialValues}`);
-    } else {
-      // this.props.createJob(this.state);
-      const newJob = {
-        ...values,
-        id: cuid(),
-        hostPhotoURL: "/assets/categoryImages/logo2.png",
-        orderedBy: "Bob"
-      };
-      this.props.createJob(newJob);
-      this.props.history.push(`/jobs/${newJob.id}`);
+    try {
+      if (this.props.initialValues.id) {
+        if(Object.keys(values.addressLatLng).length===0){
+          values.addressLatLng=this.props.job.addressLatLng
+        }
+        this.props.updateJob(values);
+        this.props.history.push(`/workOrders/${this.props.initialValues.id}`);
+      } else {
+        let createdJob = await this.props.createJob(values);
+        this.props.history.push(`/workOrders/${createdJob.id}`);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -129,7 +127,7 @@ class WorkOrderForm extends Component {
       .then(results => getLatLng(results[0]))
       .then(latlng => {
         this.setState({
-          addressLatLng: latlng 
+          addressLatLng: latlng
         });
       })
       .then(() => {
@@ -147,7 +145,9 @@ class WorkOrderForm extends Component {
       // initialValues,
       invalid,
       submitting,
-      pristine
+      pristine,
+      job,
+      cancelToggle
     } = this.props;
     // const { title, date, city, address, orderedBy } = this.state;
     return (
@@ -202,43 +202,6 @@ class WorkOrderForm extends Component {
                 placeholder="Date that you expect from contractor to start the job"
               />
 
-              {/* <Form.Field>
-            <label>Job Date</label>
-            <input
-              name="date"
-              onChange={this.handleInputChange}
-              value={date}
-              type="date"
-              placeholder="Job Date"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>City</label>
-            <input
-              name="city"
-              onChange={this.handleInputChange}
-              value={city}
-              placeholder="City job is taking place"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Address</label>
-            <input
-              name="address"
-              onChange={this.handleInputChange}
-              value={address}
-              placeholder="Enter the address of the job"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Ordered By</label>
-            <input
-              name="orderedBy"
-              onChange={this.handleInputChange}
-              value={orderedBy}
-              placeholder="Enter the name of person Ordered"
-            />
-          </Form.Field> */}
               <Button
                 disabled={invalid || submitting || pristine}
                 positive
@@ -259,6 +222,13 @@ class WorkOrderForm extends Component {
               <Button onClick={this.props.history.goBack} type="button">
                 Cancel
               </Button>
+              <Button
+                type="button"
+                color={job.cancelled ? "blue" : "red"}
+                content={job.cancelled ? "Reactive Enquiry" : "Cancel Enquiry"}
+                onClick={() => cancelToggle(!job.cancelled, job.id)}
+                floated="right"
+              />
             </Form>
           </Segment>
         </Grid.Column>
@@ -266,7 +236,13 @@ class WorkOrderForm extends Component {
     );
   }
 }
-export default connect(
-  mapState,
-  actions
-)(reduxForm({ form: "Form", validate })(WorkOrderForm));
+export default withFirestore(
+  connect(
+    mapState,
+    actions
+  )(
+    reduxForm({ form: "workOrderForm", validate, enableReinitialize: true })(
+      WorkOrderForm
+    )
+  )
+);
