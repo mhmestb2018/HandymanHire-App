@@ -1,10 +1,3 @@
-import {  FETCH_JOBS } from "./WorkOrderConstants";
-import {
-  asyncActionStart,
-  asyncActionFinish,
-  asyncActionError
-} from "../../async/asyncActions";
-import { fetchSampleData } from "../../../app/data/mockApi";
 import { toastr } from "react-redux-toastr";
 import { createNewJob } from "../../../app/common/utill/helpers";
 
@@ -23,7 +16,7 @@ export const createJob = job => {
         jobDate: job.date,
         handyman: false
       });
-      toastr.success("Success!", "Your job proposal enquiry has been created");
+      toastr.success("Success!", "Your job proposal has been created");
       return createdJob;
     } catch (error) {
       toastr.error("Oops", "Something went wrong");
@@ -61,18 +54,4 @@ export const cancelToggle = (cancelled, jobId) => async (
   } catch (error) {
     console.log(error);
   }
-};
-
-export const loadJobs = () => {
-  return async dispatch => {
-    try {
-      dispatch(asyncActionStart());
-      const jobs = await fetchSampleData();
-      dispatch({ type: FETCH_JOBS, payload: { jobs } });
-      dispatch(asyncActionFinish());
-    } catch (error) {
-      console.log(error);
-      dispatch(asyncActionError);
-    }
-  };
 };

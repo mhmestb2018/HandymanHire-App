@@ -137,3 +137,22 @@ export const jobProposal = job => async (
     toastr.error("Problem with signin up ");
   }
 };
+export const cancelJobProposal = job => async (
+  dispatch,
+  getState,
+  { getFirestore, getFirebase }
+) => {
+  const firestore = getFirestore();
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  try {
+    await firestore.update(`workOrders/${job.id}_${user.uid}`, {
+      [`InterestedInJobs.${user.uid}`]: firestore.FieldValue.delete()
+    });
+    await firestore.delete(`handyman_proposal/${job.id}_${user.uid}`);
+    toastr.success("You have removed yourself from interested in enquiry");
+  } catch (error) {
+    console.log(error);
+    toastr.error("Something went wrong");
+  }
+};

@@ -3,6 +3,7 @@ import { Segment, Item, Icon, List, Button, Label } from "semantic-ui-react";
 import WorkListProposals from "./WorkListProposals";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import { objectToArray } from "../../../app/common/utill/helpers";
 class WorkListItem extends Component {
   render() {
     const { job } = this.props;
@@ -13,8 +14,15 @@ class WorkListItem extends Component {
             <Item>
               <Item.Image size="tiny" circular src={job.photoURL} />
               <Item.Content>
-                <Item.Header>{job.title}</Item.Header>
-                <Item.Description>Ordered by {job.orderedBy}</Item.Description>
+                <Item.Header as={Link} to={`/workOrders/${job.id}`}>
+                  {job.title}
+                </Item.Header>
+                <Item.Description>
+                  Ordered By {"  "}
+                  <Link to={`/profile/${job.orderedByUid}`}>
+                    {job.orderedBy}
+                  </Link>
+                </Item.Description>
                 {job.cancelled && (
                   <Label
                     style={{ top: "-40px" }}
@@ -54,9 +62,12 @@ class WorkListItem extends Component {
             <Item.Header as="a">Interested in doing the job</Item.Header>
           </div>
           <List horizontal>
-            {job.proposals &&
-              Object.values(job.proposals).map((proposal, index) => (
-                <WorkListProposals key={index} proposal={proposal} />
+            {job.InterestedInJobs &&
+              objectToArray(job.InterestedInJobs).map(interested => (
+                <WorkListProposals
+                  key={interested.id}
+                  interested={interested}
+                />
               ))}
           </List>
         </Segment>

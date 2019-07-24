@@ -122,7 +122,7 @@ const ProjectsPage = ({
                 >
                   Save
                 </Button>
-                {/* <Button.Or /> */}
+                <Button.Or />
                 <Button
                   // disabled={loading}
                   onClick={handleCancelCrop}

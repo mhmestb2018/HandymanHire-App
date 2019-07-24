@@ -21,7 +21,6 @@ import DateInput from "../../../app/common/form/DateInput";
 import PlaceInput from "../../../app/common/form/PlaceInput";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { withFirestore } from "react-redux-firebase";
-import { toastr } from "react-redux-toastr";
 
 const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
@@ -89,15 +88,13 @@ class WorkOrderForm extends Component {
     await firestore.setListener(`workOrders/${match.params.id}`);
   }
 
-
-  
   // when provided 'if (this.props.initialValues.id)' did not work
   onFormSubmit = async values => {
     values.addressLatLng = this.state.addressLatLng;
     try {
       if (this.props.initialValues.id) {
-        if(Object.keys(values.addressLatLng).length===0){
-          values.addressLatLng=this.props.job.addressLatLng
+        if (Object.keys(values.addressLatLng).length === 0) {
+          values.addressLatLng = this.props.job.addressLatLng;
         }
         this.props.updateJob(values);
         this.props.history.push(`/workOrders/${this.props.initialValues.id}`);

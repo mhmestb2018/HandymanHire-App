@@ -23,7 +23,8 @@ const WorkOrderDetailedHeader = ({
   job,
   isInterested,
   isHandyman,
-  jobProposal
+  jobProposal,
+  cancelJobProposal
 }) => {
   return (
     <Segment.Group style={{ background: "white" }}>
@@ -46,7 +47,12 @@ const WorkOrderDetailedHeader = ({
                 />
                 <p>{job.date && format(job.date.toDate(), "EEEE do LLLL")}</p>
                 <p>
-                  Ordered by <strong>{job.orderedBy}</strong>
+                  Ordered by{" "}
+                  <strong>
+                    <Link to={`/profile/${job.orderedByUid}`}>
+                      {job.orderedBy}
+                    </Link>
+                  </strong>
                 </p>
               </Item.Content>
             </Item>
@@ -55,10 +61,12 @@ const WorkOrderDetailedHeader = ({
       </Segment>
 
       <Segment attached="bottom" clearing>
-        {!isHandyman && (
+        {isHandyman && (
           <Fragment>
             {isInterested ? (
-              <Button>Cancel My Enquiry</Button>
+              <Button onClick={() => cancelJobProposal(job)}>
+                Cancel My Enquiry proposal
+              </Button>
             ) : (
               <Button onClick={() => jobProposal(job)} color="green">
                 Put An Offer
@@ -66,7 +74,7 @@ const WorkOrderDetailedHeader = ({
             )}
           </Fragment>
         )}
-        {!isHandyman && (
+        {isHandyman && (
           <Button
             as={Link}
             to={`/manage/${job.id}`}

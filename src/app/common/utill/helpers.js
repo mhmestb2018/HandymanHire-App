@@ -15,10 +15,11 @@ export const createNewJob = (user, photoURL, job) => {
     InterestedInJobs: {
       [user.uid]: {
         // offerDescription: user.offerDescription,
+        isInterested:true,
         joinDate: new Date(),
         photoURL: photoURL || "/assets/user.png",
         displayName: user.displayName
-      }
+      } 
     }
   };
 };
