@@ -146,10 +146,11 @@ export const cancelJobProposal = job => async (
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
   try {
-    await firestore.update(`workOrders/${job.id}_${user.uid}`, {
+    await firestore.update(`workOrders/${job.id}`, {
+      //bug , not reflecting change of value in the user interface redux-firestore (no bug in 0.3.2)
       [`InterestedInJobs.${user.uid}`]: firestore.FieldValue.delete()
     });
-    await firestore.delete(`handyman_proposal/${job.id}_${user.uid}`);
+    await firestore.delete(`job_interested/${job.id}_${user.uid}`);
     toastr.success("You have removed yourself from interested in enquiry");
   } catch (error) {
     console.log(error);

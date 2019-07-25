@@ -25,12 +25,12 @@ const UserProfileDescription = ({ profile }) => {
             <p>{profile.description}</p>
           </Grid.Column>
           <Grid.Column width={6}>
-            <Header icon="heart outline" content="Interests" />
+            <Header icon="unordered list" content="Interests" />
             <List>
               {profile.interests &&
                 profile.interests.map((interests, index) => (
                   <Item key={index}>
-                    <Icon name="heart" />
+                    <Icon name="wrench" />
                     <Item.Content>{interests}</Item.Content>
                   </Item>
                 ))}

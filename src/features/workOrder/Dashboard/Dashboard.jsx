@@ -12,7 +12,6 @@ const mapState = state => ({
 });
 const actions = {
   createJob,
-
   updateJob
 };
 class Dashboard extends Component {

@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { Segment, Item, Label, List, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const WorkOrderDetailedSidebar = ({ interested }) => {
-  const isHandyman = false;
+const WorkOrderDetailedSidebar = ({ InterestedInJobs }) => {
+  const isHire = false;
   return (
     <Fragment>
       <Segment
@@ -22,16 +22,16 @@ const WorkOrderDetailedSidebar = ({ interested }) => {
       </Segment>
       <Segment attached>
         <List relaxed divided>
-          {interested &&
-            interested.map(interested => (
+          {InterestedInJobs &&
+            InterestedInJobs.map(interested => (
               <Item key={interested.id} style={{ position: "relative" }}>
-                {isHandyman}
+                {isHire}
                 <Label
                   style={{ position: "absolute" }}
                   color="orange"
                   ribbon="right"
                 >
-                  Customer (Ordered by)
+                 Handyman trust points
                 </Label>
                 <Image size="tiny" src={interested.photoURL} />
 

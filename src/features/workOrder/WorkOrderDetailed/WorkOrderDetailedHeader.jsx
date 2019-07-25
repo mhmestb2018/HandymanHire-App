@@ -22,7 +22,7 @@ const imageTextStyle = {
 const WorkOrderDetailedHeader = ({
   job,
   isInterested,
-  isHandyman,
+  isHire,
   jobProposal,
   cancelJobProposal
 }) => {
@@ -61,20 +61,20 @@ const WorkOrderDetailedHeader = ({
       </Segment>
 
       <Segment attached="bottom" clearing>
-        {isHandyman && (
+        {!isHire && (
           <Fragment>
             {isInterested ? (
               <Button onClick={() => cancelJobProposal(job)}>
-                Cancel My Enquiry proposal
+                Cancel My Proposal
               </Button>
             ) : (
               <Button onClick={() => jobProposal(job)} color="green">
-                Put An Offer
+                Add My Proposal
               </Button>
             )}
           </Fragment>
         )}
-        {isHandyman && (
+        {isHire && (
           <Button
             as={Link}
             to={`/manage/${job.id}`}

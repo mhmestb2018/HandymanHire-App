@@ -25,11 +25,8 @@ import { withFirestore } from "react-redux-firebase";
 const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
   let job = {};
-  //did not work with if before firestore
-  if (
-    state.firestore.ordered.workOrders &&
-    state.firestore.ordered.workOrders.lenght > 0
-  ) {
+  //did not work with added to if ( && state.firestore.ordered.workOrders.lenght > 0 )
+  if (state.firestore.ordered.workOrders) {
     job =
       state.firestore.ordered.workOrders.filter(job => job.id === jobId)[0] ||
       {};
@@ -87,7 +84,10 @@ class WorkOrderForm extends Component {
     const { firestore, match } = this.props;
     await firestore.setListener(`workOrders/${match.params.id}`);
   }
-
+  async componentWillUnmount() {
+    const { firestore, match } = this.props;
+    await firestore.unsetListener(`workOrders/${match.params.id}`);
+  }
   // when provided 'if (this.props.initialValues.id)' did not work
   onFormSubmit = async values => {
     values.addressLatLng = this.state.addressLatLng;
@@ -238,7 +238,7 @@ export default withFirestore(
     mapState,
     actions
   )(
-    reduxForm({ form: "workOrderForm", validate, enableReinitialize: true })(
+    reduxForm({ form: "workOrdeForm", validate, enableReinitialize: true })(
       WorkOrderForm
     )
   )

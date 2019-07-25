@@ -12,7 +12,7 @@ class WorkListItem extends Component {
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image size="tiny" circular src={job.photoURL} />
+              <Item.Image size="tiny" circular src={job.orderedByPhotoURL} />
               <Item.Content>
                 <Item.Header as={Link} to={`/workOrders/${job.id}`}>
                   {job.title}
@@ -25,7 +25,7 @@ class WorkListItem extends Component {
                 </Item.Description>
                 {job.cancelled && (
                   <Label
-                    style={{ top: "-40px" }}
+                    style={{ top: "-30px" }}
                     ribbon="right"
                     color="red"
                     content="This enquiry has been cancelled"

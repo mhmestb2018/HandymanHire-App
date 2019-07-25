@@ -14,16 +14,15 @@ const mapState = (state, ownProps) => {
 
   let job = {};
   //did not work with if
-  // if (
-  //   state.firestore.ordered.workOrders &&
-  //   state.firestore.ordered.workOrders.lenght > 0
-  // ) {
-  job =
-    state.firestore.ordered.workOrders.filter(job => job.id === jobId)[0] || {};
-  // }
+  if (state.firestore.ordered.workOrders) {
+    job =
+      state.firestore.ordered.workOrders.filter(job => job.id === jobId)[0] ||
+      {};
+  }
   return {
     job,
     auth: state.firebase.auth
+ 
   };
 };
 const actions = {
@@ -41,10 +40,13 @@ class WorkOrderDetailedPage extends Component {
     await firestore.unsetListener(`workOrders/${match.params.id}`);
   }
   render() {
-    const { job, auth, jobProposal, cancelJobProposal } = this.props;
+    const { job, auth, jobProposal, cancelJobProposal} = this.props;
+
     const InterestedInJobs =
       job && job.InterestedInJobs && objectToArray(job.InterestedInJobs);
-    const isHandyman = job.orderedByUid === auth.uid;
+
+    const isHire = job.orderedByUid===auth.uid
+    
     const isInterested =
       InterestedInJobs && InterestedInJobs.some(i => i.id === auth.uid);
     return (
@@ -53,7 +55,7 @@ class WorkOrderDetailedPage extends Component {
           <WorkOrderDetailedHeader
             job={job}
             isInterested={isInterested}
-            isHandyman={isHandyman}
+            isHire={isHire}
             jobProposal={jobProposal}
             cancelJobProposal={cancelJobProposal}
           />
