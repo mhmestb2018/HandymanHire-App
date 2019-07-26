@@ -25,6 +25,7 @@
 //   }
 // };
 
+//when clicled on links redirerct to specific user profile page
 export const userProfileQuery = ({ auth, userUid, match }) =>
   userUid !== null
     ? [

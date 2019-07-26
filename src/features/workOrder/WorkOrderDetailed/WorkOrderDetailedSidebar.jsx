@@ -37,7 +37,7 @@ const WorkOrderDetailedSidebar = ({ InterestedInJobs }) => {
 
                 <Item.Content verticalAlign="middle">
                   <Item.Header as="h3">
-                    <Link to={`/profile/${interested.displayName}`}>
+                    <Link to={`/profile/${interested.id}`}>
                       {interested.displayName}
                     </Link>
                   </Item.Header>

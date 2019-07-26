@@ -34,6 +34,7 @@ const mapState = (state, ownProps) => {
   return {
     initialValues: job,
     job
+    
   };
 };
 const actions = {
@@ -89,6 +90,7 @@ class WorkOrderForm extends Component {
     await firestore.unsetListener(`workOrders/${match.params.id}`);
   }
   // when provided 'if (this.props.initialValues.id)' did not work
+  // jobs is pointing to workOrders page
   onFormSubmit = async values => {
     values.addressLatLng = this.state.addressLatLng;
     try {
@@ -97,10 +99,10 @@ class WorkOrderForm extends Component {
           values.addressLatLng = this.props.job.addressLatLng;
         }
         this.props.updateJob(values);
-        this.props.history.push(`/workOrders/${this.props.initialValues.id}`);
+        this.props.history.push(`/jobs/${this.props.initialValues.id}`);
       } else {
         let createdJob = await this.props.createJob(values);
-        this.props.history.push(`/workOrders/${createdJob.id}`);
+        this.props.history.push(`/jobs/${createdJob.id}`);
       }
     } catch (error) {
       console.log(error);
@@ -138,8 +140,8 @@ class WorkOrderForm extends Component {
   // };
   render() {
     const {
-      // history,
-      // initialValues,
+      history,
+      initialValues,
       invalid,
       submitting,
       pristine,
@@ -200,9 +202,11 @@ class WorkOrderForm extends Component {
               />
 
               <Button
-                disabled={invalid || submitting || pristine}
+               
                 positive
                 type="submit"
+                disabled={invalid || submitting || pristine}
+ 
               >
                 Submit
               </Button>

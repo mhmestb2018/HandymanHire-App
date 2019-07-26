@@ -30,11 +30,12 @@ class NavBar extends Component {
     const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
       <Fragment>
-        <Menu inverted fixed="top">
-          <Container>
-            <Menu.Item as={NavLink} exact to="/" header>
-              <Image size="small" src="assets/logoHHTools.png" alt="logo" />
-            </Menu.Item>
+      
+        <Menu inverted stackable fixed="top">
+          <Container><Image as={NavLink} exact to="/" header size="small" src="assets/logoHHTools.png" alt="logo" />
+            {/* <Menu.Item >
+           
+            </Menu.Item> */}
             <Menu.Item as={NavLink} exact to="/jobs" name="Jobs" />
             {authenticated && (
               <Fragment>
@@ -62,7 +63,7 @@ class NavBar extends Component {
             )}
           </Container>
         </Menu>
-      </Fragment>
+       </Fragment>
     );
   }
 }
