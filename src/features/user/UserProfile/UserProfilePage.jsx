@@ -10,6 +10,8 @@ import UserProfileSidebar from "./UserProfileSidebar";
 import UserProfileWorkOrders from "./UserProfileWorkOrders";
 import { userProfileQuery } from "../userQueries";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { getUserWorkOrders } from "../../auth/userActions";
+
 //to link specific user to specific profile
 const mapState = (state, ownProps) => {
   let userUid = null;
@@ -27,13 +29,32 @@ const mapState = (state, ownProps) => {
     profile,
     auth: state.firebase.auth,
     photos: state.firestore.ordered.photos,
-    requesting: state.firestore.status.requesting
+    requesting: state.firestore.status.requesting,
+    workOrders: state.workOrders,
+    workOrdersLoading: state.async.loading
   };
 };
-
+const actions = {
+  getUserWorkOrders
+};
 class UserProfilePage extends Component {
+  async componentDidMount() {
+    let workOrders = await this.props.getUserWorkOrders(this.props.userUid, 1);
+    console.log(workOrders);
+  }
+  changeTab = (e, data) => {
+    this.props.getUserWorkOrders(this.props.userUid, data.activeIndex);
+  };
   render() {
-    const { profile, photos, auth, match, requesting } = this.props;
+    const {
+      profile,
+      photos,
+      auth,
+      match,
+      requesting,
+      workOrders,
+      workOrdersLoading
+    } = this.props;
     const isCurrentUser = auth.uid === match.params.id;
     const loading = Object.values(requesting).some(a => a === true);
     if (loading) return <LoadingComponent />;
@@ -43,12 +64,19 @@ class UserProfilePage extends Component {
         <UserProfileDescription profile={profile} />
         <UserProfileSidebar isCurrentUser={isCurrentUser} />
         <UserProfileProjects photos={photos} />
-        <UserProfileWorkOrders />
+        <UserProfileWorkOrders
+          workOrders={workOrders}
+          workOrdersLoading={workOrdersLoading}
+          changeTab={this.changeTab}
+        />
       </Grid>
     );
   }
 }
 export default compose(
-  connect(mapState),
+  connect(
+    mapState,
+    actions
+  ),
   firestoreConnect((auth, userUid) => userProfileQuery(auth, userUid))
 )(UserProfilePage);

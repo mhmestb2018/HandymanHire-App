@@ -140,8 +140,8 @@ class WorkOrderForm extends Component {
   // };
   render() {
     const {
-      history,
-      initialValues,
+      // history,
+      // initialValues,
       invalid,
       submitting,
       pristine,
@@ -189,7 +189,7 @@ class WorkOrderForm extends Component {
                 options={{
                   location: new google.maps.LatLng(this.state.cityLatLng),
                   radius: 1000,
-                  types: ["establishment"]
+                  types: ["address"]
                 }}
                 onSelect={this.handleAddressSelect}
                 placeholder="Your address"

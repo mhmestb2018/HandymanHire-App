@@ -32,7 +32,8 @@ class NavBar extends Component {
       <Fragment>
       
         <Menu inverted stackable fixed="top">
-          <Container><Image as={NavLink} exact to="/" header size="small" src="assets/logoHHTools.png" alt="logo" />
+          {/* header in Image caused error in console */}
+          <Container><Image as={NavLink} exact to="/" size="small" src="assets/logoHHTools.png" alt="logo" />
             {/* <Menu.Item >
            
             </Menu.Item> */}

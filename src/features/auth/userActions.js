@@ -5,7 +5,8 @@ import {
   asyncActionFinish,
   asyncActionError
 } from "../async/asyncActions";
-
+import firebase from "../../app/config/firebase";
+import { FETCH_JOBS } from "../workOrder/WorkList/WorkOrderConstants";
 export const updateProfile = user => async (
   dispatch,
   getState,
@@ -155,5 +156,57 @@ export const cancelJobProposal = job => async (
   } catch (error) {
     console.log(error);
     toastr.error("Something went wrong");
+  }
+};
+
+export const getUserWorkOrders = (userUid, activeTab) => async (
+  dispatch,
+  getState
+) => {
+  dispatch(asyncActionStart());
+  const firestore = firebase.firestore();
+  const today = new Date(Date.now());
+  let workOrdersRef = firestore.collection("job_interested");
+  let query;
+  switch (activeTab) {
+    case 1: //past orders
+      query = workOrdersRef
+        .where("userUid", "==", userUid)
+        .where("jobDate", "<=", today)
+        .orderBy("jobDate", "desc");
+      break;
+    case 2: //future orders
+      query = workOrdersRef
+        .where("userUid", "==", userUid)
+        .where("jobDate", ">=", today)
+        .orderBy("jobDate");
+      break;
+    case 3: //my work orders
+      query = workOrdersRef
+        .where("userUid", "==", userUid)
+        .where("handyman", "==", false)
+        .orderBy("jobDate", "desc");
+      break;
+    default:
+      query = workOrdersRef
+        .where("userUid", "==", userUid)
+        .orderBy("jobDate", "desc");
+      break;
+  }
+  try {
+    let querySnap = await query.get();
+    let workOrders = [];
+    for (let i = 0; i < querySnap.docs.length; i++) {
+      let wo = await firestore
+        .collection("workOrders")
+        .doc(querySnap.docs[i].data().jobId)
+        .get();
+      workOrders.push({ ...wo.data(), id: wo.id });
+    }
+    dispatch({ type: FETCH_JOBS, payload: { workOrders } });
+    dispatch(asyncActionFinish());
+  } catch (error) {
+    console.log(error);
+    dispatch(asyncActionError);
   }
 };

@@ -61,8 +61,8 @@ class Basics extends Component {
           />
           <Field
             name="city"
-            placeholder="Home Town"
-            options={{ types: ["(cities)"] }}
+            placeholder="Country oof Orgin"
+            options={{ types: ["(regions)"] }}
             label="Female"
             component={PlaceInput}
             width={8}

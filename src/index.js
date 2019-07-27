@@ -8,7 +8,6 @@ import App from "./app/layout/App";
 import { Provider } from "react-redux";
 import { configureStore } from "./app/store/configureStore";
 import ScrollToTop from "./app/common/utill/ScrollToTop";
-
 import ReduxToastr from "react-redux-toastr";
 
 const store = configureStore();
