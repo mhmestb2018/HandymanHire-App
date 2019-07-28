@@ -184,7 +184,7 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
     case 3: //my work orders
       query = workOrdersRef
         .where("userUid", "==", userUid)
-        .where("handyman", "==", false)
+        .where("handyman", "==", true)
         .orderBy("jobDate", "desc");
       break;
     default:
@@ -193,6 +193,7 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
         .orderBy("jobDate", "desc");
       break;
   }
+
   try {
     let querySnap = await query.get();
     let workOrders = [];
@@ -204,10 +205,66 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
       workOrders.push({ ...wo.data(), id: wo.id });
     }
     dispatch({ type: FETCH_JOBS, payload: { workOrders } });
-    console.log(query)
+   
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
     dispatch(asyncActionError);
   }
 };
+
+// export const getUserWorkOrders = (userUid, activeTab) => async (
+//   dispatch,
+//   getState
+// ) => {
+//   const firestore = firebase.firestore()
+//   const today = new Date(Date.now())
+//   let eventsRef = firestore.collection("job_interested")
+//   let query
+
+//   switch (activeTab) {
+//     case 1: // past events
+//       query = eventsRef
+//         .where("userUid", "==", userUid)
+//         .where("eventDate", "<=", today)
+//         .orderBy("eventDate", "desc")
+//       break
+//     case 2: // future events
+//       query = eventsRef
+//         .where("userUid", "==", userUid)
+//         .where("eventDate", ">=", today)
+//         .orderBy("eventDate")
+//       break
+//     case 3: // hosted events
+//       query = eventsRef
+//         .where("userUid", "==", userUid)
+//         .where("host", "==", true)
+//         .orderBy("eventDate", "desc")
+//       break
+//     default:
+//       query = eventsRef
+//         .where("userUid", "==", userUid)
+//         .orderBy("eventDate", "desc")
+//   }
+
+//   try {
+//     dispatch(asyncActionStart())
+//     let querySnapshot = await query.get()
+//     let workOrders = []
+
+//     for (let doc in querySnapshot.docs) {
+//       let workOrder = await firestore
+//         .collection("workOrders")
+//         .doc(querySnapshot.docs[doc].data().jobId)
+//         .get()
+
+//       workOrders.push({ ...workOrder.data(), id: workOrder.id })
+//     }
+
+//     dispatch({ type: FETCH_JOBS, payload: { workOrders } })
+//     dispatch(asyncActionFinish())
+//   } catch (error) {
+//     console.log(error)
+//     dispatch(asyncActionError())
+//   }
+// }

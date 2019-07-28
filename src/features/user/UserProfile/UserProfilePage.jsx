@@ -39,7 +39,7 @@ const actions = {
 };
 class UserProfilePage extends Component {
   async componentDidMount() {
-    let workOrders = await this.props.getUserWorkOrders(this.props.userUid, 1);
+    let workOrders = await this.props.getUserWorkOrders(this.props.userUid);
     console.log(workOrders);
   }
   changeTab = (e, data) => {

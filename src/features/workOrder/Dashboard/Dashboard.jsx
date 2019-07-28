@@ -121,25 +121,38 @@ class Dashboard extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.workOrders !== nextProps.workOrders) {
       this.setState({
-        loadedWorkOrders: [...this.state.loadedWorkOrders, ...nextProps.workOrders]
+        loadedWorkOrders: [
+          ...this.state.loadedWorkOrders,
+          ...nextProps.workOrders
+        ]
       });
     }
   }
+  // getNextWorkOrder = async () => {
+  //   const { workOrders } = this.props;
+  //   let lastWorkOrder = workOrders && workOrders[workOrders.lenght - 1];
+  //   let next = await this.props.getWorkOrdersForDashboard(lastWorkOrder);
+  //   if (next && next.docs && next.docs.lenght <= 1) {
+  //     this.setState({
+  //       moreWorkOrders: false
+  //     });
+  //   }
+  // };
 
-  getNextWorkOrder = async () => {
+  getNextWorkOrders = async () => {
     const { workOrders } = this.props;
     let lastWorkOrder = workOrders && workOrders[workOrders.length - 1];
-    let next = await this.props.getWorkOrdersForDashboard(lastWorkOrder);
+    let next = await this.props.getEventsForDashboard(lastWorkOrder);
 
     if (next && next.docs && next.docs.length <= 1) {
-      this.setState({ moreWorkOrders: false });
+      this.setState({ moreWorkOrders: false});
     }
   };
 
   handleContextRef = contextRef => this.setState({ contextRef });
 
   render() {
-    const { loading, activities } = this.props;
+    const { loading, activities} = this.props;
     const { initialLoading, loadedWorkOrders, moreWorkOrders } = this.state;
 
     if (initialLoading) return <LoadingComponent inverted={true} />;
@@ -147,14 +160,14 @@ class Dashboard extends Component {
     return (
       <Grid>
         <Grid.Column width={10}>
-          <div ref={this.handleContextRef}>
-            <WorkList
-              loading={loading}
-              moreWorkOrders={moreWorkOrders}
-              workOrders={loadedWorkOrders}
-              getNextWorkOrders={this.getNextWorkorders}
-            />
-          </div>
+          {/* <div ref={this.handleContextRef}> */}
+          <WorkList
+            loading={loading}
+            moreWorkOrders={moreWorkOrders}
+            workOrders={loadedWorkOrders}
+            getNextWorkOrders={this.getNextWorkorders}
+          />
+          {/* </div> */}
         </Grid.Column>
         <Grid.Column width={6}>
           <RecentActivity

@@ -6,24 +6,29 @@ class WorkList extends Component {
   render() {
     const {
       workOrders,
-      getNextWorkOrder,
+      getNextWorkOrders,
       loading,
       moreWorkOrders
     } = this.props;
     return (
       <Fragment>
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={getNextWorkOrder}
-          hasMore={!loading && moreWorkOrders}
-        />
-        {workOrders &&
-          workOrders.map(job => <WorkListItem key={job.id} job={job} />)}
+        {workOrders && workOrders.lenght !== 0 && (
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={getNextWorkOrders}
+            hasMore={!loading && moreWorkOrders}
+            initialLoad={true}
+          >
+            {workOrders &&
+              workOrders.map(job => <WorkListItem key={job.id} job={job} />)}
+          </InfiniteScroll>
+        )}
       </Fragment>
     );
   }
 }
 export default WorkList;
+
 
 // import React from "react"
 // import EventListItem from "./EventListItem"

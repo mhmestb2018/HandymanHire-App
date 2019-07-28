@@ -23,9 +23,9 @@ const interests = [
     value: "home appliances repair"
   },
   {
-    key: "furniture repair & restoration ",
-    text: "Furniture Repair & Restoration ",
-    value: "furniture repair & restoration "
+    key: "furniture repair & restoration",
+    text: "Furniture Repair & Restoration",
+    value: "furniture repair & restoration"
   }
 ];
 
