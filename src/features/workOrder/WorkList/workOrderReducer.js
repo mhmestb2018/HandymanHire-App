@@ -19,7 +19,7 @@ const deleteJob = (state, payload) => {
   return [...state.filter(job => job.id !== payload.jobId)];
 };
 //changed jobs for workOrders
-const fetchJobs = (state, payload) => payload.jobs;
+const fetchJobs = (state, payload) => payload.workOrders;
 
 export default createReducer(initialState, {
   [CREATE_JOB]: createJob,

@@ -204,6 +204,7 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
       workOrders.push({ ...wo.data(), id: wo.id });
     }
     dispatch({ type: FETCH_JOBS, payload: { workOrders } });
+    console.log(query)
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);

@@ -70,15 +70,15 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
   let today = new Date();
   const firestore = firebase.firestore();
   const workOrdersRef = firestore.collection("workOrders");
-   try {
-    dispatch(asyncActionStart())
+  try {
+    dispatch(asyncActionStart());
     let startAfter =
-    lastWorkOrder &&
+      lastWorkOrder &&
       (await firestore
         .collection("workOrders")
         .doc(lastWorkOrder.id)
-        .get())
-    let query = lastWorkOrder 
+        .get());
+    let query = lastWorkOrder
       ? workOrdersRef
           .where("date", ">=", today)
           .orderBy("date")
@@ -87,12 +87,12 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
       : workOrdersRef
           .where("date", ">=", today)
           .orderBy("date")
-          .limit(2)
+          .limit(2);
 
-    let querySnap = await query.get()
+    let querySnap = await query.get();
     if (querySnap.docs.length === 0) {
-      dispatch(asyncActionFinish())
-      return querySnap
+      dispatch(asyncActionFinish());
+      return querySnap;
     }
 
     let workOrders = [];
@@ -101,9 +101,10 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
       workOrders.push(wo);
     }
 
-    
-    dispatch({ type: FETCH_JOBS, payload: { workOrders } })
+    dispatch({ type: FETCH_JOBS, payload: { workOrders } });
+
     dispatch(asyncActionFinish());
+
     return querySnap;
   } catch (error) {
     console.log(error);

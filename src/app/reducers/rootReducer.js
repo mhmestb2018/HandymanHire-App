@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   firestore:firestoreReducer,
   form: FormReducer,
   test: testReducer,
-  jobs: workOrderReducer,
+  workOrders: workOrderReducer,
   modals:modalReducer,
   auth:authReducer,
   async:asyncReducer,
