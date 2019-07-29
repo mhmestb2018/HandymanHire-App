@@ -15,11 +15,22 @@ export const createNewJob = (user, photoURL, job) => {
     InterestedInJobs: {
       [user.uid]: {
         // offerDescription: user.offerDescription,
-        isInterested:true,
+        isInterested: true,
         joinDate: new Date(),
         photoURL: photoURL || "/assets/user.png",
         displayName: user.displayName
-      } 
+      }
     }
   };
+};
+
+export const createDataTree = dataset => {
+  let hashTable = Object.create(null);
+  dataset.forEach(a => (hashTable[a.id] = { ...a, childNodes: [] }));
+  let dataTree = [];
+  dataset.forEach(a => {
+    if (a.parentId) hashTable[a.parentId].childNodes.push(hashTable[a.id]);
+    else dataTree.push(hashTable[a.id]);
+  });
+  return dataTree;
 };

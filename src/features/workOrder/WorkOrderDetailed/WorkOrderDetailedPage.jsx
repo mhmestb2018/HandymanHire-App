@@ -5,13 +5,17 @@ import WorkOrderDetailedInfo from "./WorkOrderDetailedInfo";
 import WorkOrderChat from "./WorkOrderChat";
 import WorkOrderDetailedSidebar from "./WorkOrderDetailedSidebar";
 import { connect } from "react-redux";
-import { withFirestore } from "react-redux-firebase";
-import { objectToArray } from "../../../app/common/utill/helpers";
+import { withFirestore, firebaseConnect, isEmpty } from "react-redux-firebase";
+import { compose } from "redux";
+import {
+  objectToArray,
+  createDataTree
+} from "../../../app/common/utill/helpers";
 import { jobProposal, cancelJobProposal } from "../../auth/userActions";
+import { addComment } from "../WorkList/workOrderActions";
 
 const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
-
   let job = {};
   //did not work with if
   if (state.firestore.ordered.workOrders) {
@@ -21,13 +25,16 @@ const mapState = (state, ownProps) => {
   }
   return {
     job,
-    auth: state.firebase.auth
- 
+    auth: state.firebase.auth,
+    chat:
+      !isEmpty(state.firebase.data.chat_data) &&
+      objectToArray(state.firebase.data.chat_data[ownProps.match.params.id])
   };
 };
 const actions = {
   jobProposal,
-  cancelJobProposal
+  cancelJobProposal,
+  addComment
 };
 class WorkOrderDetailedPage extends Component {
   async componentDidMount() {
@@ -40,13 +47,20 @@ class WorkOrderDetailedPage extends Component {
     await firestore.unsetListener(`workOrders/${match.params.id}`);
   }
   render() {
-    const { job, auth, jobProposal, cancelJobProposal} = this.props;
-
+    const {
+      job,
+      auth,
+      jobProposal,
+      cancelJobProposal,
+      addComment,
+      chat
+    } = this.props;
+    const chatTree = !isEmpty(chat) && createDataTree(chat);
     const InterestedInJobs =
       job && job.InterestedInJobs && objectToArray(job.InterestedInJobs);
 
-    const isHire = job.orderedByUid===auth.uid
-    
+    const isHire = job.orderedByUid === auth.uid;
+
     const isInterested =
       InterestedInJobs && InterestedInJobs.some(i => i.id === auth.uid);
     return (
@@ -60,7 +74,11 @@ class WorkOrderDetailedPage extends Component {
             cancelJobProposal={cancelJobProposal}
           />
           <WorkOrderDetailedInfo job={job} />
-          <WorkOrderChat />
+          <WorkOrderChat
+            chat={chatTree}
+            addComment={addComment}
+            jobId={job.id}
+          />
         </Grid.Column>
         <Grid.Column width={6}>
           <WorkOrderDetailedSidebar InterestedInJobs={InterestedInJobs} />
@@ -70,9 +88,11 @@ class WorkOrderDetailedPage extends Component {
   }
 }
 
-export default withFirestore(
+export default compose(
+  withFirestore,
   connect(
     mapState,
     actions
-  )(WorkOrderDetailedPage)
-);
+  ),
+  firebaseConnect(props => [`chat_data/${props.match.params.id}`])
+)(WorkOrderDetailedPage);

@@ -78,33 +78,31 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
         .collection("workOrders")
         .doc(lastWorkOrder.id)
         .get());
-    let query = lastWorkOrder
-      ? workOrdersRef
-          .where("date", ">=", today)
+    let query;
+    lastWorkOrder
+      ? (query = workOrdersRef
+          // .where("date", ">=", today)
           .orderBy("date")
           .startAfter(startAfter)
-          .limit(2)
-      : workOrdersRef
-          .where("date", ">=", today)
+          .limit(3))
+      : (query = workOrdersRef
+          // .where("date", ">=", today)
           .orderBy("date")
-          .limit(2);
+          .limit(3));
 
     let querySnap = await query.get();
     if (querySnap.docs.length === 0) {
       dispatch(asyncActionFinish());
-      return querySnap;
+      return;
     }
-
     let workOrders = [];
+
     for (let i = 0; i < querySnap.docs.length; i++) {
       let wo = { ...querySnap.docs[i].data(), id: querySnap.docs[i].id };
       workOrders.push(wo);
     }
-
     dispatch({ type: FETCH_JOBS, payload: { workOrders } });
-
     dispatch(asyncActionFinish());
-
     return querySnap;
   } catch (error) {
     console.log(error);
@@ -112,51 +110,26 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
   }
 };
 
-// export const getWorkOrdersForDashboard = lastJob => async dispatch => {
-//   let today = new Date(Date.now())
-//   const firestore = firebase.firestore()
-//   const eventsRef = firestore.collection("workOrders")
-
-//   try {
-//     dispatch(asyncActionStart())
-//     let startAfter =
-//       lastJob &&
-//       (await firestore
-//         .collection("workOrders")
-//         .doc(lastJob.id)
-//         .get())
-//     let query = lastJob
-//       ? eventsRef
-//           .where("date", ">=", today)
-//           .orderBy("date")
-//           .startAfter(startAfter)
-//           .limit(2)
-//       : eventsRef
-//           .where("date", ">=", today)
-//           .orderBy("date")
-//           .limit(2)
-
-//     let querySnapshot = await query.get()
-//     if (querySnapshot.docs.length === 0) {
-//       dispatch(asyncActionFinish())
-//       return querySnapshot
-//     }
-
-//     let jobs = []
-
-//     for (let doc in querySnapshot.docs) {
-//       let job = {
-//         ...querySnapshot.docs[doc].data(),
-//         id: querySnapshot.docs[doc].id
-//       }
-//       jobs.push(job)
-//     }
-
-//     dispatch({ type: FETCH_JOBS, payload: { jobs } })
-//     dispatch(asyncActionFinish())
-//     return querySnapshot
-//   } catch (error) {
-//     console.log(error)
-//     dispatch(asyncActionError())
-//   }
-// }
+export const addComment = (jobId, values, parentId) => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  const firebase = getFirebase();
+  const profile = getState().firebase.profile;
+  const user = firebase.auth().currentUser;
+  let newComment = {
+    parentId: parentId,
+    displayName: profile.displayName,
+    photoURL: profile.photoURL || "/assets/user.png",
+    uid: user.uid,
+    text: values.comment,
+    date: Date.now()
+  };
+  try {
+    await firebase.push(`chat_data/${jobId}`, newComment);
+  } catch (error) {
+    console.log(error);
+    toastr.error("Problem adding comment");
+  }
+};
