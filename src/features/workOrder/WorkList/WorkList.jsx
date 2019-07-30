@@ -31,10 +31,8 @@ export default WorkList;
 
 
 // import React from "react"
-// import EventListItem from "./EventListItem"
-// import InfiniteScroll from "react-infinite-scroller"
 
-// import React from "react";
+
 // import WorkListItem from "./WorkListItem";
 // import InfiniteScroll from "react-infinite-scroller";
 

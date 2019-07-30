@@ -116,7 +116,7 @@ const ProjectsPage = ({
 
               <Button.Group size="large" positive>
                 <Button
-                  laoding={loading}
+                  loading={loading}
                   onClick={handleUploadImage}
                   style={{ width: "100px" }}
                 >
@@ -142,6 +142,7 @@ const ProjectsPage = ({
         profile={profile}
         deletePhoto={handleDeletePhoto}
         setMainPhoto={handleSetMainPhoto}
+        loading={loading}
       />
     </Segment>
   );

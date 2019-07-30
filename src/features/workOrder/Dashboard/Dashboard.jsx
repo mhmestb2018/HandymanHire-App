@@ -2,9 +2,7 @@ import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Grid, Loader } from "semantic-ui-react";
-
 import WorkList from "../WorkList/WorkList";
-
 import { getWorkOrdersForDashboard } from "../../workOrder/WorkList/workOrderActions";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import RecentActivity from "../RecentActivity/RecentActivity";
@@ -85,7 +83,7 @@ class Dashboard extends Component {
           />
         </Grid.Column>
         <Grid.Column width={10}>
-          <Loader active={loading} />
+          {/* <Loader active={loading} /> */}
         </Grid.Column>
       </Grid>
     );

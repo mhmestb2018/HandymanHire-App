@@ -17,7 +17,7 @@ export const createJob = job => {
     const newJob = createNewJob(user, photoURL, job);
     try {
       let createdJob = await firestore.add("workOrders", newJob);
-      await firestore.set(`handyman_proposal/${createdJob.id}_${user.uid}`, {
+      await firestore.set(`job_interested/${createdJob.id}_${user.uid}`, {
         jobId: createdJob.id,
         userUid: user.uid,
         jobDate: job.date,

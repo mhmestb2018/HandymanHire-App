@@ -91,18 +91,46 @@ export const deletePhoto = photo => async (
     throw new Error("Problem deleting the photo");
   }
 };
-export const setMainPhoto = photo => async (
-  dispatch,
-  getState,
-  { getFirebase }
-) => {
-  const firebase = getFirebase();
+// dealing with duplicate photo data
+export const setMainPhoto = photo => async (dispatch, getState) => {
+  const firestore = firebase.firestore();
+  const user = firebase.auth().currentUser;
+  const today = new Date();
+  let userDocRef = firestore.collection("users").doc(user.uid);
+  let jobInterestedRef = firestore.collection("job_interested");
   try {
-    return await firebase.updateProfile({
+    dispatch(asyncActionStart());
+    let batch = firestore.batch();
+    batch.update(userDocRef, {
       photoURL: photo.url
     });
+    let jobQuery = await jobInterestedRef
+      .where("userUid", "==", user.uid)
+      .where("jobDate", ">=", today);
+    let jobQuerySnap = await jobQuery.get();
+    for (let i = 0; i < jobQuerySnap.docs.length; i++) {
+      let jobDocRef = await firestore
+        .collection("workOrders")
+        .doc(jobQuerySnap.docs[i].data().jobId);
+      let job = await jobDocRef.get();
+      console.log(job)
+      if (job.data().orderedByUid === user.uid) {
+        batch.update(jobDocRef, {
+          orderedByPhotoURL: photo.url,
+          [`InterestedInJobs.${user.uid}.photoURL`]: photo.url
+        });
+      } else {
+        batch.update(jobDocRef, {
+          [`InterestedInJobs.${user.uid}.photoURL`]: photo.url
+        });
+      }
+    }
+    console.log(batch);
+    await batch.commit();
+    dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
+    dispatch(asyncActionError);
     throw new Error("Problem setting main photo");
   }
 };
@@ -205,66 +233,10 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
       workOrders.push({ ...wo.data(), id: wo.id });
     }
     dispatch({ type: FETCH_JOBS, payload: { workOrders } });
-   
+
     dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
     dispatch(asyncActionError);
   }
 };
-
-// export const getUserWorkOrders = (userUid, activeTab) => async (
-//   dispatch,
-//   getState
-// ) => {
-//   const firestore = firebase.firestore()
-//   const today = new Date(Date.now())
-//   let eventsRef = firestore.collection("job_interested")
-//   let query
-
-//   switch (activeTab) {
-//     case 1: // past events
-//       query = eventsRef
-//         .where("userUid", "==", userUid)
-//         .where("eventDate", "<=", today)
-//         .orderBy("eventDate", "desc")
-//       break
-//     case 2: // future events
-//       query = eventsRef
-//         .where("userUid", "==", userUid)
-//         .where("eventDate", ">=", today)
-//         .orderBy("eventDate")
-//       break
-//     case 3: // hosted events
-//       query = eventsRef
-//         .where("userUid", "==", userUid)
-//         .where("host", "==", true)
-//         .orderBy("eventDate", "desc")
-//       break
-//     default:
-//       query = eventsRef
-//         .where("userUid", "==", userUid)
-//         .orderBy("eventDate", "desc")
-//   }
-
-//   try {
-//     dispatch(asyncActionStart())
-//     let querySnapshot = await query.get()
-//     let workOrders = []
-
-//     for (let doc in querySnapshot.docs) {
-//       let workOrder = await firestore
-//         .collection("workOrders")
-//         .doc(querySnapshot.docs[doc].data().jobId)
-//         .get()
-
-//       workOrders.push({ ...workOrder.data(), id: workOrder.id })
-//     }
-
-//     dispatch({ type: FETCH_JOBS, payload: { workOrders } })
-//     dispatch(asyncActionFinish())
-//   } catch (error) {
-//     console.log(error)
-//     dispatch(asyncActionError())
-//   }
-// }
