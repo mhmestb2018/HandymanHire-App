@@ -21,6 +21,7 @@ const imageTextStyle = {
 };
 const WorkOrderDetailedHeader = ({
   job,
+  loading,
   isInterested,
   isHire,
   jobProposal,
@@ -68,7 +69,7 @@ const WorkOrderDetailedHeader = ({
                 Cancel My Proposal
               </Button>
             ) : (
-              <Button onClick={() => jobProposal(job)} color="green">
+              <Button loading={loading} onClick={() => jobProposal(job)} color="green">
                 Add My Proposal
               </Button>
             )}

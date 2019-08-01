@@ -33,8 +33,8 @@ const mapState = (state, ownProps) => {
   }
   return {
     initialValues: job,
-    job
-    
+    job,
+    loading: state.async.loading
   };
 };
 const actions = {
@@ -98,7 +98,7 @@ class WorkOrderForm extends Component {
         if (Object.keys(values.addressLatLng).length === 0) {
           values.addressLatLng = this.props.job.addressLatLng;
         }
-        this.props.updateJob(values);
+        await this.props.updateJob(values);
         this.props.history.push(`/jobs/${this.props.initialValues.id}`);
       } else {
         let createdJob = await this.props.createJob(values);
@@ -140,13 +140,14 @@ class WorkOrderForm extends Component {
   // };
   render() {
     const {
-      // history,
+      history,
       // initialValues,
       invalid,
       submitting,
       pristine,
       job,
-      cancelToggle
+      cancelToggle,
+      loading
     } = this.props;
     // const { title, date, city, address, orderedBy } = this.state;
     return (
@@ -202,27 +203,24 @@ class WorkOrderForm extends Component {
               />
 
               <Button
-               
+                loading={loading}
                 positive
                 type="submit"
                 disabled={invalid || submitting || pristine}
- 
               >
                 Submit
               </Button>
-
-              {/* Do not working, conflict with create new job */}
               {/* <Button
                 onClick={
-                  initialValues.id
-                    ? () => history.push(`/jobs/${initialValues.id}`)
+                  job.id
+                    ? () => history.push(`/jobs/${job.id}`)
                     : () => history.push("/jobs")
                 }
-                type="button" >Cancel</Button> */}
-
-              <Button onClick={this.props.history.goBack} type="button">
+                type="button"
+                disabled={loading}
+              >
                 Cancel
-              </Button>
+              </Button> */}
               <Button
                 type="button"
                 color={job.cancelled ? "blue" : "red"}

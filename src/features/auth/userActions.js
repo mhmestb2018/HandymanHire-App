@@ -113,7 +113,7 @@ export const setMainPhoto = photo => async (dispatch, getState) => {
         .collection("workOrders")
         .doc(jobQuerySnap.docs[i].data().jobId);
       let job = await jobDocRef.get();
-      console.log(job)
+      console.log(job);
       if (job.data().orderedByUid === user.uid) {
         batch.update(jobDocRef, {
           orderedByPhotoURL: photo.url,
@@ -134,38 +134,48 @@ export const setMainPhoto = photo => async (dispatch, getState) => {
     throw new Error("Problem setting main photo");
   }
 };
-export const jobProposal = job => async (
-  dispatch,
-  getState,
-  { getFirebase, getFirestore }
-) => {
-  const firestore = getFirestore();
-  const firebase = getFirebase();
+//if any changes in workOrders transacion rerun to track them
+
+export const jobProposal = job => async (dispatch, getState) => {
+  const firestore = firebase.firestore();
   const user = firebase.auth().currentUser;
-  const profile = getState().firebase.profile;
+  const { photoURL, displayName } = getState().firebase.profile;
   const interested = {
-    interested: true,
-    joinDate: firestore.FieldValue.serverTimestamp(),
-    photoURL: profile.photoURL || "/assets/user.png",
-    displayName: profile.displayName,
-    handyman: true
+    isInterested: true,
+    joinDate: new Date(),
+    photoURL: photoURL || "/assets/user.png",
+    displayName: displayName
   };
+
   try {
-    await firestore.update(`workOrders/${job.id}`, {
-      [`InterestedInJobs.${user.uid}`]: interested
+    dispatch(asyncActionStart());
+    let jobDocRef = firestore.collection("workOrders").doc(job.id);
+    let jobInterestedDocRef = firestore
+      .collection("InterestedInJobs")
+      .doc(`${job.id}_${user.uid}`);
+
+    await firestore.runTransaction(async transaction => {
+      await transaction.get(jobDocRef);
+      await transaction.update(jobDocRef, {
+        [`job_interested.${user.uid}`]: interested
+      });
+      await transaction.set(jobInterestedDocRef, {
+        jobId: job.id,
+        userUid: user.uid,
+        jobDate: job.date,
+        handyman: true
+      });
     });
-    await firestore.set(`job_interested/${job.id}_${user.uid}`, {
-      jobId: job.id,
-      userUid: user.uid,
-      jobDate: job.date,
-      handyman: true
-    });
-    toastr.success("You are interested in that job enquiry");
+
+    dispatch(asyncActionFinish());
+    toastr.success("Success", "You have signed up for the event");
   } catch (error) {
     console.log(error);
-    toastr.error("Problem with signin up ");
+    dispatch(asyncActionError());
+    toastr.error("Oops", "Problem signing up to the event");
   }
 };
+
 export const cancelJobProposal = job => async (
   dispatch,
   getState,

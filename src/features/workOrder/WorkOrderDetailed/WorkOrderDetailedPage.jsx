@@ -25,6 +25,7 @@ const mapState = (state, ownProps) => {
   }
   return {
     job,
+    loading:state.async.loading,
     auth: state.firebase.auth,
     chat:
       !isEmpty(state.firebase.data.chat_data) &&
@@ -48,6 +49,7 @@ class WorkOrderDetailedPage extends Component {
   }
   render() {
     const {
+      loading,
       job,
       auth,
       jobProposal,
@@ -68,6 +70,7 @@ class WorkOrderDetailedPage extends Component {
         <Grid.Column width={10}>
           <WorkOrderDetailedHeader
             job={job}
+            loading={loading}
             isInterested={isInterested}
             isHire={isHire}
             jobProposal={jobProposal}
