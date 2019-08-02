@@ -51,8 +51,8 @@ class WorkListItem extends Component {
           <span>
             <Icon name="clock" />
             {format(job.date.toDate(), "EEEE do LLL yyyy")}
-            at{""}
-            {format(job.date.toDate(), "h:mm a")}
+            {" "}
+            {/* {format(job.date.toDate(), "h:mm a")} */}
             <Icon name="marker" /> {job.city}
           </span>
         </Segment>

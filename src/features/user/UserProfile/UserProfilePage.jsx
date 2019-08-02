@@ -10,7 +10,7 @@ import UserProfileSidebar from "./UserProfileSidebar";
 import UserProfileWorkOrders from "./UserProfileWorkOrders";
 import { userProfileQuery } from "../userQueries";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { getUserWorkOrders } from "../../auth/userActions";
+import { getUserWorkOrders, followMember,unfollowMember } from "../../auth/userActions";
 
 //to link specific user to specific profile
 const mapState = (state, ownProps) => {
@@ -31,11 +31,14 @@ const mapState = (state, ownProps) => {
     photos: state.firestore.ordered.photos,
     requesting: state.firestore.status.requesting,
     workOrders: state.workOrders,
-    workOrdersLoading: state.async.loading
+    workOrdersLoading: state.async.loading,
+    following: state.firestore.ordered.following
   };
 };
 const actions = {
-  getUserWorkOrders
+  getUserWorkOrders,
+  followMember,
+  unfollowMember
 };
 class UserProfilePage extends Component {
   async componentDidMount() {
@@ -53,16 +56,26 @@ class UserProfilePage extends Component {
       match,
       requesting,
       workOrders,
-      workOrdersLoading
+      workOrdersLoading,
+      followMember,
+      following,
+      unfollowMember
     } = this.props;
     const isCurrentUser = auth.uid === match.params.id;
     const loading = Object.values(requesting).some(a => a === true);
-    if (loading) return <LoadingComponent />;
+    const isFollowing = !isEmpty(following);
+    if (loading) return <LoadingComponent inverted={true} />;
     return (
       <Grid>
         <UserProfileHeader profile={profile} />
         <UserProfileDescription profile={profile} />
-        <UserProfileSidebar isCurrentUser={isCurrentUser} />
+        <UserProfileSidebar
+          isCurrentUser={isCurrentUser}
+          profile={profile}
+          followMember={followMember}
+          isFollowing={isFollowing}
+          unfollowMember={unfollowMember}
+        />
         <UserProfileProjects photos={photos} />
         <UserProfileWorkOrders
           workOrders={workOrders}
@@ -78,5 +91,7 @@ export default compose(
     mapState,
     actions
   ),
-  firestoreConnect((auth, userUid) => userProfileQuery(auth, userUid))
+  firestoreConnect((auth, userUid, match) =>
+    userProfileQuery(auth, userUid, match)
+  )
 )(UserProfilePage);

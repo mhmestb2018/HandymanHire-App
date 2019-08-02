@@ -14,6 +14,7 @@ import {
 import { jobProposal, cancelJobProposal } from "../../auth/userActions";
 import { addComment } from "../WorkList/workOrderActions";
 
+
 const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
   let job = {};

@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import { Segment, Item, Label, List, Image } from "semantic-ui-react";
+import { Segment, Item, Label, List, Image, Rating } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const WorkOrderDetailedSidebar = ({ InterestedInJobs }) => {
+const WorkOrderDetailedSidebar = ({ InterestedInJobs, job }) => {
   const isHire = false;
   return (
     <Fragment>
@@ -14,11 +14,7 @@ const WorkOrderDetailedSidebar = ({ InterestedInJobs }) => {
         inverted
         color="blue"
       >
-        {/* {InterestedInJobs && InterestedInJobs.lenght}
-        {InterestedInJobs && InterestedInJobs.lenght === 1
-          ? "Contractor"
-          : "Contractors"}{" "} */}
-        Interested in the job
+        Members interested in the job
       </Segment>
       <Segment attached>
         <List relaxed divided>
@@ -31,7 +27,10 @@ const WorkOrderDetailedSidebar = ({ InterestedInJobs }) => {
                   color="orange"
                   ribbon="right"
                 >
-                 Handyman trust points
+                  <Rating  defaultRating={3} maxRating={5} icon='star' disabled />
+                  {/* <Icon name="star outline" />
+                  <Icon name="star outline" />
+                  <Icon name="star outline" /> */}
                 </Label>
                 <Image size="tiny" src={interested.photoURL} />
 

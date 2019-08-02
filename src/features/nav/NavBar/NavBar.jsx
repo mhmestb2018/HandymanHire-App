@@ -40,7 +40,7 @@ class NavBar extends Component {
             <Menu.Item as={NavLink} exact to="/jobs" name="Jobs" />
             {authenticated && (
               <Fragment>
-                <Menu.Item as={NavLink} to="/contractors" name="Contractors" />
+                <Menu.Item as={NavLink} to="/members" name="Members" />
                 <Menu.Item as={NavLink} to="/test" name="Test" />
                 <Menu.Item>
                   <Button

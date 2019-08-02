@@ -83,7 +83,7 @@ class Dashboard extends Component {
           />
         </Grid.Column>
         <Grid.Column width={10}>
-          {/* <Loader active={loading} /> */}
+          <Loader active={loading} />
         </Grid.Column>
       </Grid>
     );

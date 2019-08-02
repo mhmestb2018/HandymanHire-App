@@ -1,30 +1,3 @@
-// export const userProfileQuery = ({ auth, userUid }) => {
-//   if (userUid !== null) {
-//     return [
-//       {
-//         collection: "users",
-//         doc: userUid,
-//         storeAs: "profile"
-//       },
-//       {
-//         colllection: "users",
-//         doc: userUid,
-//         subcollections: [{ collection: "photos" }],
-//         storeAs: "photos"
-//       }
-//     ];
-//   } else {
-//     return [
-//       {
-//         collection: "users",
-//         doc: auth.uid,
-//         subcollections: [{ collection: "photos" }],
-//         storeAs: "photos"
-//       }
-//     ];
-//   }
-// };
-
 //when clicled on links redirerct to specific user profile page
 export const userProfileQuery = ({ auth, userUid, match }) =>
   userUid !== null

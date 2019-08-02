@@ -4,7 +4,7 @@ import NavBar from "../../features/nav/NavBar/NavBar";
 import { Container } from "semantic-ui-react";
 import { Route,Switch ,withRouter } from "react-router-dom";
 import WorkOrderForm from "../../features/workOrder/WorkOrderForm/WorkOrderForm";
-import ContractorsDashboard from "../../features/user/ContractorsDashboard/ContractorsDashboard";
+import MembersDashboard from "../../features/user/MembersDashboard/MembersDashbord";
 import UserProfilePage from "../../features/user/UserProfile/UserProfilePage";
 import SettingsDashboard from "../../features/user/Settings/SettingsDashboard";
 import HomePage from "../../features/home/HomePage";
@@ -28,7 +28,7 @@ class App extends Component {
                   <Route exact path="/jobs" component={Dashboard} />
                   <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
                   <Route path="/profile/:id" component={UserProfilePage} />
-                  <Route path="/contractors" component={ContractorsDashboard} />
+                  <Route path="/members" component={MembersDashboard} />
                   <Route path="/settings" component={SettingsDashboard} />
                   <Route
                     path={["/createJob", "/manage/:id"]}

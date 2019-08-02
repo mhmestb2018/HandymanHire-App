@@ -250,3 +250,56 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
     dispatch(asyncActionError);
   }
 };
+
+export const followMember= memberToFollow => async (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore()
+  const user = firestore.auth().currentUser
+
+  // get the detail of the person to follow
+  const { id, displayName, city, photoURL } = memberToFollow
+  const following = {
+    displayName,
+    city: city || "Unknown City",
+    photoURL: photoURL || "/assets/user.png"
+  }
+
+  try {
+    // add that person to the "following" collection
+    await firestore.set(
+      {
+        collection: "users",
+        doc: user.uid,
+        subcollections: [{ collection: "following", doc: id }]
+      },
+      following
+    )
+  } catch (error) {
+    console.log(error)
+    throw new Error("Problem following this member, please try again later")
+  }
+}
+
+export const unfollowMember = memberToUnfollow => async (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore()
+  const user = firestore.auth().currentUser
+
+  try {
+    // remove the person from member's "following" collection
+    await firestore.delete({
+      collection: "users",
+      doc: user.uid,
+      subcollections: [{ collection: "following", doc: memberToUnfollow.id }]
+    })
+  } catch (error) {
+    console.log(error)
+    throw new Error("Problem unfollowing this member , please try again later")
+  }
+}
