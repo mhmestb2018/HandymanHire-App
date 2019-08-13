@@ -4,10 +4,10 @@ import { Menu, Button } from "semantic-ui-react";
 const SignedOutMenu = ({ signIn,register }) => {
   return (
     <Menu.Item position="right">
-      <Button onClick={signIn} basic inverted content="Login" />
+      <Button onClick={signIn} basic color='black' content="Login" />
       <Button
         basic
-        inverted
+        color='black'
         onClick={register}
         content="Register"
         style={{ marginLeft: "0.5em" }}

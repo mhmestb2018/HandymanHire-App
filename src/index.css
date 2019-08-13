@@ -27,11 +27,7 @@ body {
   align-items: center;
   text-align: center;
   background-image: linear-gradient(
-    /* 135deg,
-          rgb(36, 53, 121) 0%,
-          rgb(33, 138, 174) 69%,
-          rgb(32, 132, 172) 89% */
-      135deg,
+  
     rgb(55, 75, 155) 0%,
     rgb(35, 109, 134) 69%,
     rgb(22, 126, 77) 89%
@@ -59,23 +55,17 @@ body {
   font-weight: normal;
 }
 
-/* .footer.segment {
-  padding: 5em 0;
-} */
-
-.secondary.inverted.pointing.menu {
-  border: none;
-}
-
 /*end home page styles*/
-
+h4.ui.header {
+  margin-bottom: 2em;
+}
+.ui.inverted.blue.button,
+.ui.inverted.blue.buttons .button {
+  margin: 2em 4em;
+}
 /* navbar styles */
 
-.ui.menu .item img.logo {
-  margin-right: 2em;
-}
-
-.ui.fixed.menu {
+.ui.inverted.menu {
   background-image: linear-gradient(
     135deg,
     rgb(55, 75, 155) 0%,
@@ -87,10 +77,13 @@ body {
           rgb(32, 132, 172) 89% */
   ) !important;
 }
-
+.ui.menu .active.item {
+  background: rgba(0, 0, 0, 0.05);
+  font-weight: 900;
+}
 .ui.main.container,
 .main.segment {
-  margin-top: 10em;
+  margin-top: 1em;
 }
 
 .ui.center.aligned.segment.attendance-preview {
@@ -108,6 +101,10 @@ body {
 
 .ui.menu:not(.vertical) .item > .button {
   margin-left: 0.5em;
+}
+.ui.menu {
+  border: 0.1em solid black;
+  border-radius: 0.8em;
 }
 
 /*chat comments*/
@@ -130,3 +127,43 @@ body {
   border: dashed 3px blue;
 }
 /* menu responsive */
+.ui.menu .active.item {
+  font-weight: 1000;
+}
+.ui.basic.black.button,
+.ui.basic.black.buttons .button:hover {
+  -webkit-box-shadow: 0 0 0 1px #032649 inset !important;
+  box-shadow: 0 0 0 1px #468ace inset !important;
+  color: #3a74ad !important;
+}
+/* @media (max-width: 1000px) {
+  .ui.small.image, .ui.small.images .image, .ui.small.images img, .ui.small.images svg {
+   visibility: hidden;
+  }
+} */
+.ui.cards {
+  text-align: center;
+  margin-left: 7em;
+}
+.ui.segment:first-child {
+  margin-top: 2em;
+}
+/* contact form */
+
+#contactForm{
+  width: 100%; /* Full width */
+  padding: 19px; /* Some padding */  
+  border: 1px solid black; /* Gray border */
+  border-radius: 8px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+
+}
+.ui.form textarea {
+  margin: 1em 0.1em;
+}
+.jobsForm{
+  margin: 0em 3em;
+}
+.img-preview{
+  resize: horizontal;
+}

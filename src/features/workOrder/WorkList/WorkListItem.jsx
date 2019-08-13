@@ -1,18 +1,31 @@
 import React, { Component } from "react";
-import { Segment, Item, Icon, List, Button, Label } from "semantic-ui-react";
+import {
+  Segment,
+  Item,
+  Icon,
+  List,
+  Button,
+  Label,
+  Header
+} from "semantic-ui-react";
 import WorkListProposals from "./WorkListProposals";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { objectToArray } from "../../../app/common/utill/helpers";
+
 class WorkListItem extends Component {
   render() {
     const { job } = this.props;
     return (
       <Segment.Group>
         <Segment>
+          <Header as="h3" block vertical textAlign="center">
+            {job.category}
+          </Header>
           <Item.Group>
             <Item>
               <Item.Image size="tiny" circular src={job.orderedByPhotoURL} />
+
               <Item.Content>
                 <Item.Header as={Link} to={`/jobs/${job.id}`}>
                   {job.title}
@@ -36,23 +49,22 @@ class WorkListItem extends Component {
           </Item.Group>
         </Segment>
         <Segment clearing>
-          <span>{job.description}</span>
           <div>
             <Button
               as={Link}
               to={`/jobs/${job.id}`}
-              color="teal"
-              floated="right"
-              content="View"
+              basic
+              color="black"
+              content="More details"
+              attached="bottom"
             />
           </div>
         </Segment>
         <Segment>
           <span>
             <Icon name="clock" />
-            {format(job.date.toDate(), "EEEE do LLL yyyy")}
-            {" "}
-            {/* {format(job.date.toDate(), "h:mm a")} */}
+            {format(job.date.toDate(), "EEEE do LLL yyyy")}{" "}
+            {format(job.date.toDate(), "h:mm a")}
             <Icon name="marker" /> {job.city}
           </span>
         </Segment>

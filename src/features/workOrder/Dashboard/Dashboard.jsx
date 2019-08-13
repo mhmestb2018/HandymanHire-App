@@ -65,7 +65,7 @@ class Dashboard extends Component {
     if (initialLoading) return <LoadingComponent inverted={true} />;
 
     return (
-      <Grid>
+      <Grid stackable>
         <Grid.Column width={10}>
           <div ref={this.contextRef}>
             <WorkList
@@ -80,6 +80,7 @@ class Dashboard extends Component {
           <RecentActivity
             activities={activities}
             contextRef={this.contextRef}
+            className='activity'
           />
         </Grid.Column>
         <Grid.Column width={10}>

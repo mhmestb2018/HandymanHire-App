@@ -12,7 +12,7 @@ const SignedInMenu = ({ signOut, profile, auth }) => {
         spaced="right"
         src={profile.photoURL || "/assets/user.png"}
       />
-      <Dropdown pointing="top left" text={profile.displayName}>
+      <Dropdown pointing="top right" text={profile.displayName}>
         <Dropdown.Menu>
           <Dropdown.Item text="Create Job Enquiry" icon="plus" />
           <Dropdown.Item text="My Jobs" icon="calendar" />

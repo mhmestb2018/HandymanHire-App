@@ -11,7 +11,7 @@ const UserDetailedSidebar = ({
 }) => {
   return (
     <Grid.Column width={4}>
-      <Segment>
+      <Segment >
         { isCurrentUser &&(
             <Button
               as={Link}

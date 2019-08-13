@@ -34,7 +34,7 @@ const UserProfileWorkOrders = ({
       />
       <br />
 
-      <Card.Group itemsPerRow={5}>
+      <Card.Group itemsPerRow={5} stackable>
         {workOrders &&
           workOrders.map(job => (
             <Card as={Link} to={`/jobs/${job.id}`} key={job.id}>

@@ -152,7 +152,7 @@ class WorkOrderForm extends Component {
     // const { title, date, city, address, orderedBy } = this.state;
     return (
       <Grid>
-        <Grid.Column width={10}>
+        <Grid.Column width={16} className='jobsForm'>
           <Segment>
             <Header sub color="blue" content="Work Order Offer Details" />
             <Form
@@ -210,17 +210,7 @@ class WorkOrderForm extends Component {
               >
                 Submit
               </Button>
-              {/* <Button
-                onClick={
-                  job.id
-                    ? () => history.push(`/jobs/${job.id}`)
-                    : () => history.push("/jobs")
-                }
-                type="button"
-                disabled={loading}
-              >
-                Cancel
-              </Button> */}
+        
               <Button
                 type="button"
                 color={job.cancelled ? "blue" : "red"}
@@ -240,7 +230,7 @@ export default withFirestore(
     mapState,
     actions
   )(
-    reduxForm({ form: "workOrdeForm", validate, enableReinitialize: true })(
+    reduxForm({ form: "workOrderForm", validate, enableReinitialize: true })(
       WorkOrderForm
     )
   )

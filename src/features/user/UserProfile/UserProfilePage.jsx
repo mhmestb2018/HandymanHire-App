@@ -66,7 +66,7 @@ class UserProfilePage extends Component {
     const isFollowing = !isEmpty(following);
     if (loading) return <LoadingComponent inverted={true} />;
     return (
-      <Grid>
+      <Grid stackable>
         <UserProfileHeader profile={profile} />
         <UserProfileDescription profile={profile} />
         <UserProfileSidebar

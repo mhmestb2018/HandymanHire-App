@@ -136,46 +136,38 @@ export const setMainPhoto = photo => async (dispatch, getState) => {
 };
 //if any changes in workOrders transacion rerun to track them
 
-export const jobProposal = job => async (dispatch, getState) => {
-  const firestore = firebase.firestore();
+export const jobProposal = job => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firestore = getFirestore();
+  const firebase = getFirebase();
   const user = firebase.auth().currentUser;
-  const { photoURL, displayName } = getState().firebase.profile;
+  const profile = getState().firebase.profile;
   const interested = {
-    isInterested: true,
-    joinDate: new Date(),
-    photoURL: photoURL || "/assets/user.png",
-    displayName: displayName
+    interested: true,
+    joinDate: firestore.FieldValue.serverTimestamp(),
+    photoURL: profile.photoURL || "/assets/user.png",
+    displayName: profile.displayName,
+    handyman: true
   };
-
   try {
-    dispatch(asyncActionStart());
-    let jobDocRef = firestore.collection("workOrders").doc(job.id);
-    let jobInterestedDocRef = firestore
-      .collection("InterestedInJobs")
-      .doc(`${job.id}_${user.uid}`);
-
-    await firestore.runTransaction(async transaction => {
-      await transaction.get(jobDocRef);
-      await transaction.update(jobDocRef, {
-        [`job_interested.${user.uid}`]: interested
-      });
-      await transaction.set(jobInterestedDocRef, {
-        jobId: job.id,
-        userUid: user.uid,
-        jobDate: job.date,
-        handyman: true
-      });
+    await firestore.update(`workOrders/${job.id}`, {
+      [`InterestedInJobs.${user.uid}`]: interested
     });
-
-    dispatch(asyncActionFinish());
-    toastr.success("Success", "You have signed up for the event");
+    await firestore.set(`job_interested/${job.id}_${user.uid}`, {
+      jobId: job.id,
+      userUid: user.uid,
+      jobDate: job.date,
+      handyman: true
+    });
+    toastr.success("You are interested in that job enquiry");
   } catch (error) {
     console.log(error);
-    dispatch(asyncActionError());
-    toastr.error("Oops", "Problem signing up to the event");
+    toastr.error("Problem with signin up ");
   }
 };
-
 export const cancelJobProposal = job => async (
   dispatch,
   getState,
@@ -251,21 +243,21 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
   }
 };
 
-export const followMember= memberToFollow => async (
+export const followMember = memberToFollow => async (
   dispatch,
   getState,
   { getFirestore }
 ) => {
-  const firestore = getFirestore()
-  const user = firestore.auth().currentUser
+  const firestore = getFirestore();
+  const user = firestore.auth().currentUser;
 
   // get the detail of the person to follow
-  const { id, displayName, city, photoURL } = memberToFollow
+  const { id, displayName, city, photoURL } = memberToFollow;
   const following = {
     displayName,
     city: city || "Unknown City",
     photoURL: photoURL || "/assets/user.png"
-  }
+  };
 
   try {
     // add that person to the "following" collection
@@ -276,20 +268,20 @@ export const followMember= memberToFollow => async (
         subcollections: [{ collection: "following", doc: id }]
       },
       following
-    )
+    );
   } catch (error) {
-    console.log(error)
-    throw new Error("Problem following this member, please try again later")
+    console.log(error);
+    throw new Error("Problem following this member, please try again later");
   }
-}
+};
 
 export const unfollowMember = memberToUnfollow => async (
   dispatch,
   getState,
   { getFirestore }
 ) => {
-  const firestore = getFirestore()
-  const user = firestore.auth().currentUser
+  const firestore = getFirestore();
+  const user = firestore.auth().currentUser;
 
   try {
     // remove the person from member's "following" collection
@@ -297,9 +289,9 @@ export const unfollowMember = memberToUnfollow => async (
       collection: "users",
       doc: user.uid,
       subcollections: [{ collection: "following", doc: memberToUnfollow.id }]
-    })
+    });
   } catch (error) {
-    console.log(error)
-    throw new Error("Problem unfollowing this member , please try again later")
+    console.log(error);
+    throw new Error("Problem unfollowing this member , please try again later");
   }
-}
+};

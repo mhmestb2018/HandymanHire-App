@@ -1,6 +1,13 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import { Segment, Header, Divider, Grid, Button } from "semantic-ui-react";
+import {
+  Segment,
+  Header,
+  Divider,
+  Grid,
+  Button,
+  Container
+} from "semantic-ui-react";
 import { compose } from "redux";
 import DropzoneInput from "./DropzoneInput";
 import CropperPhotos from "./CropperPhotos";
@@ -84,7 +91,7 @@ const ProjectsPage = ({
   return (
     <Segment>
       <Header dividing size="large" content="Your Photos" />
-      <Grid>
+      <Grid stackable>
         <Grid.Row />
         <Grid.Column width={4}>
           <Header color="teal" sub content="Step 1 - Add Photo" />
@@ -100,37 +107,40 @@ const ProjectsPage = ({
             />
           )}
         </Grid.Column>
+
         <Grid.Column width={1} />
         <Grid.Column width={4}>
           <Header sub color="teal" content="Step 3 - Preview & Upload" />
           {files.length > 0 && (
             <Fragment>
-              <div
-                className="img-preview"
-                style={{
-                  minHeight: "200px",
-                  minWidth: "200px",
-                  overflow: "hidden"
-                }}
-              />
+              <Container stackable>
+                <div
+                  className="img-preview"
+                  style={{
+                    minHeight: "200px",
+                    minWidth: "200px",
+                    overflow: "hidden"
+                  }}
+                />
 
-              <Button.Group size="large" positive>
-                <Button
-                  loading={loading}
-                  onClick={handleUploadImage}
-                  style={{ width: "100px" }}
-                >
-                  Save
-                </Button>
-                <Button.Or />
-                <Button
-                  // disabled={loading}
-                  onClick={handleCancelCrop}
-                  style={{ width: "100px" }}
-                >
-                  Cancel
-                </Button>
-              </Button.Group>
+                <Button.Group size="large" positive>
+                  <Button
+                    loading={loading}
+                    onClick={handleUploadImage}
+                    style={{ width: "100px" }}
+                  >
+                    Save
+                  </Button>
+                  <Button.Or />
+                  <Button
+                    // disabled={loading}
+                    onClick={handleCancelCrop}
+                    style={{ width: "100px" }}
+                  >
+                    Cancel
+                  </Button>
+                </Button.Group>
+              </Container>
             </Fragment>
           )}
         </Grid.Column>
