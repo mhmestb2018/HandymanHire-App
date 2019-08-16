@@ -8,7 +8,6 @@ import {
   asyncActionError
 } from "../../async/asyncActions";
 
-
 export const createJob = job => {
   return async (dispatch, getState, { getFirestore, getFirebase }) => {
     const firestore = getFirestore();
@@ -27,7 +26,7 @@ export const createJob = job => {
       toastr.success("Success!", "Your job proposal has been created");
       return createdJob;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toastr.error("Oops", "Something went wrong ");
     }
   };
@@ -69,7 +68,7 @@ export const updateJob = job => {
       toastr.success("Success!", "Job proposal updated");
     } catch (error) {
       dispatch(asyncActionError());
-      console.log(error)
+      console.log(error);
       toastr.error("Oops", "Something went wrong with  update");
     }
   };
@@ -130,8 +129,8 @@ export const cancelToggle = (cancelled, jobId) => async (
 ) => {
   const firestore = getFirestore();
   const message = cancelled
-    ? "Are you sure you want to stop publishing your enquiry ?"
-    : "This will reactivate publishing of your enquiry, Are you sure ?";
+    ? "Are you sure you want to cancel job posting ?"
+    : "This will reactivate your job posting, Are you sure ?";
   try {
     toastr.confirm(message, {
       onOk: async () =>
@@ -149,6 +148,7 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
   getState
 ) => {
   let today = new Date();
+  const cat = "painting";
   const firestore = firebase.firestore();
   const workOrdersRef = firestore.collection("workOrders");
   try {
@@ -170,7 +170,6 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
           // .where("date", ">=", today)
           .orderBy("date")
           .limit(3));
-
     let querySnap = await query.get();
     if (querySnap.docs.length === 0) {
       dispatch(asyncActionFinish());
@@ -183,7 +182,9 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
       workOrders.push(wo);
     }
     dispatch({ type: FETCH_JOBS, payload: { workOrders } });
+    console.log(querySnap);
     dispatch(asyncActionFinish());
+
     return querySnap;
   } catch (error) {
     console.log(error);

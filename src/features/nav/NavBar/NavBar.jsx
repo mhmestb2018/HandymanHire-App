@@ -70,20 +70,31 @@ class NavBar extends Component {
               <Icon name="align justify" size="large" />
               <Dropdown pointing="top right" text="Menu">
                 <Dropdown.Menu>
-                  {/* <Dropdown.Item text="Create Job Enquiry" icon="plus"  />
-                  <Dropdown.Item text="My Jobs" icon="calendar" />
-                  <Dropdown.Item text="My Proposals" icon="users" /> */}
                   <Dropdown.Item
                     as={Link}
                     to={`/jobs`}
                     text="Jobs"
                     icon="wrench"
                   />
+                  {authenticated && (
+                    <Dropdown.Item
+                      as={Link}
+                      to="/members"
+                      text="Members"
+                      icon="users"
+                    />
+                  )}
                   <Dropdown.Item
                     as={Link}
-                    to="/members"
-                    text="Members"
-                    icon="users"
+                    to={`/contact`}
+                    text="Contact Us"
+                    icon="mail"
+                  />
+                  <Dropdown.Item
+                    as={Link}
+                    to={`/termsConditions`}
+                    text="T & C"
+                    icon="handshake"
                   />
                 </Dropdown.Menu>
               </Dropdown>

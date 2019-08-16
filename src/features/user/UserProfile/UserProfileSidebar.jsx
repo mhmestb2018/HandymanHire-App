@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, Segment } from "semantic-ui-react";
+import { Grid, Button, Segment} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const UserDetailedSidebar = ({
@@ -11,18 +11,17 @@ const UserDetailedSidebar = ({
 }) => {
   return (
     <Grid.Column width={4}>
-      <Segment >
-        { isCurrentUser &&(
-            <Button
-              as={Link}
-              to="/settings"
-              color="blue"
-              fluid
-              basic
-              content="Edit Profile"
-            />
-          )
-        }
+      <Segment>
+        {isCurrentUser && (
+          <Button
+            as={Link}
+            to="/settings"
+            color="blue"
+            fluid
+            basic
+            content="Edit Profile"
+          />
+        )}
 
         {!isCurrentUser && !isFollowing && (
           <Button

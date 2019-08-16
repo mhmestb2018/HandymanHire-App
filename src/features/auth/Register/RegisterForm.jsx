@@ -1,9 +1,16 @@
 import React from "react";
-import { Form, Segment, Button, Label, Divider } from "semantic-ui-react";
+import {
+  Form,
+  Segment,
+  Button,
+  Label,
+  Divider,
+  Confirm
+} from "semantic-ui-react";
 import { Field, reduxForm } from "redux-form";
 import TextInput from "../../../app/common/form/TextInput";
 import { connect } from "react-redux";
-import { registerUser,socialLogin } from "../../auth/authActions";
+import { registerUser, socialLogin } from "../../auth/authActions";
 import { combineValidators, isRequired } from "revalidate";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
@@ -24,6 +31,8 @@ const RegisterForm = ({
   submitting,
   socialLogin
 }) => {
+  // const { open, result } = this.state
+  // const [isChecked, setIsChecked] = React.useState(undefined);
   return (
     <Form size="large" onSubmit={handleSubmit(registerUser)}>
       <Segment>
@@ -50,6 +59,7 @@ const RegisterForm = ({
             {error}
           </Label>
         )}
+
         <Button
           disabled={invalid || submitting}
           fluid
@@ -58,8 +68,19 @@ const RegisterForm = ({
         >
           Register
         </Button>
+
         <Divider horizontal>Or</Divider>
-        <SocialLogin socialLogin={socialLogin}/>
+        <SocialLogin socialLogin={socialLogin} />
+        {/* <Segment compact>
+          <Checkbox
+            name="terms"
+            inverted
+            isChecked={isChecked}
+            hasError
+            onChange={setIsChecked}
+            label="I accept the Terms of Service"
+          />
+        </Segment> */}
       </Segment>
     </Form>
   );

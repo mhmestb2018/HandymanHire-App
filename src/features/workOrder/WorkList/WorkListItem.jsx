@@ -19,7 +19,7 @@ class WorkListItem extends Component {
     return (
       <Segment.Group>
         <Segment>
-          <Header as="h3" block vertical textAlign="center">
+          <Header as="h3" style={{ textTransform: "uppercase", wordSpacing:"0.6em" }} block textAlign="center">
             {job.category}
           </Header>
           <Item.Group>
@@ -38,7 +38,7 @@ class WorkListItem extends Component {
                 </Item.Description>
                 {job.cancelled && (
                   <Label
-                    style={{ top: "-30px" }}
+                    style={{ margin : "1em" }}
                     ribbon="right"
                     color="red"
                     content="This enquiry has been cancelled"

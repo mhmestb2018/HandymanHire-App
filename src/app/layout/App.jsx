@@ -13,7 +13,11 @@ import WorkOrderDetailedPage from "../../features/workOrder/WorkOrderDetailed/Wo
 import ModalManager from "../../features/modals/ModalManager";
 import Footer from "../../features/nav/Footer";
 import ScrollUpButton from "react-scroll-up-button";
-import ContactForm from '../common/form/ContactForm'
+import ContactForm from "../common/form/ContactForm";
+import PrivacyPolicy from "../../features/home/PrivacyPolicy";
+import TermsConditions from "../../features/home/TermsConditions";
+import Sitemap from "../../features/home/Sitemap";
+
 class App extends Component {
   render() {
     return (
@@ -38,10 +42,12 @@ class App extends Component {
                   />
                   <Route path="/test" component={TestComponent} />
                   <Route path="/contact" component={ContactForm} />
-                  
+                  <Route path="/privacyPolicy" component={PrivacyPolicy} />
+                  <Route path="/termsConditions" component={TermsConditions} />
+                  <Route path="/sitemap" component={Sitemap} />
                 </Switch>
-                <ScrollUpButton /> 
-                <Footer/>
+                <ScrollUpButton />
+                <Footer />
               </Container>
             </Fragment>
           )}

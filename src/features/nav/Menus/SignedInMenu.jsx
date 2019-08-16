@@ -14,9 +14,14 @@ const SignedInMenu = ({ signOut, profile, auth }) => {
       />
       <Dropdown pointing="top right" text={profile.displayName}>
         <Dropdown.Menu>
-          <Dropdown.Item text="Create Job Enquiry" icon="plus" />
-          <Dropdown.Item text="My Jobs" icon="calendar" />
-          <Dropdown.Item text="My Proposals" icon="users" />
+          <Dropdown.Item
+            text="Post a job"
+            icon="plus"
+            as={Link}
+            to={`/createJob`}
+          />
+          <Dropdown.Item as={Link} to="/members" text="Members" icon="users" />
+          {/* <Dropdown.Item text="My Proposals" icon="users" /> */}
           <Dropdown.Item
             as={Link}
             to={`/profile/${auth.uid}`}

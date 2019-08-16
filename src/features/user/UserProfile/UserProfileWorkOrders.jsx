@@ -26,15 +26,14 @@ const UserProfileWorkOrders = ({
 }) => (
   <Grid.Column width={12}>
     <Segment attached loading={workOrdersLoading}>
-      <Header icon="calendar" content="Enquiries" />
+      <Header icon="calendar" content="List of jobs" />
       <Tab
         onTabChange={(e, data) => changeTab(e, data)}
         panes={panes}
         menu={{ secondary: true, pointing: true }}
       />
       <br />
-
-      <Card.Group itemsPerRow={5} stackable>
+      <Card.Group itemsPerRow={6} stackable>
         {workOrders &&
           workOrders.map(job => (
             <Card as={Link} to={`/jobs/${job.id}`} key={job.id}>
@@ -42,10 +41,10 @@ const UserProfileWorkOrders = ({
               <Card.Content>
                 <Card.Header textAlign="center">{job.title}</Card.Header>
                 <Card.Meta textAlign="center">
-                  <div>
+                  {/* <div>
                     {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}
                   </div>
-                  <div>{format(job.date && job.date.toDate(), "h:mm a")}</div>
+                  <div>{format(job.date && job.date.toDate(), "h:mm a")}</div> */}
                 </Card.Meta>
               </Card.Content>
             </Card>

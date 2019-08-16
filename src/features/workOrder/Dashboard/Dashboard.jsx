@@ -1,7 +1,7 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Grid, Loader } from "semantic-ui-react";
+import { Grid, Loader, Segment, Image, Input, Item } from "semantic-ui-react";
 import WorkList from "../WorkList/WorkList";
 import { getWorkOrdersForDashboard } from "../../workOrder/WorkList/workOrderActions";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -57,17 +57,66 @@ class Dashboard extends Component {
       this.setState({ moreWorkOrders: false });
     }
   };
+  handleChange(e) {
+    // Variable to hold the original version of the list
+    let currentList = [];
+    // Variable to hold the filtered list before putting into state
+    let newList = [];
+
+    // If the search bar isn't empty
+    if (e.target.value !== "") {
+      // Assign the original list to currentList
+      currentList = this.props.items;
+
+      // Use .filter() to determine which items should be displayed
+      // based on the search terms
+      newList = currentList.filter(item => {
+        // change current item to lowercase
+        const lc = item.toLowerCase();
+        // change search term to lowercase
+        const filter = e.target.value.toLowerCase();
+        // check to see if the current list item includes the search term
+        // If it does, it will be added to newList. Using lowercase eliminates
+        // issues with capitalization in search terms and search content
+        return lc.includes(filter);
+      });
+    } else {
+      // If the search bar is empty, set newList to original task list
+      newList = this.props.items;
+    }
+    // Set the filtered state based on what our rules added to newList
+    this.setState({
+      filtered: newList
+    });
+  }
 
   render() {
     const { loading, activities } = this.props;
     const { initialLoading, loadedWorkOrders, moreWorkOrders } = this.state;
-
+    this.handleChange = this.handleChange.bind(this);
     if (initialLoading) return <LoadingComponent inverted={true} />;
 
     return (
       <Grid stackable>
         <Grid.Column width={10}>
           <div ref={this.contextRef}>
+            <Segment>
+              <Item>
+                <Item.Image
+                  src="/assets/categoryImages/Jobs.jpg"
+                  alt="sitemap"
+                  size="small"
+
+                  // style={{ margin: "0em 17em" }}
+                />
+                <Input
+                  icon="search"
+                  placeholder="Search..."
+                  style={{ margin: "0em 11em" }}
+                  onChange={this.handleChange}
+                />
+              </Item>
+            </Segment>
             <WorkList
               loading={loading}
               moreWorkOrders={moreWorkOrders}
@@ -80,7 +129,7 @@ class Dashboard extends Component {
           <RecentActivity
             activities={activities}
             contextRef={this.contextRef}
-            className='activity'
+            className="activity"
           />
         </Grid.Column>
         <Grid.Column width={10}>

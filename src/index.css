@@ -1,8 +1,10 @@
-body {
+body,
+.buttonForm:hover {
   background-color: rgba(226, 215, 215, 0.815) !important;
 }
 
 /*timepicker style*/
+
 .react-datepicker__time-container
   .react-datepicker__time
   .react-datepicker__time-box
@@ -27,7 +29,6 @@ body {
   align-items: center;
   text-align: center;
   background-image: linear-gradient(
-  
     rgb(55, 75, 155) 0%,
     rgb(35, 109, 134) 69%,
     rgb(22, 126, 77) 89%
@@ -131,14 +132,18 @@ h4.ui.header {
   font-weight: 1000;
 }
 .ui.basic.black.button,
-.ui.basic.black.buttons .button:hover {
+.ui.basic.black.buttons .button:hover,
+.buttonForm {
   -webkit-box-shadow: 0 0 0 1px #032649 inset !important;
   box-shadow: 0 0 0 1px #468ace inset !important;
   color: #3a74ad !important;
 }
 /* @media (max-width: 1000px) {
-  .ui.small.image, .ui.small.images .image, .ui.small.images img, .ui.small.images svg {
-   visibility: hidden;
+  .ui.small.image,
+  .ui.small.images .image,
+  .ui.small.images img,
+  .ui.small.images svg {
+    visibility: hidden;
   }
 } */
 .ui.cards {
@@ -150,20 +155,45 @@ h4.ui.header {
 }
 /* contact form */
 
-#contactForm{
+#contactForm {
   width: 100%; /* Full width */
-  padding: 19px; /* Some padding */  
+  padding: 19px; /* Some padding */
   border: 1px solid black; /* Gray border */
   border-radius: 8px; /* Rounded borders */
   box-sizing: border-box; /* Make sure that padding and width stays in place */
-
 }
-.ui.form textarea {
+form textarea {
   margin: 1em 0.1em;
 }
-.jobsForm{
+.jobsForm {
   margin: 0em 3em;
 }
-.img-preview{
+.img-preview {
   resize: horizontal;
+}
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+textarea {
+  min-height: 10em;
+}
+.buttonForm {
+  background-color: rgb(240, 245, 241);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
 }

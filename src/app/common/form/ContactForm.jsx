@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 const ContactForm = () => {
   return (
-    <Segment>
+    <Segment clearing>
       <Header as="h1" textAlign="center" size="huge">
         Contact Us
       </Header>
@@ -25,40 +25,25 @@ const ContactForm = () => {
           <Image src="/assets/mail.jpg" size="medium" />
         </Grid.Column>
         <Grid.Column>
-          <Form id="contactForm">
+          <form
+            action="https://formspree.io/A_lesica@outlook.com"
+            method="POST"
+            id="contactForm"
+          >
             <Header as="h3">
               Any problems, got a question, We'd love to hear from you. Send us
               a message and we'll respond as soon as possible.
             </Header>
-            <Form.Group widths="equal">
-              <Form.Field
-                id="form-input-control-name"
-                control={Input}
-                placeholder="Your name"
-              />
-              <Form.Field
-                id="form-input-control-email"
-                control={Input}
-                placeholder="Email address"
-              />
-            </Form.Group>
-            <Form.Field
-              id="form-textarea-control-message"
-              control={TextArea}
-              placeholder="Message"
-              style={{ minHeight: 150 }}
+            <input id="name" type="text" name="name" placeholder="Your name" />
+            <input
+              id="email"
+              type="email"
+              name="_replyto"
+              placeholder="Email address"
             />
-            <Form.Field>
-              <Button
-                id="form-button-control-public"
-                attached="bottom"
-                content="Submit"
-                basic
-                color="black"
-                type="submit"
-              />
-            </Form.Field>
-          </Form>
+            <textarea name="message" type="text" placeholder="Message" />
+            <button type="submit" class='buttonForm'>Submit</button>
+          </form>
         </Grid.Column>
       </Grid>
     </Segment>
