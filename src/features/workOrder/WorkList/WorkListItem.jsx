@@ -6,7 +6,8 @@ import {
   List,
   Button,
   Label,
-  Header
+  Header,
+  Image
 } from "semantic-ui-react";
 import WorkListProposals from "./WorkListProposals";
 import { Link } from "react-router-dom";
@@ -24,7 +25,7 @@ class WorkListItem extends Component {
           </Header>
           <Item.Group>
             <Item>
-              <Item.Image size="tiny" circular src={job.orderedByPhotoURL} />
+              <Image avatar size='tiny' circular src={job.orderedByPhotoURL}  />
 
               <Item.Content>
                 <Item.Header as={Link} to={`/jobs/${job.id}`}>

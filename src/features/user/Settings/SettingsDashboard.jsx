@@ -1,5 +1,5 @@
-import React from "react";
-import { Grid } from "semantic-ui-react";
+import React, { Fragment } from "react";
+import { Grid, Menu } from "semantic-ui-react";
 import SettingsNav from "./SettingsNav";
 import { Route, Switch, Redirect } from "react-router-dom";
 import BasicPage from "./BasicPage";
@@ -25,38 +25,42 @@ const SettingsDashboard = ({
   updateProfile
 }) => {
   return (
-    <Grid>
-      <Grid.Column width={12}>
-        <Switch>
-          <Redirect exact from="/settings" to="/settings/basic" />
-          <Route
-            path="/settings/basic"
-            render={() => (
-              <BasicPage initialValues={user} updateProfile={updateProfile} />
-            )}
-          />
-          <Route
-            path="/settings/about"
-            render={() => (
-              <AboutPage initialValues={user} updateProfile={updateProfile} />
-            )}
-          />
-          <Route path="/settings/projects" component={ProjectsPage} />
-          <Route
-            path="/settings/account"
-            render={() => (
-              <AccountPage
-                updatePassword={updatePassword}
-                providerId={providerId}
-              />
-            )}
-          />
-        </Switch>
-      </Grid.Column>
-      <Grid.Column width={4}>
+    <Fragment>
+      <Menu compact>
+        {" "}
         <SettingsNav />
-      </Grid.Column>
-    </Grid>
+      </Menu>
+
+      <Grid centered>
+        <Grid.Column width={16}>
+          <Switch>
+            <Redirect exact from="/settings" to="/settings/basic" />
+            <Route
+              path="/settings/basic"
+              render={() => (
+                <BasicPage initialValues={user} updateProfile={updateProfile} />
+              )}
+            />
+            <Route
+              path="/settings/about"
+              render={() => (
+                <AboutPage initialValues={user} updateProfile={updateProfile} />
+              )}
+            />
+            <Route path="/settings/projects" component={ProjectsPage} />
+            <Route
+              path="/settings/account"
+              render={() => (
+                <AccountPage
+                  updatePassword={updatePassword}
+                  providerId={providerId}
+                />
+              )}
+            />
+          </Switch>
+        </Grid.Column>
+      </Grid>
+    </Fragment>
   );
 };
 

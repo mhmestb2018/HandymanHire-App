@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, createRef } from "react";
 import Dashboard from "../../features/workOrder/Dashboard/Dashboard";
 import NavBar from "../../features/nav/NavBar/NavBar";
 import { Container } from "semantic-ui-react";
@@ -19,6 +19,10 @@ import TermsConditions from "../../features/home/TermsConditions";
 import Sitemap from "../../features/home/Sitemap";
 
 class App extends Component {
+  contextRef = createRef();
+  state = {
+    contextRef: {}
+  };
   render() {
     return (
       <Fragment>
@@ -29,25 +33,30 @@ class App extends Component {
           render={() => (
             <Fragment>
               <Container className="main">
-                <NavBar />
-                <Switch key={this.props.location.key}>
-                  <Route exact path="/jobs" component={Dashboard} />
-                  <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
-                  <Route path="/profile/:id" component={UserProfilePage} />
-                  <Route path="/members" component={MembersDashboard} />
-                  <Route path="/settings" component={SettingsDashboard} />
-                  <Route
-                    path={["/createJob", "/manage/:id"]}
-                    component={WorkOrderForm}
-                  />
-                  <Route path="/test" component={TestComponent} />
-                  <Route path="/contact" component={ContactForm} />
-                  <Route path="/privacyPolicy" component={PrivacyPolicy} />
-                  <Route path="/termsConditions" component={TermsConditions} />
-                  <Route path="/sitemap" component={Sitemap} />
-                </Switch>
-                <ScrollUpButton />
-                <Footer />
+                <NavBar contextRef={this.contextRef} />
+                <div ref={this.contextRef}>
+                  <Switch key={this.props.location.key}>
+                    <Route exact path="/jobs" component={Dashboard} />
+                    <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
+                    <Route path="/profile/:id" component={UserProfilePage} />
+                    <Route path="/members" component={MembersDashboard} />
+                    <Route path="/settings" component={SettingsDashboard} />
+                    <Route
+                      path={["/createJob", "/manage/:id"]}
+                      component={WorkOrderForm}
+                    />
+                    <Route path="/test" component={TestComponent} />
+                    <Route path="/contact" component={ContactForm} />
+                    <Route path="/privacyPolicy" component={PrivacyPolicy} />
+                    <Route
+                      path="/termsConditions"
+                      component={TermsConditions}
+                    />
+                    <Route path="/sitemap" component={Sitemap} />
+                  </Switch>
+                  <ScrollUpButton />
+                  <Footer />
+                </div>
               </Container>
             </Fragment>
           )}

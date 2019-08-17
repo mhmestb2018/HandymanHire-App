@@ -13,10 +13,10 @@ import format from "date-fns/format";
 
 // Tabs for different events on user profile
 const panes = [
-  { menuItem: "All Enquiries", pane: { key: "allEnquiries" } },
-  { menuItem: "Past Enquiries", pane: { key: "pastEnquiries" } },
-  { menuItem: "Future Enquiries", pane: { key: "futurEnquiries" } },
-  { menuItem: "My Enquiries", pane: { key: "MyEnquiries" } }
+  { menuItem: "All interested jobs", pane: { key: "allInterestedJobs" } },
+  { menuItem: "Past interested jobs", pane: { key: "pastInterestedJobs" } },
+  { menuItem: "Recent interested jobs", pane: { key: "recentInterestedJobs" } },
+  { menuItem: "My posted jobs", pane: { key: "myPostedJobs" } }
 ];
 
 const UserProfileWorkOrders = ({
@@ -24,22 +24,23 @@ const UserProfileWorkOrders = ({
   workOrdersLoading,
   changeTab
 }) => (
-  <Grid.Column width={12}>
+  <Grid.Column width={12} stackable>
     <Segment attached loading={workOrdersLoading}>
-      <Header icon="calendar" content="List of jobs" />
+      <Header icon="calendar alternate outline" content="My jobs activity" />
       <Tab
+        stackable
         onTabChange={(e, data) => changeTab(e, data)}
         panes={panes}
-        menu={{ secondary: true, pointing: true }}
+        menu={{ attached: false, tabular: false, stackable: true }}
       />
       <br />
       <Card.Group itemsPerRow={6} stackable>
         {workOrders &&
           workOrders.map(job => (
-            <Card as={Link} to={`/jobs/${job.id}`} key={job.id}>
-              <Image src={`/assets/categoryImages/${job.category}.jpg`} />
+            <Card as={Link} to={`/jobs/${job.id}`} key={job.id} size='tiny'>
+              <Image src={`/assets/categoryImages/${job.category}.jpg`} size='tiny' centered/>
               <Card.Content>
-                <Card.Header textAlign="center">{job.title}</Card.Header>
+                <Card.Header  textAlign="center" >{job.title}</Card.Header>
                 <Card.Meta textAlign="center">
                   {/* <div>
                     {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}

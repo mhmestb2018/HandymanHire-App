@@ -42,14 +42,15 @@ class NavBar extends Component {
     this.props.firebase.logout();
     this.props.history.push("/");
   };
+  
 
   render() {
-    const { auth, profile, contextRef } = this.props;
+    const { auth, profile,contextRef } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
-      <Fragment ref={this.contextRef}>
+      <Fragment>
         {/* Menu for desktop */}
-
+        {/* <Sticky context={contextRef} styleElement={{ zIndex: 1 }}> */}
         <Menu stackable>
           <Container>
             <Image
@@ -60,14 +61,9 @@ class NavBar extends Component {
               src="assets/logoHHTools.png"
               alt="logo"
             />
-            {/* <Responsive
-              getWidth={getWidth}
-              maxWidth={Responsive.onlyMobile.maxWidth}
-            > */}
 
             <Menu.Item position="left">
-              {/* <Icon name="user" size="big" /> */}
-              <Icon name="align justify" size="large" />
+              <Icon name="sidebar" size="large" />
               <Dropdown pointing="top right" text="Menu">
                 <Dropdown.Menu>
                   <Dropdown.Item
@@ -99,12 +95,9 @@ class NavBar extends Component {
                 </Dropdown.Menu>
               </Dropdown>
             </Menu.Item>
-            {/* </Responsive> */}
-            {/* <Menu.Item as={NavLink} exact to="/jobs" name="Jobs" /> */}
 
             {authenticated && (
               <Fragment>
-                {/* <Menu.Item as={NavLink} to="/members" name="Members" /> */}
                 <Menu.Item position="left">
                   <Button
                     as={Link}
@@ -131,8 +124,10 @@ class NavBar extends Component {
                 register={this.handleRegister}
               />
             )}
+           
           </Container>
         </Menu>
+        {/* </Sticky> */}
       </Fragment>
     );
   }

@@ -16,7 +16,6 @@ class Sitemap extends Component {
           src="/assets/categoryImages/BlockLayer.jpg"
           alt="sitemap"
           size="large"
-          floated
           style={{ margin: "0em 17em" }}
         />
       </Segment>

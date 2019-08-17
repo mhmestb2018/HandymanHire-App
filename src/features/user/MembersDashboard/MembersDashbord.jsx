@@ -27,15 +27,15 @@ const mapStateToProps = ({ firebase, firestore }) => ({
 const renderEmptyCard = () => (
   <Header as="h3" icon textAlign="center">
     <Icon name="users" />
-    <Header.Content>There's no member</Header.Content>
+    <Header.Content>No one is folowing you</Header.Content>
   </Header>
 );
 
 const MembersDashboard = ({ followings, followers }) => (
-  <Grid>
+  <Grid stackable>
     <Grid.Column width={16}>
       <Segment>
-        <Header dividing content="Members following me" />
+        <Header dividing content="Following me" />
         <Card.Content>
           <Card.Group itemsPerRow={8} stackable>
             {followers ? (
@@ -53,7 +53,7 @@ const MembersDashboard = ({ followings, followers }) => (
         </Card.Content>
       </Segment>
       <Segment>
-        <Header dividing content="Following Members" />
+        <Header dividing content="I follow" />
         <Card.Content >
           <Card.Group itemsPerRow={8} stackable>
             {followings ? (

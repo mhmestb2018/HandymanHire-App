@@ -152,7 +152,7 @@ class WorkOrderForm extends Component {
     // const { title, date, city, address, orderedBy } = this.state;
     return (
       <Grid>
-        <Grid.Column width={16} className='jobsForm'>
+        <Grid.Column width={16}>
           <Segment>
             <Header sub color="blue" content="Work Order Offer Details" />
             <Form
@@ -210,7 +210,7 @@ class WorkOrderForm extends Component {
               >
                 Submit
               </Button>
-        
+
               <Button
                 type="button"
                 color={job.cancelled ? "blue" : "red"}

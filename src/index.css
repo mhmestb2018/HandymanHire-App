@@ -165,9 +165,7 @@ h4.ui.header {
 form textarea {
   margin: 1em 0.1em;
 }
-.jobsForm {
-  margin: 0em 3em;
-}
+
 .img-preview {
   resize: horizontal;
 }
@@ -196,4 +194,12 @@ textarea {
   cursor: pointer;
   display: block;
   width: 100%;
+}
+/* images jobs segments */
+@media only screen and (max-width: 767px) {
+  .ui.items:not(.unstackable) > .item > .image,
+  .ui.items:not(.unstackable) > .item > .image > img {
+    min-height: 80px !important;
+    max-height: 80px !important;
+  }
 }

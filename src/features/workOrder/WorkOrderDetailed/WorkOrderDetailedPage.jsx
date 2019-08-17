@@ -14,7 +14,6 @@ import {
 import { jobProposal, cancelJobProposal } from "../../auth/userActions";
 import { addComment } from "../WorkList/workOrderActions";
 
-
 const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
   let job = {};
@@ -26,7 +25,7 @@ const mapState = (state, ownProps) => {
   }
   return {
     job,
-    loading:state.async.loading,
+    loading: state.async.loading,
     auth: state.firebase.auth,
     chat:
       !isEmpty(state.firebase.data.chat_data) &&
@@ -67,7 +66,7 @@ class WorkOrderDetailedPage extends Component {
     const isInterested =
       InterestedInJobs && InterestedInJobs.some(i => i.id === auth.uid);
     return (
-      <Grid>
+      <Grid stackable>
         <Grid.Column width={10}>
           <WorkOrderDetailedHeader
             job={job}
