@@ -17,7 +17,9 @@ const UserProfileHeader = ({ profile }) => {
           <Item>
             <LazyLoad
               height={150}
-              placeholder={<Item.Image avatar size='small' src={"/assets/user.png"} />}
+              placeholder={
+                <Item.Image avatar size="small" src={"/assets/user.png"} />
+              }
             >
               <Item.Image
                 avatar
@@ -32,7 +34,7 @@ const UserProfileHeader = ({ profile }) => {
               <Header as="h3">{profile.occupation}</Header>
               <br />
               <Header as="h3">
-                {age},  Lives in {profile.city}
+                {age} years old , lives in {profile.city}
               </Header>
             </Item.Content>
           </Item>

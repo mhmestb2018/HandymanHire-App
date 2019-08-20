@@ -44,7 +44,7 @@ const HomepageHeading = ({ mobile, history }) => (
   </Segment>
 );
 const HomePage = () => (
-  <Container>
+  <Container style={{ marginTop: "1em" }}>
     <NavBar />
     <HomepageHeading />
     <Segment>
@@ -55,10 +55,10 @@ const HomePage = () => (
               We connect homeowner and handyman
             </Header>
             <p style={{ fontSize: "1.33em" }}>
-              We are providing simple and easy advertisement platform for
-              homeowners and contractors in Ireland. Getting a handyman to help
-              out around the home has never been easier. Our apps connects
-              handyman with customers who can then set up and arrange services.
+              We are providing simple advertisement platform for homeowners and
+              contractors in Ireland. Getting a handyman to help out around the
+              home has never been easier. Our apps connect handyman with
+              customers who can then find the right professional.
             </p>
             <Button inverted color="blue" floated="right">
               Read More
@@ -72,15 +72,16 @@ const HomePage = () => (
       </Grid>
     </Segment>
     <Segment>
-      <Card.Group>
+      <Card.Group centered>
         <Card>
           <Card.Content>
             <Icon name="envelope open outline" size="huge" />
             <Card.Meta>Homeowner</Card.Meta>
             <Card.Description>
               {" "}
-              you can easily post a job and wait for a response from
-              contractors. You can chat and decide who is right for your job.{" "}
+              You can easily create your profile, post a job and wait for a response from home
+              professionals. You can chat and decide who is the right for your
+              job.{" "}
             </Card.Description>
           </Card.Content>
         </Card>
@@ -89,7 +90,7 @@ const HomePage = () => (
           <Card.Content>
             <Icon name="add user" size="huge" />
             <Card.Meta content="Handyman" />
-            <Card.Description content=" you can easily create your profile, and if you find suitaible job offer, just add yourself into the project as interested." />
+            <Card.Description content="You can easily create your profile, and if you find the job offer you can inform the homeowner that you are ready to take up a job by adding yourself into the project as interested." />
           </Card.Content>
         </Card>
 
@@ -103,7 +104,7 @@ const HomePage = () => (
       </Card.Group>
     </Segment>
     <ScrollUpButton />
-   
+
     <Footer />
   </Container>
 );

@@ -4,7 +4,7 @@ import ActivityItem from "./ActivityItem";
 const RecentActivity = ({ activities, contextRef }) => {
   return (
     <Sticky context={contextRef} offset={100} styleElement={{ zIndex: 0 }}>
-      <Header attached="top" content="Recent Jobs Activity" />
+      <Header attached="top" content="Recent jobs activity" textAlign='center'/>
       <Segment attached>
         <Feed>
           {activities &&

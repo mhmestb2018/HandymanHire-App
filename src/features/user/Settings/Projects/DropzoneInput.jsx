@@ -25,11 +25,12 @@ const DropzoneInput = ({ setFiles }) => {
     <div
       {...getRootProps()}
       className={"dropzone " + (isDragActive && "dropzone--isActive")}
+      style={{ height: "15em", padding: "4em" }}
     >
       {" "}
       <input {...getInputProps()} />
       <Icon name="upload" size="large" />
-      <Header as="h4" content="Please drop image here" />
+      <Header as="h4" content="Please click to upload or drop image here" />
     </div>
   );
 };

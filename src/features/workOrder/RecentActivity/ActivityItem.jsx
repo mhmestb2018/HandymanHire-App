@@ -9,14 +9,14 @@ class ActivityItem extends Component {
       case "newJob":
         return (
           <div>
-            New Enquiry by{" "}
+            New job by{" "}
             <Feed.User
               as={Link}
               to={{ pathname: "/profile/" + activity.orderedByUid }}
             >
               {activity.orderedBy}
             </Feed.User>{" "}
-            Title{" "}
+            job title{" "}
             <Link to={{ pathname: "/jobs/" + activity.jobId }}>
               {activity.title}
             </Link>
@@ -25,14 +25,14 @@ class ActivityItem extends Component {
       case "cancelledJob":
         return (
           <div>
-            Enquiry by{" "}
+            Job by{" "}
             <Feed.User
               as={Link}
               to={{ pathname: "/profile/" + activity.orderedByUid }}
             >
               {activity.orderedBy}
             </Feed.User>{" "}
-            Title{" "}
+            title{" "}
             <Link to={{ pathname: "/jobs/" + activity.jobId }}>
               {activity.title}
             </Link>{" "}

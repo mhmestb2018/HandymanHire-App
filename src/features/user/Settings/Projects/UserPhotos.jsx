@@ -16,25 +16,29 @@ const UserPhotos = ({
   }
   return (
     <Fragment>
-      <Header sub color="teal" content="All Photos" />
-
+      <Header dividing content="Your's photos" size='large' textAlign="center" />
       <Card.Group itemsPerRow={6} stackable>
         <Card>
-          <Image src={profile.photoURL || "/assets/user.png"} centered/>
-          <Button positive>Main Photo</Button>
+          <Card.Content>
+            <Image src={profile.photoURL || "/assets/user.png"} />
+          </Card.Content>
+          <Card.Content extra>
+            <Card.Header style={{ color: "green" }}>Main photo</Card.Header>
+          </Card.Content>
         </Card>
-
         {photos &&
           filteredPhotos.map(photo => (
-            <Card key={photo.id} >
-              <Image src={photo.url} />
+            <Card key={photo.id}>
+              <Card.Content>
+                <Image src={photo.url} />
+              </Card.Content>
+              {/* <Card.Content extra> */}
               <div className="ui two buttons">
                 <Button
                   loading={loading}
                   onClick={() => setMainPhoto(photo)}
                   basic
                   color="green"
-                  
                 >
                   Main
                 </Button>
@@ -43,9 +47,9 @@ const UserPhotos = ({
                   basic
                   icon="trash"
                   color="red"
-                 
                 />
               </div>
+              {/* </Card.Content> */}
             </Card>
           ))}
       </Card.Group>

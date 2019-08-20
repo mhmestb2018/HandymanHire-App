@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Advertisement } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { firestoreConnect, isEmpty } from "react-redux-firebase";
 import { compose } from "redux";
@@ -10,7 +10,11 @@ import UserProfileSidebar from "./UserProfileSidebar";
 import UserProfileWorkOrders from "./UserProfileWorkOrders";
 import { userProfileQuery } from "../userQueries";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { getUserWorkOrders, followMember,unfollowMember } from "../../auth/userActions";
+import {
+  getUserWorkOrders,
+  followMember,
+  unfollowMember
+} from "../../auth/userActions";
 
 //to link specific user to specific profile
 const mapState = (state, ownProps) => {
@@ -59,7 +63,8 @@ class UserProfilePage extends Component {
       workOrdersLoading,
       followMember,
       following,
-      unfollowMember
+      unfollowMember,
+      contextRef
     } = this.props;
     const isCurrentUser = auth.uid === match.params.id;
     const loading = Object.values(requesting).some(a => a === true);
@@ -69,6 +74,7 @@ class UserProfilePage extends Component {
       <Grid stackable>
         <UserProfileHeader profile={profile} />
         <UserProfileDescription profile={profile} />
+
         <UserProfileSidebar
           isCurrentUser={isCurrentUser}
           profile={profile}
@@ -76,7 +82,8 @@ class UserProfilePage extends Component {
           isFollowing={isFollowing}
           unfollowMember={unfollowMember}
         />
-        <UserProfileProjects photos={photos} />
+
+        <UserProfileProjects photos={photos}/>
         <UserProfileWorkOrders
           workOrders={workOrders}
           workOrdersLoading={workOrdersLoading}

@@ -1,7 +1,7 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Grid, Loader, Segment, Image, Input, Item } from "semantic-ui-react";
+import { Grid, Loader, Segment, Image, Input, Item,Header } from "semantic-ui-react";
 import WorkList from "../WorkList/WorkList";
 import { getWorkOrdersForDashboard } from "../../workOrder/WorkList/workOrderActions";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -69,12 +69,12 @@ class Dashboard extends Component {
         <Grid.Column width={10}>
           <div ref={this.contextRef}>
             <Segment>
+             
               <Image
                 src="/assets/categoryImages/Jobs.jpg"
                 alt="sitemap"
                 size="small"
                 centered
-            
               />
             </Segment>
             <WorkList

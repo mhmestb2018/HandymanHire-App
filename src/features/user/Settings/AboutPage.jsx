@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Divider, Form, Header, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Divider,
+  Form,
+  Header,
+  Segment,
+  Card
+} from "semantic-ui-react";
 import { Field, reduxForm } from "redux-form";
 import RadioInput from "../../../app/common/form/RadioInput";
 import TextInput from "../../../app/common/form/TextInput";
@@ -32,30 +39,42 @@ const interests = [
 const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
   return (
     <Segment>
-      <Header dividing size="large" content="About Me" />
-      <p>Complete your profile to get the most out of this site</p>
+      <Header dividing size="large" content="About me" />
+      <Header as="h3">
+        Complete your profile to get the most out of this site
+      </Header>
       <Form onSubmit={handleSubmit(updateProfile)}>
         <Form.Group grouped>
           {/* <label>: </label> */}
           {/* <Field name="status" component={RadioInput} type="radio" value="single" label="Handyman" /> */}
-          <Field
-            name="status"
-            component={RadioInput}
-            type="radio"
-            value="Handyman"
-            label="  I am a Handyman"
-          />
-          <Field
-            name="status"
-            component={RadioInput}
-            type="radio"
-            value="Hire"
-            label=" I want to hire a Handyman"
-          />
+          <Card>
+            <p className="radio">
+              For the what purpose you are going to use this service mainly :
+            </p>
+            <Field
+              className="radio"
+              name="status"
+              component={RadioInput}
+              type="radio"
+              value="Handyman"
+              label=" Offer handyman service"
+            />
+            <Field
+              className="radio"
+              name="status"
+              component={RadioInput}
+              type="radio"
+              value="Hire"
+              label=" Post a jobs"
+            />
+          </Card>
         </Form.Group>
         <Divider />
-        <label>Tell us about yourself</label>
-        <Field name="about" component={TextArea} placeholder="About Me" />
+        <Field
+          name="about"
+          component={TextArea}
+          placeholder="Tell us about yourself"
+        />
         <Field
           name="interests"
           component={SelectInput}
@@ -73,17 +92,17 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
         />
         <Field
           width={8}
-          name="origin"
+          name="city"
           options={{ types: ["(cities)"] }}
           component={PlaceInput}
-          placeholder="Your City or County"
+          placeholder="Your city or county"
         />
         <Divider />
         <Button
           disabled={pristine || submitting}
           size="large"
           positive
-          content="Update Profile"
+          content="Update profile"
         />
       </Form>
     </Segment>

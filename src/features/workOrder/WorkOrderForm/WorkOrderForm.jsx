@@ -51,7 +51,7 @@ const validate = combineValidators({
       message: "Description needs to be at least 5 characters"
     })
   )(),
-  city: isRequired({ message: "Please provide County or City" }),
+  city: isRequired({ message: "Please enter county or city" }),
   date: isRequired({ message: "Date is required" })
 });
 const category = [
@@ -154,7 +154,7 @@ class WorkOrderForm extends Component {
       <Grid>
         <Grid.Column width={16}>
           <Segment>
-            <Header sub color="blue" content="Work Order Offer Details" />
+            <Header sub color="blue" content="Job request details" />
             <Form
               onSubmit={this.props.handleSubmit(this.onFormSubmit)}
               autoComplete="off"
@@ -176,7 +176,7 @@ class WorkOrderForm extends Component {
                 rows={6}
                 placeholder="Give more details about job"
               />
-              <Header sub color="blue" content="Work Order Location Details" />
+              <Header sub color="blue" content="Jobs location details" />
               <Field
                 name="city"
                 component={PlaceInput}
@@ -199,7 +199,7 @@ class WorkOrderForm extends Component {
                 name="date"
                 component={DateInput}
                 dateFormat="dd LLL yyyy h:mm a"
-                placeholder="Date that you expect from contractor to start the job"
+                placeholder="Date that job request will be expired"
               />
 
               <Button

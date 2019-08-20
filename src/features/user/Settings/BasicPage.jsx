@@ -60,8 +60,8 @@ class Basics extends Component {
             // maxDate={moment().subtract(18,'years')}
           />
           <Field
-            name="city"
-            placeholder="Country oof Orgin"
+            name="origin"
+            placeholder="Country of Orgin"
             options={{ types: ["(regions)"] }}
             label="Female"
             component={PlaceInput}

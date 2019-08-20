@@ -17,7 +17,7 @@ const UserProfileDescription = ({ profile }) => {
               I am a : <strong>{profile.occupation || "tbn"}</strong>
             </p>
             <p>
-              Orginally from <strong>{profile.orgin || "tbn"} </strong>
+              Orginally from <strong>{profile.origin|| "tbn"} </strong>
             </p>
             <p>
               Member Since : <strong>{createdAt}</strong>
@@ -35,7 +35,6 @@ const UserProfileDescription = ({ profile }) => {
                   </Item>
                 ))}
             </List>
-           
           </Grid.Column>
         </Grid>
       </Segment>

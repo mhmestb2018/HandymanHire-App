@@ -20,31 +20,39 @@ class WorkListItem extends Component {
     return (
       <Segment.Group>
         <Segment>
-          <Header as="h3" style={{ textTransform: "uppercase", wordSpacing:"0.6em" }} block textAlign="center">
+          <Header
+            as="h3"
+            style={{ textTransform: "uppercase", wordSpacing: "0.6em" }}
+            block
+            textAlign="center"
+          >
             {job.category}
           </Header>
           <Item.Group>
             <Item>
-              <Image avatar size='tiny' circular src={job.orderedByPhotoURL}  />
+              <Image avatar size="tiny" circular src={job.orderedByPhotoURL} />
 
               <Item.Content>
                 <Item.Header as={Link} to={`/jobs/${job.id}`}>
                   {job.title}
                 </Item.Header>
                 <Item.Description>
-                  Ordered By {"  "}
+                  Posted by {"  "}
                   <Link to={`/profile/${job.orderedByUid}`}>
                     {job.orderedBy}
                   </Link>
                 </Item.Description>
                 {job.cancelled && (
                   <Label
-                    style={{ margin : "1em" }}
+                    style={{ margin: "0.6em" }}
                     ribbon="right"
+                    size='large'
                     color="red"
-                    content="This enquiry has been cancelled"
+                    content="Job cancelled"
                   />
                 )}
+            
+
               </Item.Content>
             </Item>
           </Item.Group>
@@ -61,21 +69,34 @@ class WorkListItem extends Component {
             />
           </div>
         </Segment>
-        <Segment>
-          <span>
+        <Segment clearing>
+        {job.date.toDate() < Date.now() && (
+                  <Label
+                    style={{ margin: "0em" }}
+                    ribbon="right"
+                    color="red"
+                  
+                    size='large'>  Job expired on {format(job.date.toDate(), "EEEE do LLL yyyy")}</Label>
+                
+                )}
+          <Header as="h5">
             <Icon name="clock" />
-            {format(job.date.toDate(), "EEEE do LLL yyyy")}{" "}
-            {format(job.date.toDate(), "h:mm a")}
-            <Icon name="marker" /> {job.city}
-          </span>
+            Posted on {format(job.created.toDate(), "EEEE do LLL yyyy")}{" "}
+            {/* {format(job.created.toDate(), "h:mm a")} */}
+            
+          </Header>
+       
+          <Header as="h5">
+            <Icon name="marker" /> Job location {job.city}
+          </Header>
+          
         </Segment>
 
         <Segment secondary>
-          <div>
-            <Item.Header as="a">Interested in doing the job</Item.Header>
-          </div>
+          <Item.Header as="h5">Interested in the job</Item.Header>
           <List horizontal>
             {job.InterestedInJobs &&
+              job &&
               objectToArray(job.InterestedInJobs).map(interested => (
                 <WorkListProposals
                   key={interested.id}

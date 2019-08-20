@@ -1,5 +1,13 @@
 import React, { Fragment } from "react";
-import { Segment, Item, Label, List, Image, Rating } from "semantic-ui-react";
+import {
+  Segment,
+  Item,
+  List,
+  Image,
+  Label,
+  Header,
+  Icon
+} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const WorkOrderDetailedSidebar = ({ InterestedInJobs, job }) => {
@@ -14,33 +22,46 @@ const WorkOrderDetailedSidebar = ({ InterestedInJobs, job }) => {
         inverted
         color="blue"
       >
-        Members interested in the job
+        Interested in the job
       </Segment>
-      <Segment attached>
+      <Segment >
         <List relaxed divided>
+          {/* {InterestedInJobs && (
+            <Segment>
+              <Icon name="users" size="big" textAlign="center" />
+              <p>No one interested yet</p>
+            </Segment>
+          )} */}
           {InterestedInJobs &&
             InterestedInJobs.map(interested => (
               <Item key={interested.id} style={{ position: "relative" }}>
-                {isHire}
-                <Label
+                {/* <Label
                   style={{ position: "absolute" }}
                   color="orange"
                   ribbon="right"
                 >
-                  <Rating  defaultRating={3} maxRating={5} icon='star' disabled />
-                  {/* <Icon name="star outline" />
+                  <Header
+                    as="h5"
+                    content="Homeowner"
+                    style={{ color: "white" }}
+                  /> */}
+                {/* <Icon name="star outline" />
                   <Icon name="star outline" />
                   <Icon name="star outline" /> */}
-                </Label>
-                <Image size="tiny" src={interested.photoURL} />
+                {/* </Label> */}
+                {interested.handyman && (
+                  <Fragment>
+                    <Image size="tiny" src={interested.photoURL} />
 
-                <Item.Content verticalAlign="middle">
-                  <Item.Header as="h3">
-                    <Link to={`/profile/${interested.id}`}>
-                      {interested.displayName}
-                    </Link>
-                  </Item.Header>
-                </Item.Content>
+                    <Item.Content >
+                      <Item.Header as="h3">
+                        <Link to={`/profile/${interested.id}`}>
+                          {interested.displayName}
+                        </Link>
+                      </Item.Header>
+                    </Item.Content>
+                  </Fragment>
+                )}
               </Item>
             ))}
         </List>

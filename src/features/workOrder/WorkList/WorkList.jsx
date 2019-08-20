@@ -21,7 +21,7 @@ class WorkList extends Component {
             initialLoad={true}
           >
             {workOrders &&
-              workOrders.map(job => <WorkListItem key={job.id} job={job} />)}
+              workOrders.map(job => <WorkListItem key={job.id} job={job} p/>)}
           </InfiniteScroll>
         )}
       </Fragment>

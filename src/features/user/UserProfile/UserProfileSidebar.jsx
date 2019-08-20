@@ -1,8 +1,8 @@
 import React from "react";
-import { Grid, Button, Segment} from "semantic-ui-react";
+import { Grid, Button, Segment, Advertisement } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const UserDetailedSidebar = ({
+const UserProfileSidebar = ({
   isCurrentUser,
   followMember,
   profile,
@@ -16,7 +16,8 @@ const UserDetailedSidebar = ({
           <Button
             as={Link}
             to="/settings"
-            color="blue"
+            color="black"
+            icon="edit"
             fluid
             basic
             content="Edit Profile"
@@ -46,4 +47,4 @@ const UserDetailedSidebar = ({
     </Grid.Column>
   );
 };
-export default UserDetailedSidebar;
+export default UserProfileSidebar;

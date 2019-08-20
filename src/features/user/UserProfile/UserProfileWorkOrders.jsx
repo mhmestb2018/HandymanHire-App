@@ -24,11 +24,10 @@ const UserProfileWorkOrders = ({
   workOrdersLoading,
   changeTab
 }) => (
-  <Grid.Column width={12} stackable>
+  <Grid.Column width={12} stackable="true">
     <Segment attached loading={workOrdersLoading}>
       <Header icon="calendar alternate outline" content="My jobs activity" />
       <Tab
-        stackable
         onTabChange={(e, data) => changeTab(e, data)}
         panes={panes}
         menu={{ attached: false, tabular: false, stackable: true }}
@@ -37,15 +36,19 @@ const UserProfileWorkOrders = ({
       <Card.Group itemsPerRow={6} stackable>
         {workOrders &&
           workOrders.map(job => (
-            <Card as={Link} to={`/jobs/${job.id}`} key={job.id} size='tiny'>
-              <Image src={`/assets/categoryImages/${job.category}.jpg`} size='tiny' centered/>
+            <Card as={Link} to={`/jobs/${job.id}`} key={job.id} size="tiny">
+              <Image
+                src={`/assets/categoryImages/${job.category}.jpg`}
+                size="tiny"
+                centered
+              />
               <Card.Content>
-                <Card.Header  textAlign="center" >{job.title}</Card.Header>
+                <Card.Header textAlign="center">{job.title}</Card.Header>
                 <Card.Meta textAlign="center">
-                  {/* <div>
+                  <div>
                     {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}
                   </div>
-                  <div>{format(job.date && job.date.toDate(), "h:mm a")}</div> */}
+                  <div>{format(job.date && job.date.toDate(), "h:mm a")}</div>
                 </Card.Meta>
               </Card.Content>
             </Card>

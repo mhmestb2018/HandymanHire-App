@@ -27,7 +27,7 @@ const mapStateToProps = ({ firebase, firestore }) => ({
 const renderEmptyCard = () => (
   <Header as="h3" icon textAlign="center">
     <Icon name="users" />
-    <Header.Content>No one is folowing you</Header.Content>
+    <Header.Content>No one yet</Header.Content>
   </Header>
 );
 

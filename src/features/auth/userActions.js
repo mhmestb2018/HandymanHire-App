@@ -45,13 +45,14 @@ export const uploadProfileImage = (file, fileName) => async (
     let userDoc = await firestore.get(`users/${user.uid}`);
     //if user has photo check,if not update profile
     // did not work with if statment, did not upload photos to firebase
-    // if (!userDoc.data().photoURL) {
-    await firebase.updateProfile({
-      photoURL: downloadURL
-    });
-    await user.updateProfile({
-      photoURL: downloadURL
-    });
+    if (!userDoc.data().photoURL) {
+      await firebase.updateProfile({
+        photoURL: downloadURL
+      });
+      await user.updateProfile({
+        photoURL: downloadURL
+      });
+    }
     //add image to firestore
     await firestore.add(
       {
@@ -113,7 +114,6 @@ export const setMainPhoto = photo => async (dispatch, getState) => {
         .collection("workOrders")
         .doc(jobQuerySnap.docs[i].data().jobId);
       let job = await jobDocRef.get();
-      console.log(job);
       if (job.data().orderedByUid === user.uid) {
         batch.update(jobDocRef, {
           orderedByPhotoURL: photo.url,
@@ -125,7 +125,6 @@ export const setMainPhoto = photo => async (dispatch, getState) => {
         });
       }
     }
-    console.log(batch);
     await batch.commit();
     dispatch(asyncActionFinish());
   } catch (error) {
@@ -135,7 +134,6 @@ export const setMainPhoto = photo => async (dispatch, getState) => {
   }
 };
 //if any changes in workOrders transacion rerun to track them
-
 export const jobProposal = job => async (
   dispatch,
   getState,
@@ -199,22 +197,22 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
   let workOrdersRef = firestore.collection("job_interested");
   let query;
   switch (activeTab) {
-    case 1: //past orders
+    case 1: //all past jobs
       query = workOrdersRef
-        .where("userUid", "==", userUid)
+      .where("userUid", "==", userUid)
         .where("jobDate", "<=", today)
         .orderBy("jobDate", "desc");
       break;
-    case 2: //future orders
+    case 2: //all recent jobs
       query = workOrdersRef
         .where("userUid", "==", userUid)
         .where("jobDate", ">=", today)
         .orderBy("jobDate");
       break;
-    case 3: //my work orders
+    case 3: //only my jobs
       query = workOrdersRef
         .where("userUid", "==", userUid)
-        .where("handyman", "==", true)
+        .where("handyman", "==", false)
         .orderBy("jobDate", "desc");
       break;
     default:

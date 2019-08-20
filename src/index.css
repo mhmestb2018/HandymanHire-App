@@ -148,10 +148,9 @@ h4.ui.header {
 } */
 .ui.cards {
   text-align: center;
-  margin-left: 7em;
 }
 .ui.segment:first-child {
-  margin-top: 2em;
+  margin-top: 0.5em;
 }
 /* contact form */
 
@@ -166,9 +165,10 @@ form textarea {
   margin: 1em 0.1em;
 }
 
-.img-preview {
-  resize: horizontal;
-}
+/* .img-preview {
+  height: 210px !important;
+  width: 210px !important;
+} */
 input[type="text"],
 input[type="email"],
 select,
@@ -202,4 +202,22 @@ textarea {
     min-height: 80px !important;
     max-height: 80px !important;
   }
+}
+/* error field */
+.ui.basic.red.label {
+  margin-top: 1em;
+}
+.radio {
+  margin: 0.2em;
+  padding: 0.1em 0.1em 0.1em 0.5em;
+}
+/* interested icons on work list items */
+
+.ui.horizontal.list > .item:first-child,
+.ui.horizontal.list > .item:last-child {
+  text-align: center;
+}
+/* dropzone */
+.dropzone {
+  margin: 0em 4em;
 }

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Segment, Image, Item, Header, Button } from "semantic-ui-react";
+import { Segment, Image, Item, Header, Button, Popup } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
@@ -46,16 +46,19 @@ const WorkOrderDetailedHeader = ({
                   content={job.title}
                   //  style={{ color: 'Blue' }}
                 />
-                <p>{job.date && format(job.date.toDate(), "EEEE do LLLL")}</p>
                 <p>
-                  Ordered by{" "}
-                  <strong>
-                    <Link to={`/profile/${job.orderedByUid}`}>
-                      {job.orderedBy}
-                    </Link>
-                  </strong>
+                  Posted on{" "}
+                  {job.created && format(job.date.toDate(), "EEEE do LLLL")}
                 </p>
+                <p>
+                  Posted by{" "}
+                  <Link to={`/profile/${job.orderedByUid}`}>
+                    {job.orderedBy}
+                  </Link>
+                </p>
+                <Item.Extra>job id : {job.id}</Item.Extra>
               </Item.Content>
+             
             </Item>
           </Item.Group>
         </Segment>
@@ -66,12 +69,21 @@ const WorkOrderDetailedHeader = ({
           <Fragment>
             {isInterested ? (
               <Button onClick={() => cancelJobProposal(job)}>
-                Cancel My Proposal
+                Discard from interested
               </Button>
             ) : (
-              <Button loading={loading} onClick={() => jobProposal(job)} color="green">
-                Add My Proposal
-              </Button>
+              <Popup
+                content="By clicking  this button you are informing homeowner that you are qualified for this job, and you want him/her to contact you."
+                trigger={
+                  <Button
+                    loading={loading}
+                    onClick={() => jobProposal(job)}
+                    color="green"
+                  >
+                    Add to interested
+                  </Button>
+                }
+              />
             )}
           </Fragment>
         )}
@@ -82,7 +94,7 @@ const WorkOrderDetailedHeader = ({
             color="green"
             floated="right"
           >
-            Manage Offer
+            Manage job
           </Button>
         )}
       </Segment>

@@ -1,12 +1,14 @@
-import React, { Component } from "react";
-import { Segment, Comment, Header } from "semantic-ui-react";
+import React, { Component,Fragment } from "react";
+import { Segment, Comment, Header,Button,Divider,Transition,Grid,Icon } from "semantic-ui-react";
 import ChatForm from "../WorkOrderDetailed/ChatForm";
 import { formatDistance } from "date-fns";
 import { Link } from "react-router-dom";
 
 class WorkOrderChat extends Component {
   state = { showReplyForm: false, selectedCommentId: null };
+  state = { visible: true }
 
+  toggleVisibility = () => this.setState(prevState => ({ visible: !prevState.visible }))
   handleOpenReplyForm = id => () => {
     this.setState({ showReplyForm: true, selectedCommentId: id });
   };
@@ -18,10 +20,11 @@ class WorkOrderChat extends Component {
     });
   };
   render() {
+    const { visible } = this.state
     const { addComment, jobId, chat } = this.props;
     const { showReplyForm, selectedCommentId } = this.state;
     return (
-      <div>
+    <Fragment>
         <Segment
           textAlign="center"
           attached="top"
@@ -29,9 +32,25 @@ class WorkOrderChat extends Component {
           color="teal"
           style={{ border: "none" }}
         >
-          <Header>Chat about this Enquiry</Header>
+          <Header>Chat about this job</Header>
         </Segment>
-        <Segment attached>
+
+        <Segment>
+          <Grid stackable>
+            <Grid.Column width={1}>
+              <Icon name='wechat' size="large" color="blue"/>
+            </Grid.Column>
+            <Grid.Column width={11}>
+           This is a public chat, all messages are vissibly for registred users
+          </Grid.Column>
+            <Grid.Column width={4}>
+        <Button content={visible ? 'Hide chat' : 'Show chat'} onClick={this.toggleVisibility}  color="blue"  attached='bottom' />
+        </Grid.Column>
+       </Grid>
+        </Segment>
+        <Transition visible={visible} animation='zoom' duration={1200}>
+         
+        <Segment>
           <Comment.Group>
             {chat &&
               chat.map(comment => (
@@ -44,7 +63,9 @@ class WorkOrderChat extends Component {
                       {comment.displayName}
                     </Comment.Author>
                     <Comment.Metadata>
-                      {/* <div>{formatDistance(comment.date.toDate(), Date.now())} ago</div> */}
+                    <div>
+                                {formatDistance(comment.date, Date.now())} ago
+                              </div>
                     </Comment.Metadata>
                     <Comment.Text>{comment.text}</Comment.Text>
                     <Comment.Actions>
@@ -124,7 +145,10 @@ class WorkOrderChat extends Component {
             form={"newComment"}
           />{" "}
         </Segment>
-      </div>
+        </Transition>
+    
+        </Fragment>
+     
     );
   }
 }

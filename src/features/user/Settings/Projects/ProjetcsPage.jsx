@@ -6,7 +6,8 @@ import {
   Divider,
   Grid,
   Button,
-  Container
+  Container,
+  Card
 } from "semantic-ui-react";
 import { compose } from "redux";
 import DropzoneInput from "./DropzoneInput";
@@ -90,61 +91,78 @@ const ProjectsPage = ({
   };
   return (
     <Segment>
-      <Header dividing size="large" content="Your Photos" />
-      <Grid stackable>
-        <Grid.Row />
-        <Grid.Column width={4}>
-          <Header color="teal" sub content="Step 1 - Add Photo" />
-          <DropzoneInput setFiles={setFiles} />
-        </Grid.Column>
-        <Grid.Column width={1} />
-        <Grid.Column width={4}>
-          <Header sub color="teal" content="Step 2 - Resize image" />
-          {files.length > 0 && (
-            <CropperPhotos
-              setImage={setImage}
-              imagePreview={files[0].preview}
-            />
-          )}
-        </Grid.Column>
+      <Header dividing size="large" content="Add photos" textAlign='center' />
+      <Card.Group itemsPerRow={3} stackable>
+        <Card>
+          <Card.Header color="teal" sub content="Step 1 - Add Photo" />
+          <Card.Content>
+            <DropzoneInput setFiles={setFiles} />
+          </Card.Content>
+        </Card>
 
-        <Grid.Column width={1} />
-        <Grid.Column width={4}>
-          <Header sub color="teal" content="Step 3 - Preview & Upload" />
+        <Card>
+          <Card.Header
+            sub
+            color="teal"
+            content="Step 2 - Resize image"
+            centered
+          />
+          <Card.Content>
+            {files.length > 0 && (
+              <CropperPhotos
+                setImage={setImage}
+                imagePreview={files[0].preview}
+              />
+            )}
+          </Card.Content>
+        </Card>
+
+        <Card>
+          <Card.Header
+            sub
+            color="teal"
+            content="Step 3 - Preview & Upload"
+            centered
+          />
+
           {files.length > 0 && (
             <Fragment>
-              <Container stackable>
+              <Card.Content>
                 <div
                   className="img-preview"
                   style={{
-                    minHeight: "200px",
-                    minWidth: "200px",
-                    overflow: "hidden"
+                    minHeight: "210px",
+                    minWidth: "210px",
+                    overflow: "hidden",
+                    border: "3px solid black",
+                    margin: "auto"
                   }}
                 />
-
-                <Button.Group size="large" positive>
-                  <Button
-                    loading={loading}
-                    onClick={handleUploadImage}
-                    style={{ width: "100px" }}
-                  >
-                    Save
-                  </Button>
-                  <Button.Or />
-                  <Button
-                    // disabled={loading}
-                    onClick={handleCancelCrop}
-                    style={{ width: "100px" }}
-                  >
-                    Cancel
-                  </Button>
-                </Button.Group>
-              </Container>
+              </Card.Content>
+              <div className="ui two buttons">
+                <Button
+                  loading={loading}
+                  onClick={handleUploadImage}
+                  style={{ width: "100px" }}
+                  basic
+                  color="blue"
+                >
+                  Save
+                </Button>
+                <Button
+                  // disabled={loading}
+                  onClick={handleCancelCrop}
+                  style={{ width: "100px" }}
+                  basic
+                  color="red"
+                >
+                  Cancel
+                </Button>
+              </div>
             </Fragment>
           )}
-        </Grid.Column>
-      </Grid>
+        </Card>
+      </Card.Group>
 
       <Divider />
       <UserPhotos

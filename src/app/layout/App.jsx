@@ -18,6 +18,7 @@ import PrivacyPolicy from "../../features/home/PrivacyPolicy";
 import TermsConditions from "../../features/home/TermsConditions";
 import Sitemap from "../../features/home/Sitemap";
 
+
 class App extends Component {
   contextRef = createRef();
   state = {
@@ -36,9 +37,10 @@ class App extends Component {
                 <NavBar contextRef={this.contextRef} />
                 <div ref={this.contextRef}>
                   <Switch key={this.props.location.key}>
+                  <Route exact path="/homePage" component={HomePage} />
                     <Route exact path="/jobs" component={Dashboard} />
                     <Route path="/jobs/:id" component={WorkOrderDetailedPage} />
-                    <Route path="/profile/:id" component={UserProfilePage} />
+                    <Route path="/profile/:id" component={UserProfilePage} contextRef={this.contextRef} />
                     <Route path="/members" component={MembersDashboard} />
                     <Route path="/settings" component={SettingsDashboard} />
                     <Route

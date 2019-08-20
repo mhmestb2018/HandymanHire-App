@@ -23,28 +23,32 @@ const WorkOrderDetailedInfo = ({ job }) => {
             <Icon name="calendar" size="large" color="blue" />
           </Grid.Column>
           <Grid.Column width={15}>
-            {job.date &&
-            <span>
-              {format(job.date.toDate(), "EEEE do LLL yyyy")}
-              {/* |at{""} {format(parseISO(job.date), "h:mm a")} */}
-            </span>}
+            {job.date && (
+              <span>
+                Post expire on {format(job.date.toDate(), "EEEE do LLL yyyy")}
+                {/* |at{""} {format(parseISO(job.date), "h:mm a")} */}
+              </span>
+            )}
           </Grid.Column>
         </Grid>
       </Segment>
       <Segment attached>
-        <Grid verticalAlign="middle">
-          <Grid.Column width={1}>
+        <Grid stackable>
+          <Grid.Column width={1} >
             <Icon name="marker" size="large" color="blue" />
           </Grid.Column>
           <Grid.Column width={11}>
-            <span>{job.address}</span>
+            {job.city}
+            <br />e
+            {job.address}
           </Grid.Column>
           <Grid.Column width={4}>
             <Button
               onClick={() => showMapToogle(!isMapOpen)}
               color="blue"
-              size="tiny"
+           
               content={isMapOpen ? "Hide map" : "Show Map"}
+              attached='bottom'
             />
           </Grid.Column>
         </Grid>

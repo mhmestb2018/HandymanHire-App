@@ -80,7 +80,12 @@ const AccountPage = ({
         <div>
           <Header color="teal" sub content="Facebook Account" />
           <p>Please visit Facebook to update your account settings</p>
-          <Button type="button" color="facebook">
+          <Button
+            type="button"
+            as="a"
+            href="https://www.facebook.com/"
+            color="facebook"
+          >
             <Icon name="facebook" />
             Go to Facebook
           </Button>
@@ -90,7 +95,12 @@ const AccountPage = ({
         <div>
           <Header color="teal" sub content="Google Account" />
           <p>Please visit Google to update your account settings</p>
-          <Button type="button" color="google plus">
+          <Button
+            type="button"
+            as="a"
+            href="https://myaccount.google.com/"
+            color="google plus"
+          >
             <Icon name="google plus" />
             Go to Google
           </Button>
