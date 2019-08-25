@@ -15,7 +15,7 @@ class UnauthorizedModal extends Component {
     }
   };
   render() {
-    const { openModal, closeModal } = this.props;
+    const { openModal } = this.props;
     return (
       <Modal size="mini" open={true} onClose={this.handlecloseModal}>
         <Modal.Header>

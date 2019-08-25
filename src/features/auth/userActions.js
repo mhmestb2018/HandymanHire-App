@@ -6,7 +6,7 @@ import {
   asyncActionError
 } from "../async/asyncActions";
 import firebase from "../../app/config/firebase";
-import { FETCH_JOBS, FETCH_USER_JOBS } from "../workOrder/WorkList/WorkOrderConstants";
+import { FETCH_USER_JOBS } from "../workOrder/WorkList/WorkOrderConstants";
 export const updateProfile = user => async (
   dispatch,
   getState,

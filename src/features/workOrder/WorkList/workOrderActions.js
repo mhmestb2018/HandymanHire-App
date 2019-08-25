@@ -102,7 +102,7 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
   dispatch,
   getState
 ) => {
-  let today = new Date();
+  // let today = new Date();
   const firestore = firebase.firestore();
   const workOrdersRef = firestore.collection("workOrders");
   try {

@@ -1,6 +1,6 @@
 /*global google*/
 import React, { Component } from "react";
-import { Segment, Button, Form, Grid, Header } from "semantic-ui-react";
+import { Segment, Button, Form, Grid, Header, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {
   createJob,
@@ -147,6 +147,12 @@ class WorkOrderForm extends Component {
       <Grid>
         <Grid.Column width={16}>
           <Segment>
+            <Image
+              centered
+              src="/assets/formPost.jpg"
+              alt="sitemap"
+              size="small"
+            />
             <Header sub color="blue" content="Job request details" />
             <Form
               onSubmit={this.props.handleSubmit(this.onFormSubmit)}

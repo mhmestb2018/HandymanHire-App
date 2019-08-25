@@ -35,6 +35,7 @@ body,
 .dropzone--isActive {
   border: dashed 3px rgb(6, 6, 80);
 }
+
 /* menu responsive */
 .ui.menu .active.item {
   font-weight: 1000;
@@ -138,7 +139,7 @@ textarea {
   margin: 1em;
 }
 
-/* hide cancel button in forgot password confirmation window */
+/* hide cancel button in "forgot password" confirmation window */
 .actions :first-child {
   visibility: hidden;
 }
