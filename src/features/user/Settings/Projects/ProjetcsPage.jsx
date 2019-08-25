@@ -4,9 +4,9 @@ import {
   Segment,
   Header,
   Divider,
-  Grid,
+ 
   Button,
-  Container,
+
   Card
 } from "semantic-ui-react";
 import { compose } from "redux";

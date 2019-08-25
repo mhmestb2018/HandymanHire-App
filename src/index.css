@@ -4,7 +4,6 @@ body,
 }
 
 /*timepicker style*/
-
 .react-datepicker__time-container
   .react-datepicker__time
   .react-datepicker__time-box
@@ -13,103 +12,14 @@ body,
   padding-right: 0;
   width: 100px;
 }
-
 .react-datepicker__input-container {
   width: inherit;
 }
-
 .react-datepicker-wrapper {
   width: 100%;
 }
 
-/*home page styles*/
-
-.masthead {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  background-image: linear-gradient(
-    rgb(55, 75, 155) 0%,
-    rgb(35, 109, 134) 69%,
-    rgb(22, 126, 77) 89%
-  ) !important;
-  height: 100vh;
-}
-
-.masthead.segment {
-  min-height: 600px;
-  padding: 4em 0 !important;
-}
-
-.masthead .ui.menu .ui.button,
-.ui.menu a.ui.inverted.button {
-  margin-left: 0.5em;
-}
-
-.masthead h1.ui.header {
-  font-size: 4em;
-  font-weight: normal;
-}
-
-.masthead h2 {
-  font-size: 1.7em;
-  font-weight: normal;
-}
-
-/*end home page styles*/
-h4.ui.header {
-  margin-bottom: 2em;
-}
-.ui.inverted.blue.button,
-.ui.inverted.blue.buttons .button {
-  margin: 2em 4em;
-}
-/* navbar styles */
-
-.ui.inverted.menu {
-  background-image: linear-gradient(
-    135deg,
-    rgb(55, 75, 155) 0%,
-    rgb(35, 109, 134) 69%,
-    rgb(22, 126, 77) 89%
-      /* 135deg,
-          rgb(36, 53, 121) 0%,
-          rgb(33, 138, 174) 69%,
-          rgb(32, 132, 172) 89% */
-  ) !important;
-}
-.ui.menu .active.item {
-  background: rgba(0, 0, 0, 0.05);
-  font-weight: 900;
-}
-.ui.main.container,
-.main.segment {
-  margin-top: 1em;
-}
-
-.ui.center.aligned.segment.attendance-preview {
-  background-color: #e0d7d7;
-}
-
-.masthead .ui.menu .ui.button,
-.ui.menu a.ui.inverted.button {
-  margin-left: 0.5em;
-}
-
-.ui.menu .item > img:not(.ui) {
-  margin-right: 1.5em !important;
-}
-
-.ui.menu:not(.vertical) .item > .button {
-  margin-left: 0.5em;
-}
-.ui.menu {
-  border: 0.1em solid black;
-  border-radius: 0.8em;
-}
-
 /*chat comments*/
-
 .ui.comments .comment .comments {
   padding-bottom: 0 !important;
   padding-left: 2em !important;
@@ -121,11 +31,9 @@ h4.ui.header {
   border-radius: 5px;
   padding-top: 30px;
   text-align: center;
-  /* min-height: 236px; */
 }
-
 .dropzone--isActive {
-  border: dashed 3px blue;
+  border: dashed 3px rgb(6, 6, 80);
 }
 /* menu responsive */
 .ui.menu .active.item {
@@ -138,37 +46,26 @@ h4.ui.header {
   box-shadow: 0 0 0 1px #468ace inset !important;
   color: #3a74ad !important;
 }
-/* @media (max-width: 1000px) {
-  .ui.small.image,
-  .ui.small.images .image,
-  .ui.small.images img,
-  .ui.small.images svg {
-    visibility: hidden;
-  }
-} */
+
+/* Cards */
 .ui.cards {
   text-align: center;
 }
 .ui.segment:first-child {
   margin-top: 0.5em;
 }
-/* contact form */
 
+/* contact form */
 #contactForm {
-  width: 100%; /* Full width */
-  padding: 19px; /* Some padding */
-  border: 1px solid black; /* Gray border */
-  border-radius: 8px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  width: 100%;
+  padding: 19px;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 form textarea {
   margin: 1em 0.1em;
 }
-
-/* .img-preview {
-  height: 210px !important;
-  width: 210px !important;
-} */
 input[type="text"],
 input[type="email"],
 select,
@@ -195,6 +92,7 @@ textarea {
   display: block;
   width: 100%;
 }
+
 /* images jobs segments */
 @media only screen and (max-width: 767px) {
   .ui.items:not(.unstackable) > .item > .image,
@@ -203,6 +101,7 @@ textarea {
     max-height: 80px !important;
   }
 }
+
 /* error field */
 .ui.basic.red.label {
   margin-top: 1em;
@@ -211,12 +110,13 @@ textarea {
   margin: 0.2em;
   padding: 0.1em 0.1em 0.1em 0.5em;
 }
-/* interested icons on work list items */
 
+/* interested icons on work list items */
 .ui.horizontal.list > .item:first-child,
 .ui.horizontal.list > .item:last-child {
   text-align: center;
 }
+
 /* dropzone */
 .dropzone {
   margin: 0em 4em;
@@ -237,11 +137,11 @@ textarea {
 .ui.modal > .content > .description {
   margin: 1em;
 }
-/* hiden cancel button in forgot password confirmation window */
+
+/* hide cancel button in forgot password confirmation window */
 .actions :first-child {
   visibility: hidden;
 }
 .ui.basic.red.label {
   margin: 0.5em 0em;
 }
-

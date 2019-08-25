@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
-
+// functions that run on firebase cloud
 const newActivity = (type, job, id) => {
   return {
     type: type,

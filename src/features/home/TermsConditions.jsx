@@ -1,20 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  Responsive,
-  Card,
-  Segment
-} from "semantic-ui-react";
-import Footer from "../nav/Footer";
+import { Container, Segment } from "semantic-ui-react";
 import ScrollUpButton from "react-scroll-up-button";
-import NavBar from "../nav/NavBar/NavBar";
 
 const TermsConditions = () => (
   <Container>

@@ -49,7 +49,7 @@ class WorkOrderChat extends Component {
               <Icon name="wechat" size="large" color="blue" />
             </Grid.Column>
             <Grid.Column width={11}>
-              This is a public chat, all messages are vissibly for registred
+              This is a public chat, all messages are visible for registered
               users
             </Grid.Column>
             <Grid.Column width={4}>

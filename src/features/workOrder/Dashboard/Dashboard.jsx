@@ -5,10 +5,7 @@ import {
   Grid,
   Loader,
   Segment,
-  Image,
-  Input,
-  Item,
-  Header
+  Image
 } from "semantic-ui-react";
 import WorkList from "../WorkList/WorkList";
 import { getWorkOrdersForDashboard } from "../../workOrder/WorkList/workOrderActions";

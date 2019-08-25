@@ -1,17 +1,8 @@
 import React, { Fragment } from "react";
-import {
-  Segment,
-  Item,
-  List,
-  Image,
-  Label,
-  Header,
-  Icon
-} from "semantic-ui-react";
+import { Segment, Item, List, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const WorkOrderDetailedSidebar = ({ InterestedInJobs, job }) => {
-  const isHire = false;
   return (
     <Fragment>
       <Segment

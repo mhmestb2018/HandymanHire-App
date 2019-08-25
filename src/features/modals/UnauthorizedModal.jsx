@@ -19,8 +19,8 @@ class UnauthorizedModal extends Component {
     return (
       <Modal size="mini" open={true} onClose={this.handlecloseModal}>
         <Modal.Header>
-          You need to be signed in to do that. Please login or register to see
-          this page. To continiue as a guest click cancel.
+          You need to be signed in to do that, Please login or register to see
+          this page. To continue as a guest click cancel.
         </Modal.Header>
 
         <Modal.Content>

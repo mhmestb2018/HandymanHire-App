@@ -16,7 +16,12 @@ const UserPhotos = ({
   }
   return (
     <Fragment>
-      <Header dividing content="Your's photos" size='large' textAlign="center" />
+      <Header
+        dividing
+        content="Your's photos"
+        size="large"
+        textAlign="center"
+      />
       <Card.Group itemsPerRow={6} stackable>
         <Card>
           <Card.Content>
@@ -32,7 +37,7 @@ const UserPhotos = ({
               <Card.Content>
                 <Image src={photo.url} />
               </Card.Content>
-              {/* <Card.Content extra> */}
+
               <div className="ui two buttons">
                 <Button
                   loading={loading}
@@ -49,7 +54,6 @@ const UserPhotos = ({
                   color="red"
                 />
               </div>
-              {/* </Card.Content> */}
             </Card>
           ))}
       </Card.Group>

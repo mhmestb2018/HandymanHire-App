@@ -89,7 +89,6 @@ class WorkOrderForm extends Component {
     const { firestore, match } = this.props;
     await firestore.unsetListener(`workOrders/${match.params.id}`);
   }
-  // when provided 'if (this.props.initialValues.id)' did not work
   // jobs is pointing to workOrders page
   onFormSubmit = async values => {
     values.addressLatLng = this.state.addressLatLng;
@@ -133,15 +132,9 @@ class WorkOrderForm extends Component {
         this.props.change("address", selectedAddress);
       });
   };
-  // handleInputChange = ({ target: { name, value } }) => {
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
+
   render() {
     const {
-      history,
-      // initialValues,
       invalid,
       submitting,
       pristine,
@@ -149,7 +142,7 @@ class WorkOrderForm extends Component {
       cancelToggle,
       loading
     } = this.props;
-    // const { title, date, city, address, orderedBy } = this.state;
+
     return (
       <Grid>
         <Grid.Column width={16}>
