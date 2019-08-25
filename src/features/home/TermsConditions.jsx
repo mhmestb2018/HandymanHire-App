@@ -30,7 +30,7 @@ const TermsConditions = () => (
         of HandymanHire's Website, located at https://handymanhire.ie.
       </p>
       <p>
-        HandymanHire.ie is a website and job advertisement platform.
+        HandymanHire.ie is a website, advertisement and connection platform.
         HandymanHire.ie’s service is free for handyman, and homeowners. Our
         service is designed to facilitate the connection between homeowners and
         handyman and encourage them to find each other through a modern medium.

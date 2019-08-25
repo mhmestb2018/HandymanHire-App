@@ -5,11 +5,7 @@ import {
   Button,
   Image,
   Dropdown,
-  Icon,
-  Responsive,
-  Sticky,
-  Sidebar,
-  Segment
+  Icon
 } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
@@ -17,12 +13,7 @@ import SignedInMenu from "../Menus/SignedInMenu";
 import { connect } from "react-redux";
 import { openModal } from "../../modals/modalActions";
 import { withFirebase } from "react-redux-firebase";
-import PropTypes from "prop-types";
-const getWidth = () => {
-  const isSSR = typeof window === "undefined";
 
-  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
-};
 const actions = {
   openModal
 };
@@ -42,15 +33,12 @@ class NavBar extends Component {
     this.props.firebase.logout();
     this.props.history.push("/");
   };
-  
 
   render() {
-    const { auth, profile,contextRef } = this.props;
+    const { auth, profile } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
       <Fragment>
-        {/* Menu for desktop */}
-        {/* <Sticky context={contextRef} styleElement={{ zIndex: 1 }}> */}
         <Menu stackable>
           <Container>
             <Image
@@ -76,7 +64,7 @@ class NavBar extends Component {
                     <Dropdown.Item
                       as={Link}
                       to="/members"
-                      text="Members"
+                      text="Followers"
                       icon="users"
                     />
                   )}
@@ -124,10 +112,8 @@ class NavBar extends Component {
                 register={this.handleRegister}
               />
             )}
-           
           </Container>
         </Menu>
-        {/* </Sticky> */}
       </Fragment>
     );
   }

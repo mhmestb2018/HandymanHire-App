@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   Button,
   Container,
-  Divider,
   Grid,
   Header,
   Icon,
@@ -15,9 +14,8 @@ import {
 import Footer from "../nav/Footer";
 import ScrollUpButton from "react-scroll-up-button";
 import NavBar from "../nav/NavBar/NavBar";
-import Sitemap from "./Sitemap";
 
-const HomepageHeading = ({ mobile, history }) => (
+const HomepageHeading = () => (
   <Segment>
     <Grid stackable>
       <Grid.Column width={8}>
@@ -52,21 +50,20 @@ const HomePage = () => (
         <Grid.Row>
           <Grid.Column width={8}>
             <Header as="h2" style={{ fontSize: "2em" }}>
-              We connect homeowner and handyman
+              We connect Homeowner and Handyman
             </Header>
             <p style={{ fontSize: "1.33em" }}>
-              We are providing simple advertisement platform for homeowners and
-              contractors in Ireland. Getting a handyman to help out around the
-              home has never been easier. Our apps connect handyman with
-              customers who can then find the right professional.
+              We are providing simple and free connection platform for
+              homeowners and home professionals in Ireland. Getting someone to
+              help out around the home has never been easier. if you are
+              homeowner our app helps you to find qualified handyman or get
+              specialized advise. If you are handyman you can find job or help
+              by sharing your knowledge and skills with others.
             </p>
-            <Button inverted color="blue" floated="right">
-              Read More
-            </Button>
           </Grid.Column>
 
           <Grid.Column floated="right" width={8}>
-            <Image bordered rounded size="big" src="/assets/Ireland.jpg" />
+            <Image bordered rounded size="large" src="/assets/Ireland.jpg" />
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -79,9 +76,9 @@ const HomePage = () => (
             <Card.Meta>Homeowner</Card.Meta>
             <Card.Description>
               {" "}
-              You can easily create your profile, post a job and wait for a response from home
-              professionals. You can chat and decide who is the right for your
-              job.{" "}
+              You can easily create your profile, post a job and wait for a
+              response from home professionals. You can chat and decide who is
+              the best qualified for your job.{" "}
             </Card.Description>
           </Card.Content>
         </Card>
@@ -108,4 +105,4 @@ const HomePage = () => (
     <Footer />
   </Container>
 );
-export default HomePage;
+export default withRouter(HomePage);

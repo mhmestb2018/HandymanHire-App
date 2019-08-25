@@ -1,10 +1,17 @@
 import React, { Fragment } from "react";
-import { Segment, Image, Item, Header, Button, Popup } from "semantic-ui-react";
+import {
+  Segment,
+  Image,
+  Item,
+  Header,
+  Button,
+  Popup,
+  Label
+} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
 const imageStyle = {
-  // filter: "brightness(80%)"
   background: "white",
   height: "18em",
   width: "20em"
@@ -16,8 +23,6 @@ const imageTextStyle = {
   left: "5%",
   width: "100%",
   height: "auto"
-
-  // color: 'white'
 };
 const WorkOrderDetailedHeader = ({
   job,
@@ -25,7 +30,9 @@ const WorkOrderDetailedHeader = ({
   isInterested,
   isHire,
   jobProposal,
-  cancelJobProposal
+  cancelJobProposal,
+  authenticated,
+  openModal
 }) => {
   return (
     <Segment.Group style={{ background: "white" }}>
@@ -41,11 +48,7 @@ const WorkOrderDetailedHeader = ({
           <Item.Group>
             <Item>
               <Item.Content>
-                <Header
-                  size="huge"
-                  content={job.title}
-                  //  style={{ color: 'Blue' }}
-                />
+                <Header size="huge" content={job.title} />
                 <p>
                   Posted on{" "}
                   {job.created && format(job.date.toDate(), "EEEE do LLLL")}
@@ -58,20 +61,27 @@ const WorkOrderDetailedHeader = ({
                 </p>
                 <Item.Extra>job id : {job.id}</Item.Extra>
               </Item.Content>
-             
             </Item>
           </Item.Group>
         </Segment>
       </Segment>
 
       <Segment attached="bottom" clearing>
+        {job.cancelled && (
+          <Label
+            size="large"
+            color="red"
+            content="This job has been cancelled"
+          />
+        )}
         {!isHire && (
           <Fragment>
-            {isInterested ? (
+            {isInterested && !job.cancelled && (
               <Button onClick={() => cancelJobProposal(job)}>
                 Discard from interested
               </Button>
-            ) : (
+            )}
+            {!isInterested && authenticated && !job.cancelled && (
               <Popup
                 content="By clicking  this button you are informing homeowner that you are qualified for this job, and you want him/her to contact you."
                 trigger={
@@ -84,6 +94,15 @@ const WorkOrderDetailedHeader = ({
                   </Button>
                 }
               />
+            )}
+            {!authenticated && !job.cancelled && (
+              <Button
+                loading={loading}
+                onClick={() => openModal("UnauthorizedModal")}
+                color="green"
+              >
+                Add to interested
+              </Button>
             )}
           </Fragment>
         )}

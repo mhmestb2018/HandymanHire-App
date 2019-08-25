@@ -14,7 +14,6 @@ export const createNewJob = (user, photoURL, job) => {
     created: new Date(),
     InterestedInJobs: {
       [user.uid]: {
-        // offerDescription: user.offerDescription,
         isInterested: true,
         joinDate: new Date(),
         photoURL: photoURL || "/assets/user.png",
@@ -23,7 +22,7 @@ export const createNewJob = (user, photoURL, job) => {
     }
   };
 };
-
+// helper to create data tree for chat
 export const createDataTree = dataset => {
   let hashTable = Object.create(null);
   dataset.forEach(a => (hashTable[a.id] = { ...a, childNodes: [] }));

@@ -45,11 +45,11 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
       </Header>
       <Form onSubmit={handleSubmit(updateProfile)}>
         <Form.Group grouped>
-          {/* <label>: </label> */}
-          {/* <Field name="status" component={RadioInput} type="radio" value="single" label="Handyman" /> */}
           <Card>
             <p className="radio">
-              For the what purpose you are going to use this service mainly :
+              You can use the same profile for posting jobs as homowner and
+              makes offers as a handyman to others jobs. For what purpose you
+              are going to use this service mainly :
             </p>
             <Field
               className="radio"
@@ -57,7 +57,7 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
               component={RadioInput}
               type="radio"
               value="Handyman"
-              label=" Offer handyman service"
+              label=" Makes offers to jobs"
             />
             <Field
               className="radio"

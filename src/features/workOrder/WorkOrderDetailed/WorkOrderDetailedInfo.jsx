@@ -34,21 +34,20 @@ const WorkOrderDetailedInfo = ({ job }) => {
       </Segment>
       <Segment attached>
         <Grid stackable>
-          <Grid.Column width={1} >
+          <Grid.Column width={1}>
             <Icon name="marker" size="large" color="blue" />
           </Grid.Column>
           <Grid.Column width={11}>
             {job.city}
-            <br />e
+            <br />
             {job.address}
           </Grid.Column>
           <Grid.Column width={4}>
             <Button
               onClick={() => showMapToogle(!isMapOpen)}
               color="blue"
-           
               content={isMapOpen ? "Hide map" : "Show Map"}
-              attached='bottom'
+              attached="bottom"
             />
           </Grid.Column>
         </Grid>

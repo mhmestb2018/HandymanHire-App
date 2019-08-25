@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  Form,
-  Input,
-  TextArea,
-  Button,
-  Container,
-  Image,
-  Grid,
-  Segment,
-  Message,
-  Header
-} from "semantic-ui-react";
-import { Link } from "react-router-dom";
-// import contactFormSubmit from "../../common/utill/contactForm";
+import { Image, Grid, Segment, Header } from "semantic-ui-react";
 
 const ContactForm = () => {
   return (
@@ -42,7 +29,9 @@ const ContactForm = () => {
               placeholder="Email address"
             />
             <textarea name="message" type="text" placeholder="Message" />
-            <button type="submit" class='buttonForm'>Submit</button>
+            <button type="submit" className="buttonForm">
+              Submit
+            </button>
           </form>
         </Grid.Column>
       </Grid>

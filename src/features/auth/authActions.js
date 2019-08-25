@@ -12,7 +12,7 @@ export const login = creds => {
       dispatch(closeModal());
     } catch (error) {
       throw new SubmissionError({
-        _error: "login failed"
+        _error: "Login failed"
       });
     }
   };
@@ -34,8 +34,8 @@ export const registerUser = user => async (
     });
     let newUser = {
       displayName: user.displayName,
-      createdAt: firestore.FieldValue.serverTimestamp()
-      // photoURL: user.profile.avatarUrl
+      createdAt: firestore.FieldValue.serverTimestamp(),
+      photoURL: user.profile.avatarUrl
     };
     await firestore.set(`users/${createdUser.user.uid}`, { ...newUser });
     dispatch(closeModal());

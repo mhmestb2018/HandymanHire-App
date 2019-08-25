@@ -35,7 +35,7 @@ const MembersDashboard = ({ followings, followers }) => (
   <Grid stackable>
     <Grid.Column width={16}>
       <Segment>
-        <Header dividing content="Following me" />
+        <Header dividing content="Users following me" />
         <Card.Content>
           <Card.Group itemsPerRow={8} stackable>
             {followers ? (
@@ -53,7 +53,7 @@ const MembersDashboard = ({ followings, followers }) => (
         </Card.Content>
       </Segment>
       <Segment>
-        <Header dividing content="I follow" />
+        <Header dividing content="Users I follow" />
         <Card.Content >
           <Card.Group itemsPerRow={8} stackable>
             {followings ? (

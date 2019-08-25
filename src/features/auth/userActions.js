@@ -6,7 +6,7 @@ import {
   asyncActionError
 } from "../async/asyncActions";
 import firebase from "../../app/config/firebase";
-import { FETCH_JOBS } from "../workOrder/WorkList/WorkOrderConstants";
+import { FETCH_JOBS, FETCH_USER_JOBS } from "../workOrder/WorkList/WorkOrderConstants";
 export const updateProfile = user => async (
   dispatch,
   getState,
@@ -160,7 +160,7 @@ export const jobProposal = job => async (
       jobDate: job.date,
       handyman: true
     });
-    toastr.success("You are interested in that job enquiry");
+    toastr.success("You are added succesfully, to interested in that job");
   } catch (error) {
     console.log(error);
     toastr.error("Problem with signin up ");
@@ -209,7 +209,7 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
         .where("jobDate", ">=", today)
         .orderBy("jobDate");
       break;
-    case 3: //only my jobs
+    case 3: //only authorized user jobs
       query = workOrdersRef
         .where("userUid", "==", userUid)
         .where("handyman", "==", false)
@@ -232,7 +232,7 @@ export const getUserWorkOrders = (userUid, activeTab) => async (
         .get();
       workOrders.push({ ...wo.data(), id: wo.id });
     }
-    dispatch({ type: FETCH_JOBS, payload: { workOrders } });
+    dispatch({ type: FETCH_USER_JOBS, payload: { workOrders } });
 
     dispatch(asyncActionFinish());
   } catch (error) {

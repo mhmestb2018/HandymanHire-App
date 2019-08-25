@@ -1,22 +1,13 @@
 import React from "react";
-import {
-  Grid,
-  Header,
-  Menu,
-  Segment,
-  Card,
-  Image,
-  Tab
-} from "semantic-ui-react";
+import { Grid, Header, Segment, Card, Image, Tab } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 
-// Tabs for different events on user profile
 const panes = [
-  { menuItem: "All interested jobs", pane: { key: "allInterestedJobs" } },
+  { menuItem: "All active jobs", pane: { key: "allInterestedJobs" } },
   { menuItem: "Past interested jobs", pane: { key: "pastInterestedJobs" } },
   { menuItem: "Recent interested jobs", pane: { key: "recentInterestedJobs" } },
-  { menuItem: "My posted jobs", pane: { key: "myPostedJobs" } }
+  { menuItem: "Posted jobs", pane: { key: "myPostedJobs" } }
 ];
 
 const UserProfileWorkOrders = ({
@@ -26,7 +17,7 @@ const UserProfileWorkOrders = ({
 }) => (
   <Grid.Column width={12} stackable="true">
     <Segment attached loading={workOrdersLoading}>
-      <Header icon="calendar alternate outline" content="My jobs activity" />
+      <Header icon="calendar alternate outline" content="Jobs activity" />
       <Tab
         onTabChange={(e, data) => changeTab(e, data)}
         panes={panes}
@@ -48,7 +39,7 @@ const UserProfileWorkOrders = ({
                   <div>
                     {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}
                   </div>
-                  <div>{format(job.date && job.date.toDate(), "h:mm a")}</div>
+                  {/* <div>{format(job.date && job.date.toDate(), "h:mm a")}</div> */}
                 </Card.Meta>
               </Card.Content>
             </Card>

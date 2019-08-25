@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Advertisement } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { firestoreConnect, isEmpty } from "react-redux-firebase";
 import { compose } from "redux";
@@ -34,7 +34,7 @@ const mapState = (state, ownProps) => {
     auth: state.firebase.auth,
     photos: state.firestore.ordered.photos,
     requesting: state.firestore.status.requesting,
-    workOrders: state.workOrders,
+    workOrders: state.workOrders.userWorkOrders,
     workOrdersLoading: state.async.loading,
     following: state.firestore.ordered.following
   };
@@ -63,8 +63,7 @@ class UserProfilePage extends Component {
       workOrdersLoading,
       followMember,
       following,
-      unfollowMember,
-      contextRef
+      unfollowMember
     } = this.props;
     const isCurrentUser = auth.uid === match.params.id;
     const loading = Object.values(requesting).some(a => a === true);
@@ -83,7 +82,7 @@ class UserProfilePage extends Component {
           unfollowMember={unfollowMember}
         />
 
-        <UserProfileProjects photos={photos}/>
+        <UserProfileProjects photos={photos} />
         <UserProfileWorkOrders
           workOrders={workOrders}
           workOrdersLoading={workOrdersLoading}

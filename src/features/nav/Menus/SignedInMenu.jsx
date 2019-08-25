@@ -20,7 +20,7 @@ const SignedInMenu = ({ signOut, profile, auth }) => {
             as={Link}
             to={`/createJob`}
           />
-          <Dropdown.Item as={Link} to="/members" text="Members" icon="users" />
+          <Dropdown.Item as={Link} to="/members" text="Followers" icon="users" />
           {/* <Dropdown.Item text="My Proposals" icon="users" /> */}
           <Dropdown.Item
             as={Link}

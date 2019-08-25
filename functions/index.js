@@ -18,10 +18,7 @@ exports.createActivity = functions.firestore
   .document("workOrders/{jobId}")
   .onCreate(job => {
     let newJob = job.data();
-    console.log(newJob);
     const activity = newActivity("newJob", newJob, job.id);
-    console.log(activity);
-
     return admin
       .firestore()
       .collection("activity")
@@ -61,25 +58,25 @@ exports.cancelActivity = functions.firestore
       });
   });
 
-  exports.followMember = functions.firestore
+exports.followMember = functions.firestore
   .document("users/{followerUid}/following/{followingUid}")
   .onCreate((job, context) => {
-    const followerUid = context.params.followerUid
-    const followingUid = context.params.followingUid
+    const followerUid = context.params.followerUid;
+    const followingUid = context.params.followingUid;
 
     const followerDoc = admin
       .firestore()
       .collection("users")
-      .doc(followerUid)
+      .doc(followerUid);
 
     return followerDoc.get().then(doc => {
-      let userData = doc.data()
-      const { displayName, city, photoURL } = userData
+      let userData = doc.data();
+      const { displayName, city, photoURL } = userData;
       const follower = {
         displayName,
         photoURL: photoURL || "/assets/user.png",
         city: city || "Unknown city"
-      }
+      };
 
       return admin
         .firestore()
@@ -87,9 +84,9 @@ exports.cancelActivity = functions.firestore
         .doc(followingUid)
         .collection("followers")
         .doc(followerUid)
-        .set(follower)
-    })
-  })
+        .set(follower);
+    });
+  });
 
 exports.unfollowMember = functions.firestore
   .document("users/{followerUid}/following/{followingUid}")
@@ -103,9 +100,4 @@ exports.unfollowMember = functions.firestore
       .delete()
       .then(() => console.log("doc deleted"))
       .catch(err => console.log(err))
-  )
-
-
-
-
- 
+  );

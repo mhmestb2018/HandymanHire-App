@@ -24,36 +24,20 @@ const WorkOrderDetailedSidebar = ({ InterestedInJobs, job }) => {
       >
         Interested in the job
       </Segment>
-      <Segment >
-        <List relaxed divided>
-          {/* {InterestedInJobs && (
-            <Segment>
-              <Icon name="users" size="big" textAlign="center" />
-              <p>No one interested yet</p>
-            </Segment>
-          )} */}
+      <Segment>
+        <List animated verticalAlign="middle">
           {InterestedInJobs &&
             InterestedInJobs.map(interested => (
-              <Item key={interested.id} style={{ position: "relative" }}>
-                {/* <Label
-                  style={{ position: "absolute" }}
-                  color="orange"
-                  ribbon="right"
-                >
-                  <Header
-                    as="h5"
-                    content="Homeowner"
-                    style={{ color: "white" }}
-                  /> */}
-                {/* <Icon name="star outline" />
-                  <Icon name="star outline" />
-                  <Icon name="star outline" /> */}
-                {/* </Label> */}
+              <List.Item key={interested.id} style={{ position: "relative" }}>
                 {interested.handyman && (
                   <Fragment>
-                    <Image size="tiny" src={interested.photoURL} />
-
-                    <Item.Content >
+                    <Image
+                      avatar
+                      size="tiny"
+                      src={interested.photoURL}
+                      style={{ width: "5em" }}
+                    />
+                    <Item.Content>
                       <Item.Header as="h3">
                         <Link to={`/profile/${interested.id}`}>
                           {interested.displayName}
@@ -62,7 +46,7 @@ const WorkOrderDetailedSidebar = ({ InterestedInJobs, job }) => {
                     </Item.Content>
                   </Fragment>
                 )}
-              </Item>
+              </List.Item>
             ))}
         </List>
       </Segment>

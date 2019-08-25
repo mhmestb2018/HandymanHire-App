@@ -1,39 +1,28 @@
-import { createStore, applyMiddleware } from "redux"
-import reduxThunk from "redux-thunk"
-import { reactReduxFirebase, getFirebase } from "react-redux-firebase"
-import { reduxFirestore, getFirestore } from "redux-firestore"
-import { composeWithDevTools } from "redux-devtools-extension"
-import firebase from "../config/firebase"
-import rootReducer from "../../app/reducers/rootReducer"
+import { createStore, applyMiddleware } from "redux";
+import reduxThunk from "redux-thunk";
+import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
+import { reduxFirestore, getFirestore } from "redux-firestore";
+import { composeWithDevTools } from "redux-devtools-extension";
+import firebase from "../config/firebase";
+import rootReducer from "../../app/reducers/rootReducer";
 
 const rrfConfig = {
   userProfile: "users",
   attachAuthIsReady: true,
   useFirestoreForProfile: true,
   updateProfileOnLogin: false
-
-}
+};
 export const configureStore = () => {
   const middlewares = [
     reduxThunk.withExtraArgument({ getFirebase, getFirestore })
-  ]
-  // const middlewareEnhancer = applyMiddleware(...middlewares)
-  // const storeEnhancers = [middlewareEnhancer]
+  ];
+
   const composedEnhancer = composeWithDevTools(
-    // ...storeEnhancers,
     applyMiddleware(...middlewares),
     reactReduxFirebase(firebase, rrfConfig),
     reduxFirestore(firebase)
   );
-  const store = createStore(rootReducer, composedEnhancer)
-  // // Enable hot module replacement
-  // if (process.env.NODE_ENV !== "production") {
-  //   if (module.hot) {
-  //     module.hot.accept("../app/reducers", () => {
-  //       const newRootReducer = require("../../app/reducers").default
-  //       store.replaceReducer(newRootReducer)
-  //     })
-  //   }
-  // }
-  return store
-}
+  const store = createStore(rootReducer, composedEnhancer);
+
+  return store;
+};

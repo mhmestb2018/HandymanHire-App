@@ -17,12 +17,14 @@ const UserProfileDescription = ({ profile }) => {
               I am a : <strong>{profile.occupation || "tbn"}</strong>
             </p>
             <p>
-              Orginally from <strong>{profile.origin|| "tbn"} </strong>
+              Orginally from <strong>{profile.origin || "tbn"} </strong>
             </p>
             <p>
               Member Since : <strong>{createdAt}</strong>
             </p>
-            <p>{profile.description}</p>
+            <p>
+              About me : <strong>{profile.about}</strong>
+            </p>
           </Grid.Column>
           <Grid.Column width={6}>
             <Header icon="unordered list" content="Interests" />

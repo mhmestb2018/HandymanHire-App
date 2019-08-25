@@ -10,7 +10,9 @@ class LoginModal extends Component {
   render() {
     return (
       <Modal size="mini" open={true} onClose={this.props.closeModal}>
-        <Modal.Header>Login to Hire Handyman for your job</Modal.Header>
+        <Modal.Header>
+          Register or login to connect with homowners or home professionals.
+        </Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <LoginForm />

@@ -16,6 +16,7 @@ export const createJob = job => {
     const photoURL = getState().firebase.profile.photoURL;
     const newJob = createNewJob(user, photoURL, job);
     try {
+      dispatch(asyncActionStart());
       let createdJob = await firestore.add("workOrders", newJob);
       await firestore.set(`job_interested/${createdJob.id}_${user.uid}`, {
         jobId: createdJob.id,
@@ -23,11 +24,13 @@ export const createJob = job => {
         jobDate: job.date,
         handyman: false
       });
-      toastr.success("Success!", "Your job proposal has been created");
+      toastr.success("Success!", "Your job has been posted");
+      dispatch(asyncActionFinish);
       return createdJob;
     } catch (error) {
       console.log(error);
-      toastr.error("Oops", "Something went wrong ");
+      toastr.error("Oops", "Something went wrong");
+      dispatch(asyncActionError);
     }
   };
 };
@@ -74,54 +77,6 @@ export const updateJob = job => {
   };
 };
 
-// export const updateJob =job => async (dispatch, getState) => {
-//   const firestore = firebase.firestore()
-//   if (job.date !== getState().firestore.ordered.events[0].date) {
-//     event.date = moment(event.date).toDate()
-//   }
-
-//   try {
-//     dispatch(asyncActionStart())
-//     let eventDocRef = firestore.collection("events").doc(event.id)
-//     let dateEqual = compareAsc(
-//       getState().firestore.ordered.events[0].date,
-//       event.date
-//     )
-//     if (dateEqual !== 0) {
-//       let batch = firestore.batch()
-//       await batch.update(eventDocRef, event)
-
-//       let eventAttendeeRef = firestore.collection("event_attendees")
-//       let eventAttendeeQuery = await eventAttendeeRef.where(
-//         "eventId",
-//         "==",
-//         event.id
-//       )
-//       let eventAttendeeQuerySnap = await eventAttendeeQuery.get()
-
-//       for (let doc in eventAttendeeQuerySnap.docs) {
-//         let eventAttendeeDocRef = await firestore
-//           .collection("event_attendees")
-//           .doc(eventAttendeeQuerySnap.docs[doc].id)
-
-//         await batch.update(eventAttendeeDocRef, {
-//           eventDate: event.date
-//         })
-//       }
-
-//       await batch.commit()
-//     } else {
-//       await eventDocRef.update(event)
-//     }
-
-//     dispatch(asyncActionFinish())
-//     toastr.success("Success!", "Event has been updated")
-//   } catch (err) {
-//     console.log(err)
-//     dispatch(asyncActionError())
-//     toastr.error("Oops!", "Something went wrong")
-//   }
-// }
 export const cancelToggle = (cancelled, jobId) => async (
   dispatch,
   getState,
@@ -148,7 +103,6 @@ export const getWorkOrdersForDashboard = lastWorkOrder => async (
   getState
 ) => {
   let today = new Date();
-  const cat = "painting";
   const firestore = firebase.firestore();
   const workOrdersRef = firestore.collection("workOrders");
   try {

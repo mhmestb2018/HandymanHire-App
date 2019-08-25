@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Image, Segment, Grid } from "semantic-ui-react";
+import { List, Image, Popup } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 class WorkListProposals extends Component {
@@ -8,21 +8,21 @@ class WorkListProposals extends Component {
     return (
       <List.Item>
         {interested.handyman && (
-          <Grid stackable>
-            <Grid.Column>
-              <Segment>
-                <Image
-                  as={Link}
-                  to={`/profile/${interested.id}`}
-                  size="mini"
-                  circular
-                  src={interested.photoURL}
-                  centered
-                />
-                <p>{interested.displayName}</p>
-              </Segment>
-            </Grid.Column>
-          </Grid>
+          <Popup
+            trigger={
+              <Image
+                as={Link}
+                to={`/profile/${interested.id}`}
+                size="mini"
+                circular
+                src={interested.photoURL}
+                centered
+              />
+            }
+            basic
+          >
+            {interested.displayName}
+          </Popup>
         )}
       </List.Item>
     );

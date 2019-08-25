@@ -199,7 +199,7 @@ class WorkOrderForm extends Component {
                 name="date"
                 component={DateInput}
                 dateFormat="dd LLL yyyy h:mm a"
-                placeholder="Date that job request will be expired"
+                placeholder="Date that job request will expired"
               />
 
               <Button
@@ -210,14 +210,15 @@ class WorkOrderForm extends Component {
               >
                 Submit
               </Button>
-
-              <Button
-                type="button"
-                color={job.cancelled ? "blue" : "red"}
-                content={job.cancelled ? "Reactive Enquiry" : "Cancel Enquiry"}
-                onClick={() => cancelToggle(!job.cancelled, job.id)}
-                floated="right"
-              />
+              {job.id && (
+                <Button
+                  type="button"
+                  color={job.cancelled ? "blue" : "red"}
+                  content={job.cancelled ? "Reactive job" : "Cancel job"}
+                  onClick={() => cancelToggle(!job.cancelled, job.id)}
+                  floated="right"
+                />
+              )}
             </Form>
           </Segment>
         </Grid.Column>

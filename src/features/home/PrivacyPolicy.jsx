@@ -234,7 +234,6 @@ const PrivacyPolicy = () => (
         If you have any questions about this Privacy Policy, please contact us:
       </p>
       <ul>
-        <li>By email: A_lesica@outlook.com</li>
         <li>
           By visiting this page on our website: https://handymanhire/contact.ie
         </li>

@@ -1,12 +1,5 @@
-import React from "react";
-import {
-  Form,
-  Segment,
-  Button,
-  Label,
-  Divider,
-  Checkbox
-} from "semantic-ui-react";
+import React, { Fragment } from "react";
+import { Form, Segment, Button, Label, Divider, Item } from "semantic-ui-react";
 import { Field, reduxForm } from "redux-form";
 import TextInput from "../../../app/common/form/TextInput";
 import { login, socialLogin } from "../authActions";
@@ -18,36 +11,44 @@ const actions = {
   socialLogin
 };
 
-const LoginForm = ({ login, handleSubmit, error, socialLogin }) => {
-
+const LoginForm = ({ login, handleSubmit, error, socialLogin, submitting }) => {
   return (
-    <Form size="large" onSubmit={handleSubmit(login)}>
-      <Segment>
-        <Field
-          name="email"
-          component={TextInput}
-          type="text"
-          placeholder="Email Address"
-        />
-        <Field
-          name="password"
-          component={TextInput}
-          type="password"
-          placeholder="password"
-        />
-        {error && (
-          <Label basic color="red">
-            {error}
-          </Label>
-        )}
-        <Button fluid size="large" color="teal">
-          Login
-        </Button>
-        <Divider horizontal>Or</Divider>
-        <SocialLogin socialLogin={socialLogin} />
-      </Segment>
-  
-    </Form>
+    <Fragment>
+      <Form size="large" onSubmit={handleSubmit(login)}>
+        <Segment>
+          <Field
+            name="email"
+            component={TextInput}
+            type="text"
+            placeholder="Email Address"
+          />
+          <Field
+            name="password"
+            component={TextInput}
+            type="password"
+            placeholder="password"
+          />
+          {error && (
+            <Label basic color="red">
+              {error}
+            </Label>
+          )}
+          <Button loading={submitting} fluid size="large" color="teal">
+            Login
+          </Button>
+          <Divider horizontal>Or</Divider>
+          <SocialLogin socialLogin={socialLogin} />
+          <Divider />
+          <Item
+            className="forgotPassword"
+            as="a"
+            href="/forgotPassword"
+            content="Forgot Password ?"
+            text="Basic Info"
+          />
+        </Segment>
+      </Form>
+    </Fragment>
   );
 };
 

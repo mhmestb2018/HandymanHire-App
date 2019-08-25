@@ -46,13 +46,11 @@ class WorkListItem extends Component {
                   <Label
                     style={{ margin: "0.6em" }}
                     ribbon="right"
-                    size='large'
+                    size="large"
                     color="red"
                     content="Job cancelled"
                   />
                 )}
-            
-
               </Item.Content>
             </Item>
           </Item.Group>
@@ -70,30 +68,30 @@ class WorkListItem extends Component {
           </div>
         </Segment>
         <Segment clearing>
-        {job.date.toDate() < Date.now() && (
-                  <Label
-                    style={{ margin: "0em" }}
-                    ribbon="right"
-                    color="red"
-                  
-                    size='large'>  Job expired on {format(job.date.toDate(), "EEEE do LLL yyyy")}</Label>
-                
-                )}
+          {job.date.toDate() < Date.now() && (
+            <Label
+              style={{ margin: "0" }}
+              ribbon="right"
+              color="red"
+              size="large"
+            >
+              {" "}
+              Job expired on {format(job.date.toDate(), "EEEE do LLL yyyy")}
+            </Label>
+          )}
           <Header as="h5">
             <Icon name="clock" />
             Posted on {format(job.created.toDate(), "EEEE do LLL yyyy")}{" "}
             {/* {format(job.created.toDate(), "h:mm a")} */}
-            
           </Header>
-       
+
           <Header as="h5">
             <Icon name="marker" /> Job location {job.city}
           </Header>
-          
         </Segment>
 
         <Segment secondary>
-          <Item.Header as="h5">Interested in the job</Item.Header>
+          <Item.Header as="h5">Interested in this job</Item.Header>
           <List horizontal>
             {job.InterestedInJobs &&
               job &&

@@ -221,3 +221,27 @@ textarea {
 .dropzone {
   margin: 0em 4em;
 }
+.ui.large.image,
+.ui.large.images .image,
+.ui.large.images img,
+.ui.large.images svg {
+  width: 550px;
+}
+.ui.input :hover {
+  background-color: green;
+  color: white;
+}
+.ui.input {
+  margin-left: 1em;
+}
+.ui.modal > .content > .description {
+  margin: 1em;
+}
+/* hiden cancel button in forgot password confirmation window */
+.actions :first-child {
+  visibility: hidden;
+}
+.ui.basic.red.label {
+  margin: 0.5em 0em;
+}
+

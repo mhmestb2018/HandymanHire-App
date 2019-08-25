@@ -1,7 +1,15 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Grid, Loader, Segment, Image, Input, Item,Header } from "semantic-ui-react";
+import {
+  Grid,
+  Loader,
+  Segment,
+  Image,
+  Input,
+  Item,
+  Header
+} from "semantic-ui-react";
 import WorkList from "../WorkList/WorkList";
 import { getWorkOrdersForDashboard } from "../../workOrder/WorkList/workOrderActions";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -15,7 +23,7 @@ const query = [
   }
 ];
 const mapStateToProps = ({ workOrders, async, firestore }) => ({
-  workOrders,
+  workOrders:workOrders.workOrders,
   loading: async.loading,
   activities: firestore.ordered.activity
 });
@@ -69,7 +77,6 @@ class Dashboard extends Component {
         <Grid.Column width={10}>
           <div ref={this.contextRef}>
             <Segment>
-             
               <Image
                 src="/assets/categoryImages/Jobs.jpg"
                 alt="sitemap"

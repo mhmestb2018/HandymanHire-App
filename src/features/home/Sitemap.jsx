@@ -1,13 +1,7 @@
 import React, { Component } from "react";
-import { Button, Header, Segment, Image, Card } from "semantic-ui-react";
+import { Header, Segment, Image } from "semantic-ui-react";
 
 class Sitemap extends Component {
-  state = { open: false };
-
-  handleOpen = () => this.setState({ open: true });
-
-  handleClose = () => this.setState({ open: false });
-
   render() {
     return (
       <Segment textAlign="center">

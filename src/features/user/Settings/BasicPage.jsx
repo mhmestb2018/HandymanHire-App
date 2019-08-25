@@ -57,7 +57,6 @@ class Basics extends Component {
             showMonthDropdown={true}
             dropdownMode="select"
             maxDate={addYears(new Date(), -18)}
-            // maxDate={moment().subtract(18,'years')}
           />
           <Field
             name="origin"

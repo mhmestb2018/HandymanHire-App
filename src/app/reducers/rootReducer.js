@@ -1,5 +1,4 @@
 import { reducer as FormReducer } from "redux-form";
-import testReducer from "../../features/testarea/testReducer";
 import workOrderReducer from "../../features/workOrder/WorkList/workOrderReducer";
 import { combineReducers } from "../../../../../../AppData/Local/Microsoft/TypeScript/3.5/node_modules/redux";
 import modalReducer from "../../features/modals/modalReducer";
@@ -12,7 +11,6 @@ const rootReducer = combineReducers({
   firebase:firebaseReducer,
   firestore:firestoreReducer,
   form: FormReducer,
-  test: testReducer,
   workOrders: workOrderReducer,
   modals:modalReducer,
   auth:authReducer,
