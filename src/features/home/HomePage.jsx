@@ -19,7 +19,7 @@ const HomepageHeading = () => (
   <Segment>
     <Grid stackable>
       <Grid.Column width={8}>
-        <Image src="/assets/HomePageImage.png" alt="logo" />
+        <Image src="/assets/HomePageImage.webp" alt="logo" />
       </Grid.Column>
       <Grid.Column width={8} textAlign="center" verticalAlign="middle">
         <Responsive />
@@ -67,7 +67,7 @@ const HomePage = () => (
               bordered
               rounded
               size="large"
-              src="/assets/Ireland.jpg"
+              src="/assets/Ireland.webp"
               alt="Ireland"
             />
           </Grid.Column>

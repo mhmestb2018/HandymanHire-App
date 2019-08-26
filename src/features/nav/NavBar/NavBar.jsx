@@ -46,7 +46,7 @@ class NavBar extends Component {
               exact
               to="/"
               size="small"
-              src="assets/logoHHTools.png"
+              src="assets/logoHHTools.webp"
               alt="HH"
             />
 

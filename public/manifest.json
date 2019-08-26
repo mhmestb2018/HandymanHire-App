@@ -1,7 +1,7 @@
 {
-  "short_name": "contractorhire",
-  "name": "contractorhire App",
-  "description": "This site utilizes “Progressive Web App” technology. When you add this site to your home screen you can use it as native app.",
+  "short_name": "HH",
+  "name": "HandymanHire",
+  "description": "online service that matches homowners with local professionals in Ireland",
   "icons": [
     {
       "src": "favicon.ico",
