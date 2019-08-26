@@ -46,7 +46,7 @@ class NavBar extends Component {
               exact
               to="/"
               size="small"
-              src="assets/logoHHTools.webp"
+              src="https://firebasestorage.googleapis.com/v0/b/handymanhire-fccd5.appspot.com/o/gsHKvFPUOFd22WKdqhwwTfoLe9M2%2Fweb_images%2FlogoHHTools.webp?alt=media&token=c3ab4f14-42c2-4e62-8687-2d32e895a60d"
               alt="HH"
             />
 

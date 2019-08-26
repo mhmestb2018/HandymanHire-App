@@ -12,7 +12,12 @@ import {
 const Footer = () => (
   <Segment textAlign="center">
     <Container textAlign="center">
-      <Image centered size="tiny" src="favicon192.png" alt="HH" />
+      <Image
+        centered
+        size="tiny"
+        src="https://firebasestorage.googleapis.com/v0/b/handymanhire-fccd5.appspot.com/o/gsHKvFPUOFd22WKdqhwwTfoLe9M2%2Fweb_images%2Ffavicon.png?alt=media&token=a07a60d7-53ee-4790-b01b-bfbe58533aa9"
+        alt="HandymanHire"
+      />
       <Responsive minWidth={768}>
         <List horizontal divided link size="large">
           <List.Item as="a" href="/sitemap">

@@ -45,6 +45,7 @@ const actions = {
 const validate = combineValidators({
   title: isRequired({ message: "The job title is required" }),
   category: isRequired({ message: "Category is required" }),
+address: isRequired({ message: "Please enter street" }),
   description: composeValidators(
     isRequired({ message: "Please enter a description" }),
     hasLengthGreaterThan(4)({
@@ -192,7 +193,7 @@ class WorkOrderForm extends Component {
                   types: ["address"]
                 }}
                 onSelect={this.handleAddressSelect}
-                placeholder="Your address"
+                placeholder="street"
               />
               <Field
                 name="date"

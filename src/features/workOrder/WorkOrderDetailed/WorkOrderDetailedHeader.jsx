@@ -38,7 +38,7 @@ const WorkOrderDetailedHeader = ({
     <Segment.Group style={{ background: "white" }}>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={`/assets/categoryImages/${job.category}.jpg`}
+          src={`/assets/categoryImages/${job.category}.webp`}
           size="medium"
           alt={job.category}
           style={imageStyle}

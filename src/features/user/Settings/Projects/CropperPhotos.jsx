@@ -12,7 +12,7 @@ class CropperPhotos extends Component {
     //create Binary Large Object from cropped file in order to store in firebase
     this.cropper.current.getCroppedCanvas().toBlob(blob => {
       setImage(blob);
-    }, "image/jpeg");
+    }, "image/webp");
   };
   render() {
     const { imagePreview } = this.props;
@@ -31,7 +31,6 @@ class CropperPhotos extends Component {
         cropBoxMovable={true}
         cropBoxResizable={true}
         crop={this.cropImage}
-        
       />
     );
   }

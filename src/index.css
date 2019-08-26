@@ -48,7 +48,7 @@ body,
   color: #3a74ad !important;
 }
 
-/* Cards */
+/* cards */
 .ui.cards {
   text-align: center;
 }
@@ -145,4 +145,15 @@ textarea {
 }
 .ui.basic.red.label {
   margin: 0.5em 0em;
+}
+/* icon footer */
+.ui.tiny.image,
+.ui.tiny.images .image,
+.ui.tiny.images img,
+.ui.tiny.images svg {
+  max-width: 53px;
+}
+.ui.card .meta,
+.ui.cards > .card .meta {
+  font-size: 1.6em;
 }

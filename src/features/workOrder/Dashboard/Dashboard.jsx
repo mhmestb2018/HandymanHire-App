@@ -70,7 +70,7 @@ class Dashboard extends Component {
           <div ref={this.contextRef}>
             <Segment>
               <Image
-                src="/assets/categoryImages/Jobs.jpg"
+                src="https://firebasestorage.googleapis.com/v0/b/handymanhire-fccd5.appspot.com/o/gsHKvFPUOFd22WKdqhwwTfoLe9M2%2Fweb_images%2FJobs.webp?alt=media&token=3cedcd7b-1ac4-4275-aef1-29cfc29e7766"
                 alt="Jobs"
                 size="small"
                 centered
