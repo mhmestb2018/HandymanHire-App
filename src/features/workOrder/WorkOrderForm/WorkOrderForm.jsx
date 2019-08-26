@@ -150,7 +150,7 @@ class WorkOrderForm extends Component {
             <Image
               centered
               src="/assets/formPost.jpg"
-              alt="sitemap"
+              alt="Post a job"
               size="small"
             />
             <Header sub color="blue" content="Job request details" />

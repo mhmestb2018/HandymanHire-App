@@ -8,8 +8,8 @@ class Sitemap extends Component {
         <Header as="h1" content="Sitemap Under Construction" />
         <Image
           src="/assets/categoryImages/BlockLayer.jpg"
-          alt="sitemap"
           size="large"
+          alt="Under construction"
           style={{ margin: "0em 17em" }}
         />
       </Segment>

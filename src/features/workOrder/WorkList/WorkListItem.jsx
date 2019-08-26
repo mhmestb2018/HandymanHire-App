@@ -30,7 +30,13 @@ class WorkListItem extends Component {
           </Header>
           <Item.Group>
             <Item>
-              <Image avatar size="tiny" circular src={job.orderedByPhotoURL} />
+              <Image
+                avatar
+                size="tiny"
+                circular
+                src={job.orderedByPhotoURL}
+                alt={job.orderedBy}
+              />
 
               <Item.Content>
                 <Item.Header as={Link} to={`/jobs/${job.id}`}>

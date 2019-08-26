@@ -9,7 +9,7 @@ const ContactForm = () => {
       </Header>
       <Grid columns={2} stackable>
         <Grid.Column>
-          <Image src="/assets/mail.jpg" size="medium" />
+          <Image src="/assets/mail.jpg" size="medium" alt="contact" />
         </Grid.Column>
         <Grid.Column>
           <form

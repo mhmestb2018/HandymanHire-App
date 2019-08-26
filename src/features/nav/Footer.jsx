@@ -11,7 +11,7 @@ import {
 const Footer = () => (
   <Segment textAlign="center">
     <Container textAlign="center">
-      <Image centered size="tiny" src="assets/favicon.png" />
+      <Image centered size="tiny" src="assets/favicon.png" alt="HH" />
       <List horizontal divided link size="small">
         <List.Item as="a" href="/sitemap">
           Site Map

@@ -31,6 +31,7 @@ const UserProfileWorkOrders = ({
               <Image
                 src={`/assets/categoryImages/${job.category}.jpg`}
                 size="tiny"
+                alt={job.category}
                 centered
               />
               <Card.Content>

@@ -47,7 +47,7 @@ class NavBar extends Component {
               to="/"
               size="small"
               src="assets/logoHHTools.png"
-              alt="logo"
+              alt="HH"
             />
 
             <Menu.Item position="left">

@@ -10,6 +10,7 @@ const SignedInMenu = ({ signOut, profile, auth }) => {
         avatar
         size="mini"
         spaced="right"
+        alt="User"
         src={profile.photoURL || "/assets/user.png"}
       />
       <Dropdown pointing="top right" text={profile.displayName}>
@@ -20,7 +21,12 @@ const SignedInMenu = ({ signOut, profile, auth }) => {
             as={Link}
             to={`/createJob`}
           />
-          <Dropdown.Item as={Link} to="/members" text="Followers" icon="users" />
+          <Dropdown.Item
+            as={Link}
+            to="/members"
+            text="Followers"
+            icon="users"
+          />
           {/* <Dropdown.Item text="My Proposals" icon="users" /> */}
           <Dropdown.Item
             as={Link}

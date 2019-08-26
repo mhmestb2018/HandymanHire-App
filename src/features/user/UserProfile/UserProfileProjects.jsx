@@ -13,9 +13,9 @@ const UserProfileProjects = ({ photos }) => {
               <LazyLoad
                 key={photo.id}
                 height={150}
-                placeholder={<Image src="/assets/user.png" />}
+                placeholder={<Image src="/assets/user.png" alt="User" />}
               >
-                <Image src={photo.url || "/assets/user.png"} />
+                <Image src={photo.url || "/assets/user.png"} alt="User" />
               </LazyLoad>
             ))}
         </Image.Group>

@@ -25,6 +25,7 @@ const WorkOrderDetailedSidebar = ({ InterestedInJobs, job }) => {
                     <Image
                       avatar
                       size="tiny"
+                      alt={interested.name}
                       src={interested.photoURL}
                       style={{ width: "5em" }}
                     />

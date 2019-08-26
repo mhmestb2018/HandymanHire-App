@@ -25,7 +25,7 @@ const UserPhotos = ({
       <Card.Group itemsPerRow={6} stackable>
         <Card>
           <Card.Content>
-            <Image src={profile.photoURL || "/assets/user.png"} />
+            <Image src={profile.photoURL || "/assets/user.png"} alt="User" />
           </Card.Content>
           <Card.Content extra>
             <Card.Header style={{ color: "green" }}>Main photo</Card.Header>
@@ -35,7 +35,7 @@ const UserPhotos = ({
           filteredPhotos.map(photo => (
             <Card key={photo.id}>
               <Card.Content>
-                <Image src={photo.url} />
+                <Image src={photo.url} alt="Projects" />
               </Card.Content>
 
               <div className="ui two buttons">

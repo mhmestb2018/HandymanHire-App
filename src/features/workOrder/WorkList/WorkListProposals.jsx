@@ -16,6 +16,7 @@ class WorkListProposals extends Component {
                 size="mini"
                 circular
                 src={interested.photoURL}
+                alt={interested.name}
                 centered
               />
             }

@@ -63,7 +63,13 @@ const HomePage = () => (
           </Grid.Column>
 
           <Grid.Column floated="right" width={8}>
-            <Image bordered rounded size="large" src="/assets/Ireland.jpg" />
+            <Image
+              bordered
+              rounded
+              size="large"
+              src="/assets/Ireland.jpg"
+              alt="Ireland"
+            />
           </Grid.Column>
         </Grid.Row>
       </Grid>

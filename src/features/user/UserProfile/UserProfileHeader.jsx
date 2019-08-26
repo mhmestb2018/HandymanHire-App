@@ -18,12 +18,18 @@ const UserProfileHeader = ({ profile }) => {
             <LazyLoad
               height={150}
               placeholder={
-                <Item.Image avatar size="small" src={"/assets/user.png"} />
+                <Item.Image
+                  avatar
+                  size="small"
+                  src={"/assets/user.png"}
+                  alt="User"
+                />
               }
             >
               <Item.Image
                 avatar
                 size="small"
+                alt="User"
                 src={profile.photoURL || "/assets/user.png"}
               />
             </LazyLoad>

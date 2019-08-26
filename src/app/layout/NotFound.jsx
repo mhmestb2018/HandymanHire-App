@@ -5,7 +5,12 @@ import { withRouter } from "react-router";
 const NotFound = ({ history }) => {
   return (
     <Segment placeholder>
-      <Image centered size="big" src="/assets/page-not-found.jpg" />
+      <Image
+        centered
+        size="big"
+        src="/assets/page-not-found.jpg"
+        alt="page not found"
+      />
 
       <Segment.Inline>
         <Button onClick={() => history.push("/jobs")} primary>

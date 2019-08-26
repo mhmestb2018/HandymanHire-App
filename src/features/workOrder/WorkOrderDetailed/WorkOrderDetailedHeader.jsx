@@ -40,6 +40,7 @@ const WorkOrderDetailedHeader = ({
         <Image
           src={`/assets/categoryImages/${job.category}.jpg`}
           size="medium"
+          alt={job.category}
           style={imageStyle}
           centered
         />
