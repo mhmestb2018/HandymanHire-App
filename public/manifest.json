@@ -1,7 +1,7 @@
 {
   "short_name": "HandymanHire",
   "name": "HandymanHire",
-  "description": "online service that matches homeowners with local professionals in Ireland",
+  "description": "Online service that matches homeowners with local professionals in Ireland (Beta verison)",
   "icons": [
     {
       "src": "favicon.ico",

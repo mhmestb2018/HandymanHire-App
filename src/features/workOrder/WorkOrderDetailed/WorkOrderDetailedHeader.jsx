@@ -24,6 +24,7 @@ const imageTextStyle = {
   width: "100%",
   height: "auto"
 };
+
 const WorkOrderDetailedHeader = ({
   job,
   loading,
@@ -38,7 +39,7 @@ const WorkOrderDetailedHeader = ({
     <Segment.Group style={{ background: "white" }}>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={`/assets/categoryImages/${job.category}.webp`}
+          src={job.orderedByPhotoURL}
           size="medium"
           alt={job.category}
           style={imageStyle}

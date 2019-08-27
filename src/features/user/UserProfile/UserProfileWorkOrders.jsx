@@ -28,20 +28,29 @@ const UserProfileWorkOrders = ({
         {workOrders &&
           workOrders.map(job => (
             <Card as={Link} to={`/jobs/${job.id}`} key={job.id} size="tiny">
-              <Image
-                src={`/assets/categoryImages/${job.category}.jpg`}
-                size="tiny"
+              {/* <Image
+                src={`/assets/categoryImages/${job.category}.webp`}
+                size="small"
                 alt={job.category}
                 centered
-              />
+              /> */}
+              <Header
+                as="h4"
+                style={{ textTransform: "uppercase", wordSpacing: "0.6em" }}
+                block
+                textAlign="center"
+              >
+                {job.category}
+              </Header>
+              <Header as="h5" textAlign="center">
+                {job.title}
+              </Header>
               <Card.Content>
-                <Card.Header textAlign="center">{job.title}</Card.Header>
-                <Card.Meta textAlign="center">
-                  <div>
-                    {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}
-                  </div>
-                  {/* <div>{format(job.date && job.date.toDate(), "h:mm a")}</div> */}
-                </Card.Meta>
+              
+              <Card.Meta textAlign="center">
+                {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}
+                {/* <div>{format(job.date && job.date.toDate(), "h:mm a")}</div> */}
+              </Card.Meta>
               </Card.Content>
             </Card>
           ))}

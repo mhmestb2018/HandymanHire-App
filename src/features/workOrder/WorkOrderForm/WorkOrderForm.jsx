@@ -26,7 +26,10 @@ const mapState = (state, ownProps) => {
   const jobId = ownProps.match.params.id;
   let job = {};
   //did not work with added to if ( && state.firestore.ordered.workOrders.lenght > 0 )
-  if (state.firestore.ordered.workOrders) {
+  if (
+    state.firestore.ordered.workOrders &&
+    state.firestore.ordered.workOrders.lenght > 0
+  ) {
     job =
       state.firestore.ordered.workOrders.filter(job => job.id === jobId)[0] ||
       {};
@@ -45,7 +48,7 @@ const actions = {
 const validate = combineValidators({
   title: isRequired({ message: "The job title is required" }),
   category: isRequired({ message: "Category is required" }),
-address: isRequired({ message: "Please enter street" }),
+  address: isRequired({ message: "Please enter street" }),
   description: composeValidators(
     isRequired({ message: "Please enter a description" }),
     hasLengthGreaterThan(4)({

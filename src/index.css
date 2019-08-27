@@ -155,5 +155,7 @@ textarea {
 }
 .ui.card .meta,
 .ui.cards > .card .meta {
-  font-size: 1.6em;
+  font-size: 1.1em;
+  position: absolute;
+  bottom: 10px;
 }
