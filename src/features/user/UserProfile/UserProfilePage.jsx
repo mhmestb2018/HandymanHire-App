@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid,Sticky } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { firestoreConnect, isEmpty } from "react-redux-firebase";
 import { compose } from "redux";
@@ -15,6 +15,7 @@ import {
   followMember,
   unfollowMember
 } from "../../auth/userActions";
+import UserMessage from "./UserMessage";
 
 //to link specific user to specific profile
 const mapState = (state, ownProps) => {
@@ -71,23 +72,28 @@ class UserProfilePage extends Component {
     if (loading) return <LoadingComponent inverted={true} />;
     return (
       <Grid stackable>
-        <UserProfileHeader profile={profile} />
-        <UserProfileDescription profile={profile} />
+        <Grid.Column width={12}>
+          <UserProfileHeader profile={profile} />
+          <UserProfileDescription profile={profile} />
 
-        <UserProfileSidebar
-          isCurrentUser={isCurrentUser}
-          profile={profile}
-          followMember={followMember}
-          isFollowing={isFollowing}
-          unfollowMember={unfollowMember}
-        />
-
-        <UserProfileProjects photos={photos} />
-        <UserProfileWorkOrders
-          workOrders={workOrders}
-          workOrdersLoading={workOrdersLoading}
-          changeTab={this.changeTab}
-        />
+          <UserProfileProjects photos={photos} />
+          <UserProfileWorkOrders
+            workOrders={workOrders}
+            workOrdersLoading={workOrdersLoading}
+            changeTab={this.changeTab}
+          />
+        </Grid.Column>
+        <Grid.Column width={4}>
+        <Sticky   styleElement={{ zIndex: 0 }}>
+          <UserProfileSidebar
+            isCurrentUser={isCurrentUser}
+            profile={profile}
+            followMember={followMember}
+            isFollowing={isFollowing}
+            unfollowMember={unfollowMember}
+          />
+          </Sticky>
+        </Grid.Column>
       </Grid>
     );
   }

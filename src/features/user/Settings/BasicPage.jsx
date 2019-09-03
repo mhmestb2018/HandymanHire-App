@@ -21,9 +21,8 @@ class Basics extends Component {
             component={TextInput}
             placeholder="User Name"
           />
-
-          <Form.Group inline>
-            <label>Gender :</label>
+          <label>Gender :</label>
+          <Form.Group>
             <Field
               name="Gender"
               type="radio"

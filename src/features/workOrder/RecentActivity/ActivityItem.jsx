@@ -50,7 +50,7 @@ class ActivityItem extends Component {
     return (
       <Feed.Event>
         <Feed.Label>
-          <img src={activity.photoURL || "/assets/user.png"} alt="" />
+          <img src={activity.photoURL || "/assets/user.png"} alt="user" />
         </Feed.Label>
         <Feed.Content>
           <Feed.Summary>{this.renderSummary(activity)}</Feed.Summary>

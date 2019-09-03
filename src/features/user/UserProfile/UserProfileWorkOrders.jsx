@@ -36,9 +36,9 @@ const UserProfileWorkOrders = ({
               /> */}
               <Header
                 as="h4"
-                style={{ textTransform: "uppercase", wordSpacing: "0.6em" }}
                 block
                 textAlign="center"
+                style={{ textTransform: "uppercase", wordSpacing: "0.6em" }}
               >
                 {job.category}
               </Header>
@@ -46,11 +46,10 @@ const UserProfileWorkOrders = ({
                 {job.title}
               </Header>
               <Card.Content>
-              
-              <Card.Meta textAlign="center">
-                {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}
-                {/* <div>{format(job.date && job.date.toDate(), "h:mm a")}</div> */}
-              </Card.Meta>
+                <Card.Meta textAlign="center" id="datePhotosCard">
+                  {format(job.date && job.date.toDate(), "dd LLL yyyy")}{" "}
+                  {/* <div>{format(job.date && job.date.toDate(), "h:mm a")}</div> */}
+                </Card.Meta>
               </Card.Content>
             </Card>
           ))}

@@ -7,8 +7,9 @@ const UserProfileHeader = ({ profile }) => {
   let age;
   if (profile.dateOfBirth) {
     age = differenceInYears(Date.now(), profile.dateOfBirth.toDate());
+    age += " years old";
   } else {
-    age = "unknow age";
+    age = "";
   }
   return (
     <Grid.Column width={16}>
@@ -34,13 +35,15 @@ const UserProfileHeader = ({ profile }) => {
               />
             </LazyLoad>
 
-            <Item.Content verticalAlign="bottom">
+            <Item.Content style={{ padding: "40px 30px" }}>
               <Header as="h1">{profile.displayName}</Header>
               <br />
               <Header as="h3">{profile.occupation}</Header>
               <br />
               <Header as="h3">
-                {age} years old , lives in {profile.city}
+                {age}
+                <br />
+                {profile.city}
               </Header>
             </Item.Content>
           </Item>

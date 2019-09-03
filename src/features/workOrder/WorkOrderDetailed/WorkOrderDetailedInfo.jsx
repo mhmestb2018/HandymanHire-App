@@ -46,7 +46,7 @@ const WorkOrderDetailedInfo = ({ job }) => {
             <Button
               onClick={() => showMapToogle(!isMapOpen)}
               color="blue"
-              content={isMapOpen ? "Hide map" : "Show Map"}
+              content={isMapOpen ? "Hide map" : "Show map"}
               attached="bottom"
             />
           </Grid.Column>

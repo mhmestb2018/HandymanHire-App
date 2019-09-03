@@ -1,6 +1,7 @@
-import React from "react";
-import { Grid, Button, Segment } from "semantic-ui-react";
+import React, { Fragment } from "react";
+import { Grid, Button, Segment, Divider, Transition } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import UserMessage from "../../user/UserProfile/UserMessage";
 
 const UserProfileSidebar = ({
   isCurrentUser,
@@ -10,7 +11,8 @@ const UserProfileSidebar = ({
   unfollowMember
 }) => {
   return (
-    <Grid.Column width={4}>
+    <Fragment>
+   
       <Segment>
         {isCurrentUser && (
           <Button
@@ -44,7 +46,8 @@ const UserProfileSidebar = ({
           />
         )}
       </Segment>
-    </Grid.Column>
+    
+ </Fragment>
   );
 };
 export default UserProfileSidebar;

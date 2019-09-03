@@ -119,9 +119,9 @@ textarea {
 }
 
 /* dropzone */
-.dropzone {
+/* .dropzone {
   margin: 0em 4em;
-}
+} */
 .ui.large.image,
 .ui.large.images .image,
 .ui.large.images img,
@@ -153,9 +153,21 @@ textarea {
 .ui.tiny.images svg {
   max-width: 53px;
 }
-.ui.card .meta,
-.ui.cards > .card .meta {
+
+/* image work order header */
+#jobsHeader {
+  width: 15em;
+}
+#datePhotosCard {
   font-size: 1.1em;
   position: absolute;
   bottom: 10px;
+}
+.ui.card .meta,
+.ui.cards > .card .meta {
+  font-size: 1.6em;
+}
+.headerCategory {
+  text-transform: uppercase;
+  word-spacing: "0.6em";
 }

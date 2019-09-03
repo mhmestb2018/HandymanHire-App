@@ -30,7 +30,7 @@ const DropzoneInput = ({ setFiles }) => {
       {" "}
       <input {...getInputProps()} />
       <Icon name="upload" size="large" />
-      <Header as="h4" content="Please click to upload or drop image here" />
+      <p>Tap to upload image or drop it here</p>
     </div>
   );
 };

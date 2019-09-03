@@ -34,7 +34,8 @@ export const registerUser = user => async (
     });
     let newUser = {
       displayName: user.displayName,
-      createdAt: firestore.FieldValue.serverTimestamp()
+      createdAt: firestore.FieldValue.serverTimestamp(),
+      email:user.email
       // photoURL: user.profile.avatarUrl
     };
     await firestore.set(`users/${createdUser.user.uid}`, { ...newUser });
@@ -65,7 +66,8 @@ export const socialLogin = selectedProvider => async (
       await firestore.set(`users/${user.user.uid}`, {
         displayName: user.profile.displayName,
         photoURL: user.profile.avatarUrl,
-        createdAt: firestore.FieldValue.serverTimestamp()
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        email:user.email
       });
     }
   } catch (error) {

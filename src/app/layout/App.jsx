@@ -19,6 +19,7 @@ import Sitemap from "../../features/home/Sitemap";
 import { UserIsAuthenticated } from "../../features/auth/authWrapper";
 import NotFound from "./NotFound";
 import ForgotPassword from "../../features/modals/ForgotPassword";
+import UserMessage from "../../features/user/UserProfile/UserMessage";
 
 class App extends Component {
   contextRef = createRef();
@@ -66,6 +67,7 @@ class App extends Component {
                     />
                     <Route path="/sitemap" component={Sitemap} />
                     <Route path="/forgotPassword" component={ForgotPassword} />
+                    <Route path="/userMessage" component={UserMessage} />
                     <Route component={NotFound} />
                   </Switch>
                   <ScrollUpButton />

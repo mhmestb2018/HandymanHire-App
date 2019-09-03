@@ -11,16 +11,9 @@ import {
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
-const imageStyle = {
-  background: "white",
-  height: "18em",
-  width: "20em"
-};
-
 const imageTextStyle = {
   position: "absolute",
-  bottom: "5%",
-  left: "5%",
+  bottom: "7%",
   width: "100%",
   height: "auto"
 };
@@ -38,11 +31,13 @@ const WorkOrderDetailedHeader = ({
   return (
     <Segment.Group style={{ background: "white" }}>
       <Segment basic attached="top" style={{ padding: "0" }}>
+        <Header as="h2" block textAlign="center"  style={{ textTransform: "uppercase", wordSpacing: "0.6em" }}>
+          {job.category}
+        </Header>
         <Image
-          src={job.orderedByPhotoURL}
-          size="medium"
+          id="jobsHeader"
+          src="/assets/info.jpg"
           alt={job.category}
-          style={imageStyle}
           centered
         />
 
@@ -50,7 +45,7 @@ const WorkOrderDetailedHeader = ({
           <Item.Group>
             <Item>
               <Item.Content>
-                <Header size="huge" content={job.title} />
+                <Header content={job.title} />
                 <p>
                   Posted on{" "}
                   {job.created && format(job.date.toDate(), "EEEE do LLLL")}
