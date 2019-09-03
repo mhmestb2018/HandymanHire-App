@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+HandymanHire - Progressive Web App, React, Redux, Firebase, and Firestore.
+
+https://handymanhire.ie/
+
 ## Available Scripts
 
 In the project directory, you can run:
