@@ -1,7 +1,7 @@
 
 Online service that matches homeowners with professionals in Ireland 
 Beta version available here
-https://handymanhire.ie/
+https://handymanhire-fccd5.firebaseapp.com/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Available Scripts
